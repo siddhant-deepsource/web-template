@@ -65,6 +65,7 @@ const Container = ({ defKey, children }) => {
   )
 }
 Container.propTypes = {
+  defKey: PropTypes.string,
   children: PropTypes.node.isRequired,
 }
 
