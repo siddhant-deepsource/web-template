@@ -1,0 +1,12 @@
+syntax = "proto2";
+package image;
+
+import "google/protobuf/timestamp.proto";
+
+message Image {
+  required int64 id = 1;
+
+  required string url = 2;
+
+  required google.protobuf.Timestamp created_at = 9000;
+}
