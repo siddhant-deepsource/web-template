@@ -5,7 +5,9 @@ import (
 	"log"
 	"net"
 
+	"github.com/golang/protobuf/proto"
 	"github.com/rickypai/mmtk/protobuf/api"
+	"github.com/rickypai/mmtk/protobuf/image"
 	"google.golang.org/grpc"
 )
 
@@ -18,7 +20,11 @@ type server struct {
 }
 
 func (s *server) GetImage(ctx context.Context, in *api.GetImageRequest) (*api.GetImageResponse, error) {
-	return &api.GetImageResponse{}, nil
+	return &api.GetImageResponse{
+		Image: &image.Image{
+			Id: proto.Int64(1),
+		},
+	}, nil
 }
 
 func main() {
