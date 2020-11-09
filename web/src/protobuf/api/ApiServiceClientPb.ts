@@ -75,5 +75,45 @@ export class APIClient {
     this.methodInfoGetImage);
   }
 
+  methodInfoGetPresignedPutURL = new grpcWeb.AbstractClientBase.MethodInfo(
+    protobuf_api_api_pb.GetPresignedPutURLResponse,
+    (request: protobuf_api_api_pb.GetPresignedPutURLRequest) => {
+      return request.serializeBinary();
+    },
+    protobuf_api_api_pb.GetPresignedPutURLResponse.deserializeBinary
+  );
+
+  getPresignedPutURL(
+    request: protobuf_api_api_pb.GetPresignedPutURLRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_api_api_pb.GetPresignedPutURLResponse>;
+
+  getPresignedPutURL(
+    request: protobuf_api_api_pb.GetPresignedPutURLRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: protobuf_api_api_pb.GetPresignedPutURLResponse) => void): grpcWeb.ClientReadableStream<protobuf_api_api_pb.GetPresignedPutURLResponse>;
+
+  getPresignedPutURL(
+    request: protobuf_api_api_pb.GetPresignedPutURLRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.Error,
+               response: protobuf_api_api_pb.GetPresignedPutURLResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/api.API/GetPresignedPutURL',
+        request,
+        metadata || {},
+        this.methodInfoGetPresignedPutURL,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/api.API/GetPresignedPutURL',
+    request,
+    metadata || {},
+    this.methodInfoGetPresignedPutURL);
+  }
+
 }
 

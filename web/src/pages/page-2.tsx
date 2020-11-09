@@ -7,22 +7,24 @@ import { SearchOutlined } from '@ant-design/icons';
 
 
 import * as grpcWeb from 'grpc-web';
-import { GetImageRequest, GetImageResponse } from '../protobuf/api/api_pb';
+import { GetPresignedPutURLRequest, GetPresignedPutURLResponse } from '../protobuf/api/api_pb';
 import Client from '../clients/api_client'
 
-const callAPI = function () {
-  var request = new GetImageRequest();
-  request.setId(1);
+const getPresignedPutURL = function () {
+  var request = new GetPresignedPutURLRequest();
+  request.setFilename("");
+  request.setMd5Hash("");
 
-  var call = Client.getImage(request, { 'custom-header-1': 'value1' },
-    (err: grpcWeb.Error, response?: GetImageResponse) => {
+  var call = Client.getPresignedPutURL(request, {},
+    (err: grpcWeb.Error, response?: GetPresignedPutURLResponse) => {
       if (response != null) {
-        console.log(response.getImage());
+        console.log(response.getUrl());
       }
     });
 
   call.on('status', (status: grpcWeb.Status) => { });
 }
+
 
 const SecondPage = () => (
   <Container defKey="1">
@@ -31,7 +33,7 @@ const SecondPage = () => (
     <p>Welcome to page 2! <br/>
       Check out that blue highlight on the header! <br/>
     </p>
-    <Button type="primary" icon={<SearchOutlined />} onClick={callAPI}>
+    <Button type="primary" icon={<SearchOutlined />} onClick={getPresignedPutURL}>
       Example button from readme.md
     </Button>
     <br/>

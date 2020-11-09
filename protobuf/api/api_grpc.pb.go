@@ -18,6 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type APIClient interface {
 	GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*GetImageResponse, error)
+	GetPresignedPutURL(ctx context.Context, in *GetPresignedPutURLRequest, opts ...grpc.CallOption) (*GetPresignedPutURLResponse, error)
 }
 
 type aPIClient struct {
@@ -37,11 +38,21 @@ func (c *aPIClient) GetImage(ctx context.Context, in *GetImageRequest, opts ...g
 	return out, nil
 }
 
+func (c *aPIClient) GetPresignedPutURL(ctx context.Context, in *GetPresignedPutURLRequest, opts ...grpc.CallOption) (*GetPresignedPutURLResponse, error) {
+	out := new(GetPresignedPutURLResponse)
+	err := c.cc.Invoke(ctx, "/api.API/GetPresignedPutURL", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // APIServer is the server API for API service.
 // All implementations must embed UnimplementedAPIServer
 // for forward compatibility
 type APIServer interface {
 	GetImage(context.Context, *GetImageRequest) (*GetImageResponse, error)
+	GetPresignedPutURL(context.Context, *GetPresignedPutURLRequest) (*GetPresignedPutURLResponse, error)
 	mustEmbedUnimplementedAPIServer()
 }
 
@@ -51,6 +62,9 @@ type UnimplementedAPIServer struct {
 
 func (UnimplementedAPIServer) GetImage(context.Context, *GetImageRequest) (*GetImageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetImage not implemented")
+}
+func (UnimplementedAPIServer) GetPresignedPutURL(context.Context, *GetPresignedPutURLRequest) (*GetPresignedPutURLResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPresignedPutURL not implemented")
 }
 func (UnimplementedAPIServer) mustEmbedUnimplementedAPIServer() {}
 
@@ -83,6 +97,24 @@ func _API_GetImage_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _API_GetPresignedPutURL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPresignedPutURLRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(APIServer).GetPresignedPutURL(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.API/GetPresignedPutURL",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(APIServer).GetPresignedPutURL(ctx, req.(*GetPresignedPutURLRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _API_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "api.API",
 	HandlerType: (*APIServer)(nil),
@@ -90,6 +122,10 @@ var _API_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetImage",
 			Handler:    _API_GetImage_Handler,
+		},
+		{
+			MethodName: "GetPresignedPutURL",
+			Handler:    _API_GetPresignedPutURL_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -2,10 +2,13 @@ package server
 
 import (
 	"context"
+	"time"
 
 	"github.com/golang/protobuf/proto"
+	"github.com/rickypai/mmtk/api/s3"
 	"github.com/rickypai/mmtk/protobuf/api"
 	"github.com/rickypai/mmtk/protobuf/image"
+	"google.golang.org/protobuf/types/known/durationpb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -20,5 +23,17 @@ func (s *Server) GetImage(ctx context.Context, in *api.GetImageRequest) (*api.Ge
 			Url:       proto.String("https://lol"),
 			CreatedAt: timestamppb.Now(),
 		},
+	}, nil
+}
+
+func (s *Server) GetPresignedPutURL(ctx context.Context, in *api.GetPresignedPutURLRequest) (*api.GetPresignedPutURLResponse, error) {
+	url, err := s3.PresignPutURL("mmtk-temp-dev", "test", "", 15*time.Minute)
+	if err != nil {
+		return nil, err
+	}
+
+	return &api.GetPresignedPutURLResponse{
+		Url:      url,
+		Duration: durationpb.New(15 * time.Minute),
 	}, nil
 }
