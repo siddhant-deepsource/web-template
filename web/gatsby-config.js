@@ -1,4 +1,4 @@
-const lessToJson = require('less-to-json'); 
+const lessToJson = require("less-to-json")
 
 module.exports = {
   siteMetadata: {
@@ -9,19 +9,19 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: 'gatsby-plugin-antd',
+      resolve: "gatsby-plugin-antd",
       options: {
-        style: true
-      }
+        style: true,
+      },
     },
     {
       resolve: "gatsby-plugin-less",
       options: {
         lessOptions: {
           javascriptEnabled: true,
-          modifyVars: lessToJson('src/theme/vars.less'),
-        }
-      }
+          modifyVars: lessToJson("src/theme/vars.less"),
+        },
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,

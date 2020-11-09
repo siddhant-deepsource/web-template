@@ -1,4 +1,4 @@
-.PHONY: proto envoy proto-setup api web
+.PHONY: proto envoy proto-setup api web format
 
 api:
 	(cd api && air)
@@ -24,3 +24,5 @@ proto-setup:
 	unzip protoc-3.13.0-linux-x86_64.zip -d ${HOME}/.local
 	go get google.golang.org/protobuf/cmd/protoc-gen-go google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
+format:
+	(cd web && npm run format)

@@ -4,7 +4,7 @@ It's a clone of the default gatsby starter but utilizing ant design (antd) compo
 
 Ant design makes it easy to design a much more professional website with ease. (Seriously it's real gud m8 :D)
 
-Sadly at the moment my starter doesn't include hot reloading for changes in `src/theme/vars.less` 
+Sadly at the moment my starter doesn't include hot reloading for changes in `src/theme/vars.less`
 
 Developing has to be restarted manualy for the changes on ant design's theme to become visible in the browser.
 
@@ -20,33 +20,33 @@ Check it out [here](https://gatsby-antd-starter.netlify.app/)
 
 Install this starter by running
 
-   ```bash
-   gatsby new my_site https://github.com/alienCY/gatsby-antd-starter
-   ```
-   
-   Then just
+```bash
+gatsby new my_site https://github.com/alienCY/gatsby-antd-starter
+```
 
-   ```bash
-   cd my_site
-   gatsby develop
-   ```
+Then just
 
-   Site can be found running at `http://localhost:8000/`
+```bash
+cd my_site
+gatsby develop
+```
 
-   **Tips on importing ant design components**
-   
-   Highly recomended to import the components as said in their site from `antd`.
-   
-   For example to import a button with an icon:
-   
-   ```javascript
-   import { Button } from 'antd';
-   import { SearchOutlined } from '@ant-design/icons';
+Site can be found running at `http://localhost:8000/`
 
-   <Button type="primary" icon={<SearchOutlined />}>
-      Search
-   </Button>
-   ```
+**Tips on importing ant design components**
+
+Highly recomended to import the components as said in their site from `antd`.
+
+For example to import a button with an icon:
+
+```javascript
+import { Button } from "antd"
+import { SearchOutlined } from "@ant-design/icons"
+;<Button type="primary" icon={<SearchOutlined />}>
+  Search
+</Button>
+```
+
 ## 🧐 What's inside?
 
 A quick look at the top-level files and directories you'll see in a Gatsby project.
@@ -88,19 +88,15 @@ A quick look at the top-level files and directories you'll see in a Gatsby proje
 11. **`package.json`**: A manifest file for Node.js projects, which includes things like metadata (the project’s name, author, etc). This manifest is how npm knows which packages to install for your project.
 
 12. **`README.md`**: A text file containing useful reference information about your project.
+
 ## Extra plugins used
 
-* gatsby-plugin-antd (+ antd)
+- gatsby-plugin-antd (+ antd)
 
-* gatsby-plugin-less (+ less)
+- gatsby-plugin-less (+ less)
 
-* less-to-json
+- less-to-json
 
 ## Basic plugins
 
-* plugins in gatsby default starter
-
-
-
-
-
+- plugins in gatsby default starter
