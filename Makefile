@@ -1,3 +1,11 @@
+.PHONY: proto envoy proto-setup api web
+
+api:
+	(cd api && air)
+
+web:
+	(cd web && gatsby develop)
+
 proto:
 	protoc --version
 	protoc -I=. protobuf/**/*.proto \
@@ -5,6 +13,9 @@ proto:
 		--grpc-web_out=import_style=typescript,mode=grpcwebtext:web/src/. \
 		--go_out=. --go_opt=paths=source_relative \
     --go-grpc_out=. --go-grpc_opt=paths=source_relative
+
+envoy:
+	envoy --config-path envoy/envoy.yaml
 
 proto-setup:
 	curl -L https://github.com/grpc/grpc-web/releases/download/1.2.1/protoc-gen-grpc-web-1.2.1-linux-x86_64 > ${HOME}/.local/bin/protoc-gen-grpc-web
