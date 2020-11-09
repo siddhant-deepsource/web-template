@@ -1,8 +1,8 @@
 proto:
 	protoc --version
 	protoc -I=. protobuf/**/*.proto \
-		--js_out=import_style=commonjs:. \
-		--grpc-web_out=import_style=typescript,mode=grpcwebtext:. \
+		--js_out=import_style=commonjs:web/src/. \
+		--grpc-web_out=import_style=typescript,mode=grpcwebtext:web/src/. \
 		--go_out=. --go_opt=paths=source_relative \
     --go-grpc_out=. --go-grpc_opt=paths=source_relative
 

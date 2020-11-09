@@ -17,6 +17,8 @@
     "gatsby-plugin-sharp": "^2.6.19",
     "gatsby-source-filesystem": "^2.3.19",
     "gatsby-transformer-sharp": "^2.5.11",
+    "google-protobuf": "^3.14.0-rc.1",
+    "grpc-web": "^1.2.1",
     "less": "^3.11.3",
     "less-to-json": "^1.2.0",
     "prop-types": "^15.7.2",
