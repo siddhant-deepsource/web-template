@@ -1,6 +1,6 @@
-import React from "react"
 import Container from "../components/container"
 import Image from "../components/image"
+import React from "react"
 import SEO from "../components/seo"
 
 const IndexPage = () => (

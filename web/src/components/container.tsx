@@ -1,8 +1,9 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-import { Link } from "gatsby"
 import { Layout, Menu } from "antd"
+import { graphql, useStaticQuery } from "gatsby"
+
+import { Link } from "gatsby"
+import PropTypes from "prop-types"
+import React from "react"
 const { Header, Footer, Content } = Layout
 
 const Container = ({ defKey, children }) => {
