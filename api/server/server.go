@@ -27,7 +27,7 @@ func (s *Server) GetImage(ctx context.Context, in *api.GetImageRequest) (*api.Ge
 }
 
 func (s *Server) GetPresignedPutURL(ctx context.Context, in *api.GetPresignedPutURLRequest) (*api.GetPresignedPutURLResponse, error) {
-	url, err := s3.PresignPutURL("mmtk-temp-dev", "test", "", 15*time.Minute)
+	url, err := s3.PresignPutURL("mmtk-temp-dev", in.GetFilename(), "", 15*time.Minute)
 	if err != nil {
 		return nil, err
 	}
