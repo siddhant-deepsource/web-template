@@ -15,6 +15,10 @@ workflows:
   node-tests:
     jobs:
       - node/test:
+          name: build
+          app-dir: web
+      - node/test:
+          name: unit tests
           app-dir: web
 
   go:
