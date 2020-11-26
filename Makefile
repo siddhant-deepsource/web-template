@@ -6,7 +6,7 @@ api:
 	(cd api && air)
 
 web:
-	(cd web && gatsby develop)
+	(cd web && npm run develop)
 
 proto:
 	protoc --version
