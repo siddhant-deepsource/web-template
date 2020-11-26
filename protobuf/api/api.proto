@@ -8,7 +8,6 @@ option go_package = "github.com/rickypai/web-template/protobuf/api";
 
 service API {
   rpc GetImage(GetImageRequest) returns (GetImageResponse) {}
-  rpc GetPresignedPutURL(GetPresignedPutURLRequest) returns (GetPresignedPutURLResponse) {}
 }
 
 message GetImageRequest {
@@ -17,16 +16,4 @@ message GetImageRequest {
 
 message GetImageResponse {
   image.Image image = 1;
-}
-
-message GetPresignedPutURLRequest {
-  string filename = 1;
-
-  string md5_hash = 2;
-}
-
-message GetPresignedPutURLResponse {
-  string url = 1;
-
-  google.protobuf.Duration duration = 2;
 }
