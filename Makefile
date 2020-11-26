@@ -21,8 +21,8 @@ envoy:
 
 proto-setup:
 	curl -L https://github.com/grpc/grpc-web/releases/download/1.2.1/protoc-gen-grpc-web-1.2.1-linux-x86_64 > ${HOME}/.local/bin/protoc-gen-grpc-web
-	curl -LO ${PB_REL}/download/v3.13.0/protoc-3.13.0-linux-x86_64.zip
-	unzip protoc-3.13.0-linux-x86_64.zip -d ${HOME}/.local
+	curl -LO ${PB_REL}/download/v3.14.0/protoc-3.14.0-linux-x86_64.zip
+	unzip protoc-3.14.0-linux-x86_64.zip -d ${HOME}/.local
 	go get google.golang.org/protobuf/cmd/protoc-gen-go google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 format:
