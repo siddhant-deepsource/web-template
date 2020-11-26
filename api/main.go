@@ -4,8 +4,8 @@ import (
 	"log"
 	"net"
 
-	"github.com/rickypai/mmtk/api/server"
-	"github.com/rickypai/mmtk/protobuf/api"
+	"github.com/rickypai/web-template/api/server"
+	"github.com/rickypai/web-template/protobuf/api"
 	"google.golang.org/grpc"
 )
 

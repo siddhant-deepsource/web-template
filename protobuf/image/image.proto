@@ -3,7 +3,7 @@ package image;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/rickypai/mmtk/protobuf/image";
+option go_package = "github.com/rickypai/web-template/protobuf/image";
 
 message Image {
   required int64 id = 1;

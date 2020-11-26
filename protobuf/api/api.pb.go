@@ -9,7 +9,7 @@ package api
 import (
 	proto "github.com/golang/protobuf/proto"
 	duration "github.com/golang/protobuf/ptypes/duration"
-	image "github.com/rickypai/mmtk/protobuf/image"
+	image "github.com/rickypai/web-template/protobuf/image"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

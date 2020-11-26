@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/rickypai/mmtk/api/s3"
-	"github.com/rickypai/mmtk/protobuf/api"
-	"github.com/rickypai/mmtk/protobuf/image"
+	"github.com/rickypai/web-template/api/s3"
+	"github.com/rickypai/web-template/protobuf/api"
+	"github.com/rickypai/web-template/protobuf/image"
 	"google.golang.org/protobuf/types/known/durationpb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -27,7 +27,7 @@ func (s *Server) GetImage(ctx context.Context, in *api.GetImageRequest) (*api.Ge
 }
 
 func (s *Server) GetPresignedPutURL(ctx context.Context, in *api.GetPresignedPutURLRequest) (*api.GetPresignedPutURLResponse, error) {
-	url, err := s3.PresignPutURL("mmtk-temp-dev", in.GetFilename(), "", 15*time.Minute)
+	url, err := s3.PresignPutURL("web-template-temp-dev", in.GetFilename(), "", 15*time.Minute)
 	if err != nil {
 		return nil, err
 	}

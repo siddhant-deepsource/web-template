@@ -1,4 +1,4 @@
-module github.com/rickypai/mmtk
+module github.com/rickypai/web-template
 
 go 1.15
 
