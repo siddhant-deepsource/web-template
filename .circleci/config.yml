@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
 jobs:
-  go-build:
+  "Go build":
     docker:
       - image: circleci/golang:1.15
 
@@ -15,13 +15,13 @@ workflows:
   node-tests:
     jobs:
       - node/test:
-          name: build
+          name: "Node.js build"
           app-dir: web
           run-command: build
       - node/test:
-          name: unit tests
+          name: "Node.js tests"
           app-dir: web
 
   go:
     jobs:
-      - go-build
+      - "Go build"
