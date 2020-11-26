@@ -1,6 +1,16 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
+jobs:
+  go-build:
+    docker:
+      - image: circleci/golang:1.15
+
+    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    steps:
+      - checkout
+      - run: go build -v ./...
+      - run: go test -v ./...
 workflows:
   node-tests:
     jobs:
@@ -8,12 +18,4 @@ workflows:
 
   go:
     jobs:
-      build:
-        docker:
-          - image: circleci/golang:1.15
-
-        working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
-        steps:
-          - checkout
-          - run: go build -v ./...
-          - run: go test -v ./...
+      - go-build
