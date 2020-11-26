@@ -1,9 +1,8 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "web-template",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Ricky Pai <rickyp999@gmail.com>",
   "dependencies": {
     "@types/antd": "^1.0.0",
     "antd": "^4.4.1",
@@ -30,10 +29,6 @@
   "devDependencies": {
     "prettier": "^2.0.5"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
