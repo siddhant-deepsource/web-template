@@ -17,6 +17,7 @@ workflows:
       - node/test:
           name: build
           app-dir: web
+          run-command: build
       - node/test:
           name: unit tests
           app-dir: web
