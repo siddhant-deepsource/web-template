@@ -1,19 +1,18 @@
 syntax = "proto3";
 package api;
 
-import "protobuf/image/image.proto";
-import "google/protobuf/duration.proto";
+import "protobuf/phone/phone.proto";
 
 option go_package = "github.com/rickypai/web-template/protobuf/api";
 
 service API {
-  rpc GetImage(GetImageRequest) returns (GetImageResponse) {}
+  rpc GetPhone(GetPhoneRequest) returns (GetPhoneResponse) {}
 }
 
-message GetImageRequest {
+message GetPhoneRequest {
   int64 id = 1;
 }
 
-message GetImageResponse {
-  image.Image image = 1;
+message GetPhoneResponse {
+  phone.Phone phone = 1;
 }

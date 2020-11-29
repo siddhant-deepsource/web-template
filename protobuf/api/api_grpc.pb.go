@@ -17,7 +17,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type APIClient interface {
-	GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*GetImageResponse, error)
+	GetPhone(ctx context.Context, in *GetPhoneRequest, opts ...grpc.CallOption) (*GetPhoneResponse, error)
 }
 
 type aPIClient struct {
@@ -28,9 +28,9 @@ func NewAPIClient(cc grpc.ClientConnInterface) APIClient {
 	return &aPIClient{cc}
 }
 
-func (c *aPIClient) GetImage(ctx context.Context, in *GetImageRequest, opts ...grpc.CallOption) (*GetImageResponse, error) {
-	out := new(GetImageResponse)
-	err := c.cc.Invoke(ctx, "/api.API/GetImage", in, out, opts...)
+func (c *aPIClient) GetPhone(ctx context.Context, in *GetPhoneRequest, opts ...grpc.CallOption) (*GetPhoneResponse, error) {
+	out := new(GetPhoneResponse)
+	err := c.cc.Invoke(ctx, "/api.API/GetPhone", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ func (c *aPIClient) GetImage(ctx context.Context, in *GetImageRequest, opts ...g
 // All implementations must embed UnimplementedAPIServer
 // for forward compatibility
 type APIServer interface {
-	GetImage(context.Context, *GetImageRequest) (*GetImageResponse, error)
+	GetPhone(context.Context, *GetPhoneRequest) (*GetPhoneResponse, error)
 	mustEmbedUnimplementedAPIServer()
 }
 
@@ -49,8 +49,8 @@ type APIServer interface {
 type UnimplementedAPIServer struct {
 }
 
-func (UnimplementedAPIServer) GetImage(context.Context, *GetImageRequest) (*GetImageResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetImage not implemented")
+func (UnimplementedAPIServer) GetPhone(context.Context, *GetPhoneRequest) (*GetPhoneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPhone not implemented")
 }
 func (UnimplementedAPIServer) mustEmbedUnimplementedAPIServer() {}
 
@@ -65,20 +65,20 @@ func RegisterAPIServer(s grpc.ServiceRegistrar, srv APIServer) {
 	s.RegisterService(&_API_serviceDesc, srv)
 }
 
-func _API_GetImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetImageRequest)
+func _API_GetPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPhoneRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(APIServer).GetImage(ctx, in)
+		return srv.(APIServer).GetPhone(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.API/GetImage",
+		FullMethod: "/api.API/GetPhone",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(APIServer).GetImage(ctx, req.(*GetImageRequest))
+		return srv.(APIServer).GetPhone(ctx, req.(*GetPhoneRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -88,8 +88,8 @@ var _API_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*APIServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetImage",
-			Handler:    _API_GetImage_Handler,
+			MethodName: "GetPhone",
+			Handler:    _API_GetPhone_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

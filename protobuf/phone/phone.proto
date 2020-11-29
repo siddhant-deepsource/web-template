@@ -1,0 +1,22 @@
+syntax = "proto2";
+package phone;
+
+import "google/protobuf/timestamp.proto";
+import "protobuf/make/make.proto";
+import "protobuf/os/os.proto";
+
+option go_package = "github.com/rickypai/web-template/protobuf/phone";
+
+message Phone {
+  required int64 id = 1;
+
+  required string name = 2;
+
+  required make.Make make = 3;
+
+  required os.OS os = 4;
+
+  required google.protobuf.Timestamp created_at = 9000;
+
+  required google.protobuf.Timestamp modified_at = 9001;
+}

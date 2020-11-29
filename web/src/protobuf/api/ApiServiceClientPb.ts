@@ -35,44 +35,44 @@ export class APIClient {
     this.options_ = options;
   }
 
-  methodInfoGetImage = new grpcWeb.AbstractClientBase.MethodInfo(
-    protobuf_api_api_pb.GetImageResponse,
-    (request: protobuf_api_api_pb.GetImageRequest) => {
+  methodInfoGetPhone = new grpcWeb.AbstractClientBase.MethodInfo(
+    protobuf_api_api_pb.GetPhoneResponse,
+    (request: protobuf_api_api_pb.GetPhoneRequest) => {
       return request.serializeBinary();
     },
-    protobuf_api_api_pb.GetImageResponse.deserializeBinary
+    protobuf_api_api_pb.GetPhoneResponse.deserializeBinary
   );
 
-  getImage(
-    request: protobuf_api_api_pb.GetImageRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protobuf_api_api_pb.GetImageResponse>;
+  getPhone(
+    request: protobuf_api_api_pb.GetPhoneRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_api_api_pb.GetPhoneResponse>;
 
-  getImage(
-    request: protobuf_api_api_pb.GetImageRequest,
+  getPhone(
+    request: protobuf_api_api_pb.GetPhoneRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: protobuf_api_api_pb.GetImageResponse) => void): grpcWeb.ClientReadableStream<protobuf_api_api_pb.GetImageResponse>;
+               response: protobuf_api_api_pb.GetPhoneResponse) => void): grpcWeb.ClientReadableStream<protobuf_api_api_pb.GetPhoneResponse>;
 
-  getImage(
-    request: protobuf_api_api_pb.GetImageRequest,
+  getPhone(
+    request: protobuf_api_api_pb.GetPhoneRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.Error,
-               response: protobuf_api_api_pb.GetImageResponse) => void) {
+               response: protobuf_api_api_pb.GetPhoneResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/api.API/GetImage',
+          '/api.API/GetPhone',
         request,
         metadata || {},
-        this.methodInfoGetImage,
+        this.methodInfoGetPhone,
         callback);
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/api.API/GetImage',
+      '/api.API/GetPhone',
     request,
     metadata || {},
-    this.methodInfoGetImage);
+    this.methodInfoGetPhone);
   }
 
 }
