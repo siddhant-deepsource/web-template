@@ -1,4 +1,4 @@
-.PHONY: proto envoy proto-setup api web format npm
+.PHONY: proto envoy proto-setup api web format
 
 PB_REL="https://github.com/protocolbuffers/protobuf/releases"
 
@@ -25,8 +25,5 @@ proto-setup:
 	unzip protoc-3.14.0-linux-x86_64.zip -d ${HOME}/.local
 	go get google.golang.org/protobuf/cmd/protoc-gen-go google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
-format: npm
+format:
 	(cd web && npm run format)
-
-npm:
-	(cd web && npm install)
