@@ -41,10 +41,7 @@ const Container = ({ defKey, children }) => {
             defaultSelectedKeys={defKey}
           >
             <Menu.Item key="1">
-              <Link to="/page-2/">Page 2</Link>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Link to="/404/">Secret page</Link>
+              <Link to="/phone/">Phones</Link>
             </Menu.Item>
           </Menu>
         </div>
