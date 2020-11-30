@@ -2,7 +2,7 @@ const lessToJson = require("less-to-json")
 
 module.exports = {
   siteMetadata: {
-    title: "Gatsby Ant Design Starter",
+    title: "Web Template",
     description: `Kick off your next, great Gatsby project with this extra awesome ant design starter!`,
     author: `@gatsbyjs + @alienCY`,
   },
