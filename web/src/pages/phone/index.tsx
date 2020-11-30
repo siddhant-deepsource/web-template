@@ -72,12 +72,7 @@ class PhoneIndexPage extends React.Component {
     this.setState({ loading: true })
     this.listPhones().then((response: ListPhonesResponse) => {
       let data = response.getPhonesList().map((p: Phone) => {
-        return {
-          id: p.getId(),
-          name: p.getName(),
-          make: { name: p.getMake().getName() },
-          os: { name: p.getOs().getName() },
-        }
+        return p.toObject()
       })
 
       this.setState({
