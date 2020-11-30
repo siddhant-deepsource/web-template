@@ -75,5 +75,45 @@ export class APIClient {
     this.methodInfoGetPhone);
   }
 
+  methodInfoListPhones = new grpcWeb.AbstractClientBase.MethodInfo(
+    protobuf_api_api_pb.ListPhonesResponse,
+    (request: protobuf_api_api_pb.ListPhonesRequest) => {
+      return request.serializeBinary();
+    },
+    protobuf_api_api_pb.ListPhonesResponse.deserializeBinary
+  );
+
+  listPhones(
+    request: protobuf_api_api_pb.ListPhonesRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_api_api_pb.ListPhonesResponse>;
+
+  listPhones(
+    request: protobuf_api_api_pb.ListPhonesRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: protobuf_api_api_pb.ListPhonesResponse) => void): grpcWeb.ClientReadableStream<protobuf_api_api_pb.ListPhonesResponse>;
+
+  listPhones(
+    request: protobuf_api_api_pb.ListPhonesRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.Error,
+               response: protobuf_api_api_pb.ListPhonesResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/api.API/ListPhones',
+        request,
+        metadata || {},
+        this.methodInfoListPhones,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/api.API/ListPhones',
+    request,
+    metadata || {},
+    this.methodInfoListPhones);
+  }
+
 }
 

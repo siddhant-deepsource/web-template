@@ -41,3 +41,37 @@ export namespace GetPhoneResponse {
   }
 }
 
+export class ListPhonesRequest extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ListPhonesRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ListPhonesRequest): ListPhonesRequest.AsObject;
+  static serializeBinaryToWriter(message: ListPhonesRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ListPhonesRequest;
+  static deserializeBinaryFromReader(message: ListPhonesRequest, reader: jspb.BinaryReader): ListPhonesRequest;
+}
+
+export namespace ListPhonesRequest {
+  export type AsObject = {
+  }
+}
+
+export class ListPhonesResponse extends jspb.Message {
+  getPhonesList(): Array<protobuf_phone_phone_pb.Phone>;
+  setPhonesList(value: Array<protobuf_phone_phone_pb.Phone>): ListPhonesResponse;
+  clearPhonesList(): ListPhonesResponse;
+  addPhones(value?: protobuf_phone_phone_pb.Phone, index?: number): protobuf_phone_phone_pb.Phone;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ListPhonesResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ListPhonesResponse): ListPhonesResponse.AsObject;
+  static serializeBinaryToWriter(message: ListPhonesResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ListPhonesResponse;
+  static deserializeBinaryFromReader(message: ListPhonesResponse, reader: jspb.BinaryReader): ListPhonesResponse;
+}
+
+export namespace ListPhonesResponse {
+  export type AsObject = {
+    phonesList: Array<protobuf_phone_phone_pb.Phone.AsObject>,
+  }
+}
+

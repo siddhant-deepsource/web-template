@@ -18,6 +18,17 @@ type Server struct {
 	api.UnimplementedAPIServer
 }
 
+func (s *Server) ListPhones(ctx context.Context, in *api.ListPhonesRequest) (*api.ListPhonesResponse, error) {
+	return &api.ListPhonesResponse{
+		Phones: []*phone.Phone{
+			getPhone(1),
+			getPhone(2),
+			getPhone(3),
+			getPhone(4),
+		},
+	}, nil
+}
+
 func (s *Server) GetPhone(ctx context.Context, in *api.GetPhoneRequest) (*api.GetPhoneResponse, error) {
 	id := in.GetId()
 
@@ -49,7 +60,7 @@ func getPhone(id int64) *phone.Phone {
 		},
 		Os: &os.OS{
 			Id:   proto.Int64(id),
-			Name: proto.String(fmt.Sprintf("Make #%v", id)),
+			Name: proto.String(fmt.Sprintf("OS #%v", id)),
 
 			CreatedAt:  ts,
 			ModifiedAt: ts,

@@ -18,6 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type APIClient interface {
 	GetPhone(ctx context.Context, in *GetPhoneRequest, opts ...grpc.CallOption) (*GetPhoneResponse, error)
+	ListPhones(ctx context.Context, in *ListPhonesRequest, opts ...grpc.CallOption) (*ListPhonesResponse, error)
 }
 
 type aPIClient struct {
@@ -37,11 +38,21 @@ func (c *aPIClient) GetPhone(ctx context.Context, in *GetPhoneRequest, opts ...g
 	return out, nil
 }
 
+func (c *aPIClient) ListPhones(ctx context.Context, in *ListPhonesRequest, opts ...grpc.CallOption) (*ListPhonesResponse, error) {
+	out := new(ListPhonesResponse)
+	err := c.cc.Invoke(ctx, "/api.API/ListPhones", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // APIServer is the server API for API service.
 // All implementations must embed UnimplementedAPIServer
 // for forward compatibility
 type APIServer interface {
 	GetPhone(context.Context, *GetPhoneRequest) (*GetPhoneResponse, error)
+	ListPhones(context.Context, *ListPhonesRequest) (*ListPhonesResponse, error)
 	mustEmbedUnimplementedAPIServer()
 }
 
@@ -51,6 +62,9 @@ type UnimplementedAPIServer struct {
 
 func (UnimplementedAPIServer) GetPhone(context.Context, *GetPhoneRequest) (*GetPhoneResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPhone not implemented")
+}
+func (UnimplementedAPIServer) ListPhones(context.Context, *ListPhonesRequest) (*ListPhonesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPhones not implemented")
 }
 func (UnimplementedAPIServer) mustEmbedUnimplementedAPIServer() {}
 
@@ -83,6 +97,24 @@ func _API_GetPhone_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _API_ListPhones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPhonesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(APIServer).ListPhones(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.API/ListPhones",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(APIServer).ListPhones(ctx, req.(*ListPhonesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _API_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "api.API",
 	HandlerType: (*APIServer)(nil),
@@ -90,6 +122,10 @@ var _API_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPhone",
 			Handler:    _API_GetPhone_Handler,
+		},
+		{
+			MethodName: "ListPhones",
+			Handler:    _API_ListPhones_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

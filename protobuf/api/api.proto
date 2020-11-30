@@ -7,6 +7,7 @@ option go_package = "github.com/rickypai/web-template/protobuf/api";
 
 service API {
   rpc GetPhone(GetPhoneRequest) returns (GetPhoneResponse) {}
+  rpc ListPhones(ListPhonesRequest) returns (ListPhonesResponse) {}
 }
 
 message GetPhoneRequest {
@@ -15,4 +16,11 @@ message GetPhoneRequest {
 
 message GetPhoneResponse {
   phone.Phone phone = 1;
+}
+
+
+message ListPhonesRequest {}
+
+message ListPhonesResponse {
+  repeated phone.Phone phones = 1;
 }
