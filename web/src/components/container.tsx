@@ -57,7 +57,7 @@ const Container = ({ defKey, children }) => {
         <div style={{ maxWidth: "900px", margin: "0 auto" }}>{children}</div>
       </Content>
       <Footer style={{ textAlign: "center" }}>
-        © {new Date().getFullYear()} made by alienCY ^__^
+        © {new Date().getFullYear()} someone
       </Footer>
     </Layout>
   )
