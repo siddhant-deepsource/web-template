@@ -75,7 +75,7 @@ export default class PhonePage extends React.Component<
   render() {
     if (this.state.loading) {
       return (
-        <Container>
+        <Container defKey="1">
           <SEO title="Phone" />
         </Container>
       )
@@ -83,7 +83,7 @@ export default class PhonePage extends React.Component<
 
     if (this.state.phone) {
       return (
-        <Container>
+        <Container defKey="1">
           <SEO title={this.state.phone.getName()} />
           <h1>{this.state.phone.getName()}</h1>
         </Container>

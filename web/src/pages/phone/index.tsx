@@ -3,7 +3,7 @@ import React from "react"
 import SEO from "../../components/seo"
 
 const PhoneIndexPage = () => (
-  <Container>
+  <Container defKey="1">
     <SEO title="Phone" />
     <h1>Phones</h1>
   </Container>

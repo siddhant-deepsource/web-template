@@ -40,6 +40,9 @@ const Container = ({ defKey, children }) => {
             mode="horizontal"
             defaultSelectedKeys={defKey}
           >
+            <Menu.Item key="0">
+              <Link to="/">Home</Link>
+            </Menu.Item>
             <Menu.Item key="1">
               <Link to="/phone/">Phones</Link>
             </Menu.Item>

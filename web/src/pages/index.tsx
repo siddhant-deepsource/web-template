@@ -4,7 +4,7 @@ import React from "react"
 import SEO from "../components/seo"
 
 const IndexPage = () => (
-  <Container>
+  <Container defKey="0">
     <SEO title="Home" />
     <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site with ant design! (antd)</p>
