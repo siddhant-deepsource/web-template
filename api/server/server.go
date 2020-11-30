@@ -19,37 +19,43 @@ type Server struct {
 }
 
 func (s *Server) GetPhone(ctx context.Context, in *api.GetPhoneRequest) (*api.GetPhoneResponse, error) {
-	if in.GetId() == 404 {
+	id := in.GetId()
+
+	if id == 404 {
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	if in.GetId() == 500 {
+	if id == 500 {
 		return nil, status.Error(codes.Unknown, "unknown")
 	}
 
+	return &api.GetPhoneResponse{
+		Phone: getPhone(id),
+	}, nil
+}
+
+func getPhone(id int64) *phone.Phone {
 	ts := ptypes.TimestampNow()
 
-	return &api.GetPhoneResponse{
-		Phone: &phone.Phone{
-			Id:   proto.Int64(in.GetId()),
-			Name: proto.String(fmt.Sprintf("Phone #%v", in.GetId())),
-			Make: &make.Make{
-				Id:   proto.Int64(in.GetId()),
-				Name: proto.String(fmt.Sprintf("Make #%v", in.GetId())),
-
-				CreatedAt:  ts,
-				ModifiedAt: ts,
-			},
-			Os: &os.OS{
-				Id:   proto.Int64(in.GetId()),
-				Name: proto.String(fmt.Sprintf("Make #%v", in.GetId())),
-
-				CreatedAt:  ts,
-				ModifiedAt: ts,
-			},
+	return &phone.Phone{
+		Id:   proto.Int64(id),
+		Name: proto.String(fmt.Sprintf("Phone #%v", id)),
+		Make: &make.Make{
+			Id:   proto.Int64(id),
+			Name: proto.String(fmt.Sprintf("Make #%v", id)),
 
 			CreatedAt:  ts,
 			ModifiedAt: ts,
 		},
-	}, nil
+		Os: &os.OS{
+			Id:   proto.Int64(id),
+			Name: proto.String(fmt.Sprintf("Make #%v", id)),
+
+			CreatedAt:  ts,
+			ModifiedAt: ts,
+		},
+
+		CreatedAt:  ts,
+		ModifiedAt: ts,
+	}
 }
