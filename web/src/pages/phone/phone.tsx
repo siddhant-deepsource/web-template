@@ -77,16 +77,15 @@ export default class PhonePage extends React.Component<
       return (
         <Container>
           <SEO title="Phone" />
-          <h1>loading...</h1>
         </Container>
       )
     }
 
-    if (this.state.errorCode == StatusCode.OK) {
+    if (this.state.phone) {
       return (
         <Container>
-          <SEO title="Phone" />
-          <h1>{this.state.phone ? this.state.phone.getName() : null}</h1>
+          <SEO title={this.state.phone.getName()} />
+          <h1>{this.state.phone.getName()}</h1>
         </Container>
       )
     }
