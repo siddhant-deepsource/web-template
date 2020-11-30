@@ -223,7 +223,7 @@ proto.phone.Phone.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * required int64 id = 1;
+ * optional int64 id = 1;
  * @return {number}
  */
 proto.phone.Phone.prototype.getId = function() {
@@ -259,7 +259,7 @@ proto.phone.Phone.prototype.hasId = function() {
 
 
 /**
- * required string name = 2;
+ * optional string name = 2;
  * @return {string}
  */
 proto.phone.Phone.prototype.getName = function() {
@@ -295,17 +295,17 @@ proto.phone.Phone.prototype.hasName = function() {
 
 
 /**
- * required make.Make make = 3;
- * @return {!proto.make.Make}
+ * optional make.Make make = 3;
+ * @return {?proto.make.Make}
  */
 proto.phone.Phone.prototype.getMake = function() {
-  return /** @type{!proto.make.Make} */ (
-    jspb.Message.getWrapperField(this, protobuf_make_make_pb.Make, 3, 1));
+  return /** @type{?proto.make.Make} */ (
+    jspb.Message.getWrapperField(this, protobuf_make_make_pb.Make, 3));
 };
 
 
 /**
- * @param {!proto.make.Make} value
+ * @param {?proto.make.Make|undefined} value
  * @return {!proto.phone.Phone} returns this
 */
 proto.phone.Phone.prototype.setMake = function(value) {
@@ -314,11 +314,11 @@ proto.phone.Phone.prototype.setMake = function(value) {
 
 
 /**
- * Clears the field making it undefined.
+ * Clears the message field making it undefined.
  * @return {!proto.phone.Phone} returns this
  */
 proto.phone.Phone.prototype.clearMake = function() {
-  return jspb.Message.setField(this, 3, undefined);
+  return this.setMake(undefined);
 };
 
 
@@ -332,17 +332,17 @@ proto.phone.Phone.prototype.hasMake = function() {
 
 
 /**
- * required os.OS os = 4;
- * @return {!proto.os.OS}
+ * optional os.OS os = 4;
+ * @return {?proto.os.OS}
  */
 proto.phone.Phone.prototype.getOs = function() {
-  return /** @type{!proto.os.OS} */ (
-    jspb.Message.getWrapperField(this, protobuf_os_os_pb.OS, 4, 1));
+  return /** @type{?proto.os.OS} */ (
+    jspb.Message.getWrapperField(this, protobuf_os_os_pb.OS, 4));
 };
 
 
 /**
- * @param {!proto.os.OS} value
+ * @param {?proto.os.OS|undefined} value
  * @return {!proto.phone.Phone} returns this
 */
 proto.phone.Phone.prototype.setOs = function(value) {
@@ -351,11 +351,11 @@ proto.phone.Phone.prototype.setOs = function(value) {
 
 
 /**
- * Clears the field making it undefined.
+ * Clears the message field making it undefined.
  * @return {!proto.phone.Phone} returns this
  */
 proto.phone.Phone.prototype.clearOs = function() {
-  return jspb.Message.setField(this, 4, undefined);
+  return this.setOs(undefined);
 };
 
 
@@ -369,17 +369,17 @@ proto.phone.Phone.prototype.hasOs = function() {
 
 
 /**
- * required google.protobuf.Timestamp created_at = 9000;
- * @return {!proto.google.protobuf.Timestamp}
+ * optional google.protobuf.Timestamp created_at = 9000;
+ * @return {?proto.google.protobuf.Timestamp}
  */
 proto.phone.Phone.prototype.getCreatedAt = function() {
-  return /** @type{!proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9000, 1));
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9000));
 };
 
 
 /**
- * @param {!proto.google.protobuf.Timestamp} value
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
  * @return {!proto.phone.Phone} returns this
 */
 proto.phone.Phone.prototype.setCreatedAt = function(value) {
@@ -388,11 +388,11 @@ proto.phone.Phone.prototype.setCreatedAt = function(value) {
 
 
 /**
- * Clears the field making it undefined.
+ * Clears the message field making it undefined.
  * @return {!proto.phone.Phone} returns this
  */
 proto.phone.Phone.prototype.clearCreatedAt = function() {
-  return jspb.Message.setField(this, 9000, undefined);
+  return this.setCreatedAt(undefined);
 };
 
 
@@ -406,17 +406,17 @@ proto.phone.Phone.prototype.hasCreatedAt = function() {
 
 
 /**
- * required google.protobuf.Timestamp modified_at = 9001;
- * @return {!proto.google.protobuf.Timestamp}
+ * optional google.protobuf.Timestamp modified_at = 9001;
+ * @return {?proto.google.protobuf.Timestamp}
  */
 proto.phone.Phone.prototype.getModifiedAt = function() {
-  return /** @type{!proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9001, 1));
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9001));
 };
 
 
 /**
- * @param {!proto.google.protobuf.Timestamp} value
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
  * @return {!proto.phone.Phone} returns this
 */
 proto.phone.Phone.prototype.setModifiedAt = function(value) {
@@ -425,11 +425,11 @@ proto.phone.Phone.prototype.setModifiedAt = function(value) {
 
 
 /**
- * Clears the field making it undefined.
+ * Clears the message field making it undefined.
  * @return {!proto.phone.Phone} returns this
  */
 proto.phone.Phone.prototype.clearModifiedAt = function() {
-  return jspb.Message.setField(this, 9001, undefined);
+  return this.setModifiedAt(undefined);
 };
 
 

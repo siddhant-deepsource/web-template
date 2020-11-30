@@ -191,7 +191,7 @@ proto.os.OS.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * required int64 id = 1;
+ * optional int64 id = 1;
  * @return {number}
  */
 proto.os.OS.prototype.getId = function() {
@@ -227,7 +227,7 @@ proto.os.OS.prototype.hasId = function() {
 
 
 /**
- * required string name = 2;
+ * optional string name = 2;
  * @return {string}
  */
 proto.os.OS.prototype.getName = function() {
@@ -263,17 +263,17 @@ proto.os.OS.prototype.hasName = function() {
 
 
 /**
- * required google.protobuf.Timestamp created_at = 9000;
- * @return {!proto.google.protobuf.Timestamp}
+ * optional google.protobuf.Timestamp created_at = 9000;
+ * @return {?proto.google.protobuf.Timestamp}
  */
 proto.os.OS.prototype.getCreatedAt = function() {
-  return /** @type{!proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9000, 1));
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9000));
 };
 
 
 /**
- * @param {!proto.google.protobuf.Timestamp} value
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
  * @return {!proto.os.OS} returns this
 */
 proto.os.OS.prototype.setCreatedAt = function(value) {
@@ -282,11 +282,11 @@ proto.os.OS.prototype.setCreatedAt = function(value) {
 
 
 /**
- * Clears the field making it undefined.
+ * Clears the message field making it undefined.
  * @return {!proto.os.OS} returns this
  */
 proto.os.OS.prototype.clearCreatedAt = function() {
-  return jspb.Message.setField(this, 9000, undefined);
+  return this.setCreatedAt(undefined);
 };
 
 
@@ -300,17 +300,17 @@ proto.os.OS.prototype.hasCreatedAt = function() {
 
 
 /**
- * required google.protobuf.Timestamp modified_at = 9001;
- * @return {!proto.google.protobuf.Timestamp}
+ * optional google.protobuf.Timestamp modified_at = 9001;
+ * @return {?proto.google.protobuf.Timestamp}
  */
 proto.os.OS.prototype.getModifiedAt = function() {
-  return /** @type{!proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9001, 1));
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9001));
 };
 
 
 /**
- * @param {!proto.google.protobuf.Timestamp} value
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
  * @return {!proto.os.OS} returns this
 */
 proto.os.OS.prototype.setModifiedAt = function(value) {
@@ -319,11 +319,11 @@ proto.os.OS.prototype.setModifiedAt = function(value) {
 
 
 /**
- * Clears the field making it undefined.
+ * Clears the message field making it undefined.
  * @return {!proto.os.OS} returns this
  */
 proto.os.OS.prototype.clearModifiedAt = function() {
-  return jspb.Message.setField(this, 9001, undefined);
+  return this.setModifiedAt(undefined);
 };
 
 

@@ -6,11 +6,11 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/rickypai/web-template/protobuf/os";
 
 message OS {
-  required int64 id = 1;
+  optional int64 id = 1;
 
-  required string name = 2;
+  optional string name = 2;
 
-  required google.protobuf.Timestamp created_at = 9000;
+  optional google.protobuf.Timestamp created_at = 9000;
 
-  required google.protobuf.Timestamp modified_at = 9001;
+  optional google.protobuf.Timestamp modified_at = 9001;
 }
