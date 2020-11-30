@@ -5,7 +5,7 @@ import NotFoundPage from "../../pages/404"
 import { GetPhoneRequest, GetPhoneResponse } from "../../protobuf/api/api_pb"
 import { Phone } from "../../protobuf/phone/phone_pb"
 import Client from "../../clients/api_client"
-import { StatusCode } from "grpc-web"
+import { Error, StatusCode } from "grpc-web"
 
 interface PhonePageProps {
   id: string
@@ -43,19 +43,19 @@ export default class PhonePage extends React.Component<
   componentDidMount() {
     this.getPhone(this.state.id)
       .then(
-        function (response) {
+        function (response: GetPhoneResponse) {
           this.setState({
             loading: false,
             phone: response.getPhone(),
             errorCode: StatusCode.OK,
           })
         }.bind(this),
-        function (e) {
+        function (e: Error) {
           this.setState({ loading: false, errorCode: e.code })
         }.bind(this)
       )
       .catch(
-        function (e) {
+        function () {
           this.setState({ loading: false, errorCode: StatusCode.UNKNOWN })
         }.bind(this)
       )
