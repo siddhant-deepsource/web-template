@@ -14,12 +14,14 @@ const columns = [
     title: "ID",
     dataIndex: "id",
     sorter: true,
+    render: (text, record) => <a href={"/phone/" + record.id + "/"}>{text}</a>,
     width: "20%",
   },
   {
     title: "Name",
     dataIndex: "name",
     sorter: true,
+    render: (text, record) => <a href={"/phone/" + record.id + "/"}>{text}</a>,
     width: "20%",
   },
   {
