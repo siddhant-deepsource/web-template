@@ -8,39 +8,53 @@ import {
   ListPhonesRequest,
   ListPhonesResponse,
 } from "../../protobuf/api/api_pb"
+import { Make } from "../../protobuf/make/make_pb"
+import { OS } from "../../protobuf/os/os_pb"
+import { PaginationConfig } from "antd/lib/pagination"
 
 const columns = [
   {
     title: "ID",
     dataIndex: "id",
     sorter: true,
-    render: (text, record) => <a href={"/phone/" + record.id + "/"}>{text}</a>,
+    render: (text: number, record: Phone.AsObject) => (
+      <a href={"/phone/" + record.id + "/"}>{text}</a>
+    ),
     width: "20%",
   },
   {
     title: "Name",
     dataIndex: "name",
     sorter: true,
-    render: (text, record) => <a href={"/phone/" + record.id + "/"}>{text}</a>,
+    render: (text: string, record: Phone.AsObject) => (
+      <a href={"/phone/" + record.id + "/"}>{text}</a>
+    ),
     width: "20%",
   },
   {
     title: "Make",
     dataIndex: "make",
     sorter: true,
-    render: make => `${make.name}`,
+    render: (make: Make.AsObject) => `${make.name}`,
     width: "20%",
   },
   {
     title: "OS",
     dataIndex: "os",
     sorter: true,
-    render: os => `${os.name}`,
+    render: (os: OS.AsObject) => `${os.name}`,
     width: "20%",
   },
 ]
 
-class PhoneIndexPage extends React.Component {
+interface PhoneIndexProps {}
+interface PhoneIndexState {
+  data: Array<Phone.AsObject>
+  pagination: PaginationConfig
+  loading: boolean
+}
+
+class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
   state = {
     data: [],
     pagination: {
