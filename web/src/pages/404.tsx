@@ -2,11 +2,11 @@ import Container from "../components/container"
 import React from "react"
 import SEO from "../components/seo"
 
-const NotFoundPage = () => (
+const NotFoundPage = prop => (
   <Container defKey="2">
-    <SEO title="404: Not found" />
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+    <SEO title={prop.code + ": " + prop.title} />
+    <h1>{prop.title}</h1>
+    <p>{prop.message}</p>
   </Container>
 )
 

@@ -63,25 +63,62 @@ export default class PhonePage extends React.Component<
     new Promise(resolve => setTimeout(resolve, 1000)).then(
       function () {
         if (this.state.loading) {
-          this.setState({ loading: false, errorCode: StatusCode.UNKNOWN })
+          this.setState({
+            loading: false,
+            errorCode: StatusCode.DEADLINE_EXCEEDED,
+          })
         }
       }.bind(this)
     )
   }
 
   render() {
-    return this.state.loading ? (
-      <Container>
-        <SEO title="Phone" />
-        <h1>loading...</h1>
-      </Container>
-    ) : this.state.errorCode == StatusCode.OK ? (
-      <Container>
-        <SEO title="Phone" />
-        <h1>{this.state.phone ? this.state.phone.getName() : null}</h1>
-      </Container>
-    ) : (
-      <NotFoundPage />
+    if (this.state.loading) {
+      return (
+        <Container>
+          <SEO title="Phone" />
+          <h1>loading...</h1>
+        </Container>
+      )
+    }
+
+    if (this.state.errorCode == StatusCode.OK) {
+      return (
+        <Container>
+          <SEO title="Phone" />
+          <h1>{this.state.phone ? this.state.phone.getName() : null}</h1>
+        </Container>
+      )
+    }
+
+    if (this.state.errorCode == StatusCode.NOT_FOUND) {
+      return (
+        <NotFoundPage
+          code={404}
+          title="Phone not found"
+          message={"Phone with id=" + this.state.id + " not found."}
+        />
+      )
+    }
+
+    if (this.state.errorCode == StatusCode.DEADLINE_EXCEEDED) {
+      return (
+        <NotFoundPage
+          code={503}
+          title="Timeout"
+          message={
+            "Waited too long while fetching phone with id=" + this.state.id
+          }
+        />
+      )
+    }
+
+    return (
+      <NotFoundPage
+        code={500}
+        title="Internal server error"
+        message={"Error fetching phone with id=" + this.state.id}
+      />
     )
   }
 }
