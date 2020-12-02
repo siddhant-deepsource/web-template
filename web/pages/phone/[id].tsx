@@ -1,6 +1,6 @@
 import React from 'react';
 import { Error, StatusCode } from 'grpc-web';
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext, GetServerSidePropsResult, P } from 'next';
 import Container from '../../components/container';
 // import SEO from '../../components/seo';
 // import NotFoundPage from '../../pages/404';
@@ -8,8 +8,15 @@ import { GetPhoneRequest, GetPhoneResponse } from '../../protobuf/api/api_pb';
 import { Phone } from '../../protobuf/phone/phone_pb';
 import Client from '../../clients/node_client';
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const id = parseInt(context.params.id, 10);
+export const getServerSideProps = async (context: GetServerSidePropsContext):
+  Promise<GetServerSidePropsResult<PhonePageProp>> => {
+  let id: number;
+
+  if (Array.isArray(context.params.id)) {
+    id = parseInt(context.params.id[0], 10);
+  } else {
+    id = parseInt(context.params.id, 10);
+  }
 
   const props: PhonePageProp = {
     id,
