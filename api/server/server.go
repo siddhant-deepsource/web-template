@@ -30,6 +30,8 @@ func (s *Server) ListPhones(ctx context.Context, in *api.ListPhonesRequest) (*ap
 }
 
 func (s *Server) GetPhone(ctx context.Context, in *api.GetPhoneRequest) (*api.GetPhoneResponse, error) {
+	fmt.Printf("Called GetPhone with %+v\n", in)
+
 	id := in.GetId()
 
 	if id == 404 {
