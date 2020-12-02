@@ -1,6 +1,6 @@
 import React from 'react';
 import { Error, StatusCode } from 'grpc-web';
-import { GetServerSidePropsContext, GetServerSidePropsResult, P } from 'next';
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Container from '../../components/container';
 // import SEO from '../../components/seo';
 import Custom404 from '../404';
@@ -26,12 +26,13 @@ export const getServerSideProps = async (context: GetServerSidePropsContext):
 
   const request = new GetPhoneRequest();
   request.setId(id);
-  const p = new Promise((resolve, reject) => Client.getPhone(request, (err, response) => {
-    if (err) {
-      return reject(err);
-    }
-    resolve(response);
-  }));
+  const p = new Promise((resolve, reject) => Client.getPhone(request,
+    (err: Error, response: GetPhoneResponse) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(response);
+    }));
 
   // await (p);
   await p.then(
