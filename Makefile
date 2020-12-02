@@ -6,13 +6,13 @@ api:
 	(cd api && air)
 
 web:
-	(cd web1 && npm run develop)
+	(cd web && yarn run dev)
 
 proto:
 	protoc --version
 	protoc -I=. protobuf/**/*.proto \
-		--js_out=import_style=commonjs:web/src/. \
-		--grpc-web_out=import_style=typescript,mode=grpcwebtext:web/src/. \
+		--js_out=import_style=commonjs:web/. \
+		--grpc-web_out=import_style=typescript,mode=grpcwebtext:web/. \
 		--go_out=. --go_opt=paths=source_relative \
     --go-grpc_out=. --go-grpc_opt=paths=source_relative
 
@@ -26,4 +26,4 @@ proto-setup:
 	go get google.golang.org/protobuf/cmd/protoc-gen-go google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 format:
-	(cd web1 && npm run format)
+	(cd web && yarn run lint)

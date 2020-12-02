@@ -1,57 +1,57 @@
-import Container from "../../components/container"
-import React from "react"
-import SEO from "../../components/seo"
-import { Table } from "antd"
-import Client from "../../clients/api_client"
-import { Phone } from "../../protobuf/phone/phone_pb"
+import React from 'react';
+import { Table } from 'antd';
+import { PaginationConfig } from 'antd/lib/pagination';
+import Container from '../../components/container';
+// import SEO from '../../components/seo';
+import Client from '../../clients/api_client';
+import { Phone } from '../../protobuf/phone/phone_pb';
 import {
   ListPhonesRequest,
   ListPhonesResponse,
-} from "../../protobuf/api/api_pb"
-import { Make } from "../../protobuf/make/make_pb"
-import { OS } from "../../protobuf/os/os_pb"
-import { PaginationConfig } from "antd/lib/pagination"
+} from '../../protobuf/api/api_pb';
+import { Make } from '../../protobuf/make/make_pb';
+import { OS } from '../../protobuf/os/os_pb';
 
 const columns = [
   {
-    title: "ID",
-    dataIndex: "id",
+    title: 'ID',
+    dataIndex: 'id',
     sorter: true,
     render: (text: number, record: Phone.AsObject) => (
-      <a href={"/phone/" + record.id + "/"}>{text}</a>
+      <a href={`/phone/${record.id}/`}>{text}</a>
     ),
-    width: "20%",
+    width: '20%',
   },
   {
-    title: "Name",
-    dataIndex: "name",
+    title: 'Name',
+    dataIndex: 'name',
     sorter: true,
     render: (text: string, record: Phone.AsObject) => (
-      <a href={"/phone/" + record.id + "/"}>{text}</a>
+      <a href={`/phone/${record.id}/`}>{text}</a>
     ),
-    width: "20%",
+    width: '20%',
   },
   {
-    title: "Make",
-    dataIndex: "make",
+    title: 'Make',
+    dataIndex: 'make',
     sorter: true,
     render: (make: Make.AsObject) => `${make.name}`,
-    width: "20%",
+    width: '20%',
   },
   {
-    title: "OS",
-    dataIndex: "os",
+    title: 'OS',
+    dataIndex: 'os',
     sorter: true,
     render: (os: OS.AsObject) => `${os.name}`,
-    width: "20%",
+    width: '20%',
   },
-]
+];
 
 interface PhoneIndexProps {}
 interface PhoneIndexState {
-  data: Array<Phone.AsObject>
-  pagination: PaginationConfig
-  loading: boolean
+  data: Array<Phone.AsObject>;
+  pagination: PaginationConfig;
+  loading: boolean;
 }
 
 class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
@@ -62,17 +62,17 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
       pageSize: 10,
     },
     loading: false,
-  }
+  };
 
   listPhones = function (): Promise<ListPhonesResponse> {
-    var request = new ListPhonesRequest()
+    const request = new ListPhonesRequest();
 
-    return Client.listPhones(request, {})
-  }
+    return Client.listPhones(request, {});
+  };
 
   componentDidMount() {
-    const { pagination } = this.state
-    this.fetch({ pagination })
+    const { pagination } = this.state;
+    this.fetch({ pagination });
   }
 
   handleTableChange = (pagination, filters, sorter) => {
@@ -81,46 +81,44 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
       sortOrder: sorter.order,
       pagination,
       ...filters,
-    })
-  }
+    });
+  };
 
   fetch = (params = {}) => {
-    this.setState({ loading: true })
+    this.setState({ loading: true });
     this.listPhones().then((response: ListPhonesResponse) => {
-      let data = response.getPhonesList().map((p: Phone) => {
-        return p.toObject()
-      })
+      const data = response.getPhonesList().map((p: Phone) => p.toObject());
 
       this.setState({
         loading: false,
-        data: data,
+        data,
         // pagination: {
         //   ...params.pagination,
         //   total: 200,
         //   // 200 is mock data, you should read it from server
         //   // total: data.totalCount,
         // },
-      })
-    })
-  }
+      });
+    });
+  };
 
   render() {
-    const { data, pagination, loading } = this.state
+    const { data, pagination, loading } = this.state;
     return (
       <Container defKey="1">
-        <SEO title="Phone" />
+        {/* <SEO title="Phone" /> */}
         <h1>Phones</h1>
         <Table
           columns={columns}
-          rowKey={record => record.id}
+          rowKey={(record) => record.id}
           dataSource={data}
           pagination={pagination}
           loading={loading}
           onChange={this.handleTableChange}
         />
       </Container>
-    )
+    );
   }
 }
 
-export default PhoneIndexPage
+export default PhoneIndexPage;

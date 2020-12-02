@@ -8,3 +8,5 @@ coverage
 .next
 
 next.config.js
+
+protobuf
