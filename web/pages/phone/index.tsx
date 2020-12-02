@@ -47,6 +47,7 @@ const columns = [
   },
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface PhoneIndexProps {}
 interface PhoneIndexState {
   data: Array<Phone.AsObject>;
@@ -64,18 +65,18 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
     loading: false,
   };
 
-  listPhones = function (): Promise<ListPhonesResponse> {
+  listPhones = (): Promise<ListPhonesResponse> => {
     const request = new ListPhonesRequest();
 
     return Client.listPhones(request, {});
   };
 
-  componentDidMount() {
+  componentDidMount(): void {
     const { pagination } = this.state;
     this.fetch({ pagination });
   }
 
-  handleTableChange = (pagination, filters, sorter) => {
+  handleTableChange = (pagination, filters, sorter): void => {
     this.fetch({
       sortField: sorter.field,
       sortOrder: sorter.order,
@@ -84,7 +85,7 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
     });
   };
 
-  fetch = (params = {}) => {
+  fetch = (params = {}): void => {
     this.setState({ loading: true });
     this.listPhones().then((response: ListPhonesResponse) => {
       const data = response.getPhonesList().map((p: Phone) => p.toObject());
@@ -102,7 +103,7 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
     });
   };
 
-  render() {
+  render(): JSX.Element {
     const { data, pagination, loading } = this.state;
     return (
       <Container defKey="1">
