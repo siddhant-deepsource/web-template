@@ -15,6 +15,9 @@ proto:
 		--grpc-web_out=import_style=typescript,mode=grpcwebtext:web/. \
 		--go_out=. --go_opt=paths=source_relative \
     --go-grpc_out=. --go-grpc_opt=paths=source_relative
+	grpc_tools_node_protoc \
+		--js_out=import_style=commonjs,binary:web/ \
+		--grpc_out=grpc_js:web/ protobuf/**/*.proto
 
 envoy:
 	envoy --config-path envoy/envoy.yaml
@@ -24,6 +27,7 @@ proto-setup:
 	curl -LO ${PB_REL}/download/v3.14.0/protoc-3.14.0-linux-x86_64.zip
 	unzip protoc-3.14.0-linux-x86_64.zip -d ${HOME}/.local
 	go get google.golang.org/protobuf/cmd/protoc-gen-go google.golang.org/grpc/cmd/protoc-gen-go-grpc
+	yarn global add grpc-tools
 
 format:
 	(cd web && yarn run lint)
