@@ -5,7 +5,12 @@ import React from 'react';
 
 const { Header, Footer, Content } = Layout;
 
-const Container = ({ defKey, children }) => {
+interface ContainerProp {
+  defKey: string[];
+  children: JSX.Element;
+}
+
+const Container = ({ defKey, children }: ContainerProp): JSX.Element => {
   const headerColor = 'rebeccapurple';
   return (
     <Layout>
@@ -55,9 +60,5 @@ const Container = ({ defKey, children }) => {
     </Layout>
   );
 };
-// Container.propTypes = {
-//   defKey: PropTypes.string,
-//   children: PropTypes.node.isRequired,
-// };
 
 export default Container;
