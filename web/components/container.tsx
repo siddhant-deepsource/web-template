@@ -6,8 +6,8 @@ import React from 'react';
 const { Header, Footer, Content } = Layout;
 
 interface ContainerProp {
-  defKey: string[];
-  children: JSX.Element;
+  defKey: string[] | string;
+  children: JSX.Element[] | JSX.Element;
 }
 
 const Container = ({ defKey, children }: ContainerProp): JSX.Element => {
@@ -33,7 +33,7 @@ const Container = ({ defKey, children }: ContainerProp): JSX.Element => {
             style={{ backgroundColor: headerColor, float: 'right' }}
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={defKey}
+            defaultSelectedKeys={Array.isArray(defKey) ? defKey : [defKey]}
           >
             <Menu.Item key="0">
               <Link href="/">Home</Link>

@@ -3,7 +3,7 @@ import { Error, StatusCode } from 'grpc-web';
 import { GetServerSidePropsContext, GetServerSidePropsResult, P } from 'next';
 import Container from '../../components/container';
 // import SEO from '../../components/seo';
-// import NotFoundPage from '../../pages/404';
+import Custom404 from '../404';
 import { GetPhoneRequest, GetPhoneResponse } from '../../protobuf/api/api_pb';
 import { Phone } from '../../protobuf/phone/phone_pb';
 import Client from '../../clients/node_client';
@@ -70,14 +70,11 @@ const PhonePage = (props: PhonePageProp): JSX.Element => {
 
   if (props.errorCode === StatusCode.NOT_FOUND) {
     return (
-        // <NotFoundPage
-        //   code={404}
-        //   title="Phone not found"
-        //   message={`Phone with id=${id} not found.`}
-        // />
-        <Container defKey="1">
-          <h1>404</h1>
-        </Container>
+        <Custom404
+          defKey="1"
+          title="Phone not found"
+          message={`Phone with id ${props.id} not found.`}
+        />
     );
   }
 
