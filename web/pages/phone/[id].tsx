@@ -2,7 +2,7 @@ import React from 'react';
 import { Error, StatusCode } from 'grpc-web';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Container from '../../components/container';
-// import SEO from '../../components/seo';
+import SEO from '../../components/seo';
 import Custom404 from '../404';
 import { GetPhoneRequest, GetPhoneResponse } from '../../protobuf/api/api_pb';
 import { Phone } from '../../protobuf/phone/phone_pb';
@@ -63,7 +63,7 @@ const PhonePage = (props: PhonePageProp): JSX.Element => {
   if (props.phone) {
     return (
         <Container defKey="1">
-          {/* <SEO title={phone.getName()} /> */}
+          <SEO title={props.phone.name} />
           <h1>{props.phone.name}</h1>
         </Container>
     );

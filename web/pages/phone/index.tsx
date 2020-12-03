@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'antd';
 import { PaginationConfig } from 'antd/lib/pagination';
 import Container from '../../components/container';
-// import SEO from '../../components/seo';
+import SEO from '../../components/seo';
 import Client from '../../clients/api_client';
 import { Phone } from '../../protobuf/phone/phone_pb';
 import {
@@ -107,7 +107,7 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
     const { data, pagination, loading } = this.state;
     return (
       <Container defKey="1">
-        {/* <SEO title="Phone" /> */}
+        <SEO title="Phones" />
         <h1>Phones</h1>
         <Table
           columns={columns}
