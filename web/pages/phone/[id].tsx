@@ -7,6 +7,7 @@ import Custom404 from '../404';
 import { GetPhoneRequest, GetPhoneResponse } from '../../protobuf/api/api_pb';
 import { Phone } from '../../protobuf/phone/phone_pb';
 import Client from '../../clients/node_client';
+import PhoneComponent from './_phone';
 
 export const getServerSideProps = async (context: GetServerSidePropsContext):
   Promise<GetServerSidePropsResult<PhonePageProp>> => {
@@ -64,7 +65,7 @@ const PhonePage = (props: PhonePageProp): JSX.Element => {
     return (
         <Container defKey="1">
           <SEO title={props.phone.name} />
-          <h1>{props.phone.name}</h1>
+          <PhoneComponent phone={props.phone} />
         </Container>
     );
   }
