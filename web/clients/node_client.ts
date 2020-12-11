@@ -1,9 +1,12 @@
-import * as grpc from '@grpc/grpc-js';
-import { APIClient } from '../protobuf/api/api_grpc_pb';
+import * as grpc from "@grpc/grpc-js";
+import { APIClient } from "../protobuf/api/api_grpc_pb";
 
 // const grpc = require('@grpc/grpc-js');
 
-const Client = new APIClient('localhost:8080', grpc.credentials.createInsecure());
+const Client = new APIClient(
+  "localhost:8080",
+  grpc.credentials.createInsecure()
+);
 
 export default Client;
 

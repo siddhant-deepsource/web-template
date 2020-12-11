@@ -1,7 +1,7 @@
-import { Layout, Menu } from 'antd';
-import Link from 'next/link';
+import { Layout, Menu } from "antd";
+import Link from "next/link";
 // import PropTypes from 'prop-types';
-import React from 'react';
+import React from "react";
 
 const { Header, Footer, Content } = Layout;
 
@@ -11,26 +11,24 @@ interface ContainerProp {
 }
 
 const Container = ({ defKey, children }: ContainerProp): JSX.Element => {
-  const headerColor = 'rebeccapurple';
+  const headerColor = "rebeccapurple";
   return (
     <Layout>
       <Header
         style={{
-          position: 'fixed',
+          position: "fixed",
           zIndex: 1,
-          width: '100%',
+          width: "100%",
           backgroundColor: headerColor,
         }}
       >
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <h1 style={{ margin: 'margin 0', float: 'left' }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h1 style={{ margin: "margin 0", float: "left" }}>
             {/* <Link href="/" style={{ color: 'white' }}> */}
-            <Link href="/">
-              Hi
-            </Link>
+            <Link href="/">Hi</Link>
           </h1>
           <Menu
-            style={{ backgroundColor: headerColor, float: 'right' }}
+            style={{ backgroundColor: headerColor, float: "right" }}
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={Array.isArray(defKey) ? defKey : [defKey]}
@@ -46,15 +44,15 @@ const Container = ({ defKey, children }: ContainerProp): JSX.Element => {
       </Header>
       <Content
         style={{
-          padding: '24px 50px',
+          padding: "24px 50px",
           marginTop: 64,
-          background: '#fff',
-          minHeight: '100vh', // edit this to change minimum page height
+          background: "#fff",
+          minHeight: "100vh", // edit this to change minimum page height
         }}
       >
-        <div style={{ maxWidth: '900px', margin: '0 auto' }}>{children}</div>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>{children}</div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>
+      <Footer style={{ textAlign: "center" }}>
         © {new Date().getFullYear()} someone
       </Footer>
     </Layout>

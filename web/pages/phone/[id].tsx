@@ -1,16 +1,17 @@
-import React from 'react';
-import { Error, StatusCode } from 'grpc-web';
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
-import Container from '../../components/container';
-import SEO from '../../components/seo';
-import Custom404 from '../404';
-import { GetPhoneRequest, GetPhoneResponse } from '../../protobuf/api/api_pb';
-import { Phone } from '../../protobuf/phone/phone_pb';
-import Client from '../../clients/node_client';
-import PhoneComponent from './_phone';
+import React from "react";
+import { Error, StatusCode } from "grpc-web";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import Container from "../../components/container";
+import SEO from "../../components/seo";
+import Custom404 from "../404";
+import { GetPhoneRequest, GetPhoneResponse } from "../../protobuf/api/api_pb";
+import { Phone } from "../../protobuf/phone/phone_pb";
+import Client from "../../clients/node_client";
+import PhoneComponent from "./_phone";
 
-export const getServerSideProps = async (context: GetServerSidePropsContext):
-  Promise<GetServerSidePropsResult<PhonePageProp>> => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<PhonePageProp>> => {
   let id: number;
 
   if (Array.isArray(context.params.id)) {
@@ -27,27 +28,28 @@ export const getServerSideProps = async (context: GetServerSidePropsContext):
 
   const request = new GetPhoneRequest();
   request.setId(id);
-  const p = new Promise((resolve, reject) => Client.getPhone(request,
-    (err: Error, response: GetPhoneResponse) => {
+  const p = new Promise((resolve, reject) =>
+    Client.getPhone(request, (err: Error, response: GetPhoneResponse) => {
       if (err) {
         return reject(err);
       }
       return resolve(response);
-    }));
+    })
+  );
 
   // await (p);
-  await p.then(
-    (response: GetPhoneResponse) => {
-      props.phone = response.getPhone().toObject();
-    },
-    (e: Error) => {
-      props.errorCode = e.code;
-    },
-  ).catch(
-    () => {
+  await p
+    .then(
+      (response: GetPhoneResponse) => {
+        props.phone = response.getPhone().toObject();
+      },
+      (e: Error) => {
+        props.errorCode = e.code;
+      }
+    )
+    .catch(() => {
       props.errorCode = StatusCode.UNKNOWN;
-    },
-  );
+    });
 
   return {
     props,
@@ -63,47 +65,47 @@ interface PhonePageProp {
 const PhonePage = (props: PhonePageProp): JSX.Element => {
   if (props.phone) {
     return (
-        <Container defKey="1">
-          <SEO title={props.phone.name} />
-          <PhoneComponent phone={props.phone} />
-        </Container>
+      <Container defKey="1">
+        <SEO title={props.phone.name} />
+        <PhoneComponent phone={props.phone} />
+      </Container>
     );
   }
 
   if (props.errorCode === StatusCode.NOT_FOUND) {
     return (
-        <Custom404
-          defKey="1"
-          title="Phone not found"
-          message={`Phone with id ${props.id} not found.`}
-        />
+      <Custom404
+        defKey="1"
+        title="Phone not found"
+        message={`Phone with id ${props.id} not found.`}
+      />
     );
   }
 
   if (props.errorCode === StatusCode.DEADLINE_EXCEEDED) {
     return (
-        // <NotFoundPage
-        //   code={503}
-        //   title="Timeout"
-        //   message={
-        //     `Waited too long while fetching phone with id=${id}`
-        //   }
-        // />
-        <Container defKey="1">
-          <h1>503</h1>
-        </Container>
+      // <NotFoundPage
+      //   code={503}
+      //   title="Timeout"
+      //   message={
+      //     `Waited too long while fetching phone with id=${id}`
+      //   }
+      // />
+      <Container defKey="1">
+        <h1>503</h1>
+      </Container>
     );
   }
 
   return (
-      // <NotFoundPage
-      //   code={500}
-      //   title="Internal server error"
-      //   message={`Error fetching phone with id=${id}`}
-      // />
-      <Container defKey="1">
-        <h1>500</h1>
-      </Container>
+    // <NotFoundPage
+    //   code={500}
+    //   title="Internal server error"
+    //   message={`Error fetching phone with id=${id}`}
+    // />
+    <Container defKey="1">
+      <h1>500</h1>
+    </Container>
   );
 };
 

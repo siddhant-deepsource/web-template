@@ -1,15 +1,15 @@
-import { NextPageContext } from 'next';
+import { NextPageContext } from "next";
 
 interface ErrorProps {
-  statusCode: number
+  statusCode: number;
 }
 
 const Error = ({ statusCode }: ErrorProps): JSX.Element => (
-    <p>
-      {statusCode
-        ? `An error ${statusCode} occurred on server`
-        : 'An error occurred on client'}
-    </p>
+  <p>
+    {statusCode
+      ? `An error ${statusCode} occurred on server`
+      : "An error occurred on client"}
+  </p>
 );
 
 Error.getInitialProps = ({ res, err }: NextPageContext): ErrorProps => {

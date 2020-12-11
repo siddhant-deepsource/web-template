@@ -1,48 +1,52 @@
-import { Helmet } from 'react-helmet';
-import { MetaHTMLAttributes } from 'react';
+import { Helmet } from "react-helmet";
+import { MetaHTMLAttributes } from "react";
 
 interface SEOProps {
-  lang?: string
-  description?: string
-  meta?: Array<MetaHTMLAttributes<HTMLMetaElement>>
-  title?: string
-  author?: string
+  lang?: string;
+  description?: string;
+  meta?: Array<MetaHTMLAttributes<HTMLMetaElement>>;
+  title?: string;
+  author?: string;
 }
 
 const SEO = ({
-  description = '', lang = 'en', meta = [], title = '', author = '',
+  description = "",
+  lang = "en",
+  meta = [],
+  title = "",
+  author = "",
 }: SEOProps): JSX.Element => {
   const defaultMeta: Array<MetaHTMLAttributes<HTMLMetaElement>> = [
     {
-      name: 'description',
+      name: "description",
       content: description,
     },
     {
-      property: 'og:title',
+      property: "og:title",
       content: title,
     },
     {
-      property: 'og:description',
+      property: "og:description",
       content: description,
     },
     {
-      property: 'og:type',
-      content: 'website',
+      property: "og:type",
+      content: "website",
     },
     {
-      name: 'twitter:card',
-      content: 'summary',
+      name: "twitter:card",
+      content: "summary",
     },
     {
-      name: 'twitter:creator',
+      name: "twitter:creator",
       content: author,
     },
     {
-      name: 'twitter:title',
+      name: "twitter:title",
       content: title,
     },
     {
-      name: 'twitter:description',
+      name: "twitter:description",
       content: description,
     },
   ];

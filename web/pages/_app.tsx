@@ -1,8 +1,8 @@
-import '../styles/globals.css';
-import '../styles/antd.less';
+import "../styles/globals.css";
+import "../styles/antd.less";
 
 // import App from "next/app";
-import type { AppProps /* , AppContext */ } from 'next/app';
+import type { AppProps /* , AppContext */ } from "next/app";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function MyApp({ Component, pageProps }: AppProps) {
