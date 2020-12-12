@@ -17,10 +17,12 @@ workflows:
       - node/test:
           name: "Node.js build"
           app-dir: web
+          pkg-manager: yarn
           run-command: build
       - node/test:
           name: "Node.js tests"
           app-dir: web
+          pkg-manager: yarn
 
   go:
     jobs:
