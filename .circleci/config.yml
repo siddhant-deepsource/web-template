@@ -11,6 +11,12 @@ jobs:
       - checkout
       - run: go build -v ./...
       - run: go test -v ./...
+  "Envoy validate config":
+    docker:
+      - image: "envoyproxy/envoy:v1.15.3@sha256:8e4e3d1c3f291b097a06a1070b4ccad92e870b14c35a76b4d457bc27bf8b7a9a"
+    steps:
+      - checkout
+      - run: make lint-envoy
 workflows:
   node-tests:
     jobs:
@@ -29,3 +35,7 @@ workflows:
   go:
     jobs:
       - "Go build"
+
+  envoy:
+    jobs:
+      - "Envoy validate config"
