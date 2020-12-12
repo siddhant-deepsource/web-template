@@ -13,10 +13,10 @@ jobs:
       - run: go test -v ./...
   "Envoy validate config":
     docker:
-      - image: "envoyproxy/envoy:v1.15.3@sha256:8e4e3d1c3f291b097a06a1070b4ccad92e870b14c35a76b4d457bc27bf8b7a9a"
+      - image: "envoyproxy/envoy-alpine:v1.15.3@sha256:429550bacdf49175a076bb063b1314b317ef2666e08424b2d39088432e229a6b"
     steps:
       - checkout
-      - run: make lint-envoy
+      - run: envoy --config-path envoy/envoy.yaml --mode validate
 workflows:
   node-tests:
     jobs:
