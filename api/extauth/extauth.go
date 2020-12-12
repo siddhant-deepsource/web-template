@@ -9,6 +9,7 @@ import (
 	"github.com/gorilla/pat"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
+	"github.com/markbates/goth/providers/github"
 	"github.com/markbates/goth/providers/twitter"
 )
 
@@ -33,7 +34,16 @@ const userTemplate = `
 
 func NewExternalAuth() *pat.Router {
 	goth.UseProviders(
-		twitter.NewAuthenticate(os.Getenv("TWITTER_KEY"), os.Getenv("TWITTER_SECRET"), "http://127.0.0.1:3000/auth/twitter/callback"),
+		twitter.NewAuthenticate(
+			os.Getenv("TWITTER_KEY"),
+			os.Getenv("TWITTER_SECRET"),
+			"http://127.0.0.1:3000/auth/twitter/callback",
+		),
+		github.New(
+			os.Getenv("GITHUB_KEY"),
+			os.Getenv("GITHUB_SECRET"),
+			"http://localhost:3000/auth/github/callback",
+		),
 	)
 
 	p := pat.New()
