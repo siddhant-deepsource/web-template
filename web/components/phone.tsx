@@ -1,5 +1,5 @@
 import { Descriptions } from "antd";
-import { Phone } from "../../protobuf/phone/phone_pb";
+import { Phone } from "../protobuf/phone/phone_pb";
 
 interface PhoneComponentProp {
   phone: Phone.AsObject;

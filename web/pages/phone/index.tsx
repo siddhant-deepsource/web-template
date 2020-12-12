@@ -1,6 +1,6 @@
 import React from "react";
 import { Table } from "antd";
-import { PaginationConfig } from "antd/lib/pagination";
+import { TablePaginationConfig } from "antd/lib/table";
 import Container from "../../components/container";
 import SEO from "../../components/seo";
 import Client from "../../clients/api_client";
@@ -51,7 +51,7 @@ const columns = [
 interface PhoneIndexProps {}
 interface PhoneIndexState {
   data: Array<Phone.AsObject>;
-  pagination: PaginationConfig;
+  pagination: TablePaginationConfig;
   loading: boolean;
 }
 

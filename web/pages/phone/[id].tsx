@@ -7,7 +7,7 @@ import Custom404 from "../404";
 import { GetPhoneRequest, GetPhoneResponse } from "../../protobuf/api/api_pb";
 import { Phone } from "../../protobuf/phone/phone_pb";
 import Client from "../../clients/node_client";
-import PhoneComponent from "./_phone";
+import PhoneComponent from "../../components/phone";
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
