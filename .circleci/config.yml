@@ -19,10 +19,12 @@ workflows:
           app-dir: web
           pkg-manager: yarn
           run-command: build
+          version: "15.4.0"
       - node/test:
           name: "Node.js tests"
           app-dir: web
           pkg-manager: yarn
+          version: "15.4.0"
 
   go:
     jobs:
