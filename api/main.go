@@ -5,7 +5,7 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/rickypai/web-template/api/httprouter"
+	"github.com/rickypai/web-template/api/extauth"
 	"github.com/rickypai/web-template/api/server"
 	"github.com/rickypai/web-template/protobuf/api"
 	"golang.org/x/sync/errgroup"
@@ -26,7 +26,7 @@ func main() {
 	s := grpc.NewServer()
 	api.RegisterAPIServer(s, &server.Server{})
 
-	httpRouter := httprouter.NewHTTP()
+	extAuth := extauth.NewExternalAuth()
 
 	g := &errgroup.Group{}
 	g.Go(func() error {
@@ -36,7 +36,7 @@ func main() {
 
 	g.Go(func() error {
 		log.Printf("listening HTTP on %s", httpPort)
-		return http.ListenAndServe(httpPort, httpRouter)
+		return http.ListenAndServe(httpPort, extAuth)
 	})
 
 	if err := g.Wait(); err != nil {
