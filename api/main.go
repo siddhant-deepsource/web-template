@@ -10,11 +10,11 @@ import (
 )
 
 const (
-	port = ":50051"
+	grpcPort = ":50051"
 )
 
 func main() {
-	lis, err := net.Listen("tcp", port)
+	lis, err := net.Listen("tcp", grpcPort)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
