@@ -3,7 +3,7 @@ package make;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/rickypai/web-template/protobuf/make";
+option go_package = "github.com/rickypai/web-template/api/protobuf/make";
 
 message Make {
   optional int64 id = 1;

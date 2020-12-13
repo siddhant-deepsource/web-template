@@ -3,7 +3,7 @@ package api;
 
 import "protobuf/phone/phone.proto";
 
-option go_package = "github.com/rickypai/web-template/protobuf/api";
+option go_package = "github.com/rickypai/web-template/api/protobuf/api";
 
 service API {
   rpc GetPhone(GetPhoneRequest) returns (GetPhoneResponse) {}

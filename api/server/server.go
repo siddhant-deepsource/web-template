@@ -6,10 +6,10 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
-	"github.com/rickypai/web-template/protobuf/api"
-	"github.com/rickypai/web-template/protobuf/make"
-	"github.com/rickypai/web-template/protobuf/os"
-	"github.com/rickypai/web-template/protobuf/phone"
+	"github.com/rickypai/web-template/api/protobuf/api"
+	"github.com/rickypai/web-template/api/protobuf/make"
+	"github.com/rickypai/web-template/api/protobuf/os"
+	"github.com/rickypai/web-template/api/protobuf/phone"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

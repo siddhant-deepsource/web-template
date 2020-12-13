@@ -14,8 +14,8 @@ proto:
 	protoc -I=. protobuf/**/*.proto \
 		--js_out=import_style=commonjs:web/. \
 		--grpc-web_out=import_style=typescript,mode=grpcwebtext:web/. \
-		--go_out=. --go_opt=paths=source_relative \
-    --go-grpc_out=. --go-grpc_opt=paths=source_relative
+		--go_out=api/ --go_opt=paths=source_relative \
+    --go-grpc_out=api/ --go-grpc_opt=paths=source_relative
 	grpc_tools_node_protoc \
 		--js_out=import_style=commonjs,binary:web/ \
 		--grpc_out=grpc_js:web/ protobuf/**/*.proto
@@ -40,6 +40,7 @@ ifeq ($(UNAME_S),Darwin)
 	unzip protoc-3.14.0-osx-x86_64.zip -d ${HOME}/.local
 	rm protoc-3.14.0-osx-x86_64.zip
 endif
+	chmod +x ${HOME}/.local/bin/protoc-gen-grpc-web
 	go get google.golang.org/protobuf/cmd/protoc-gen-go google.golang.org/grpc/cmd/protoc-gen-go-grpc
 	yarn global add grpc-tools
 

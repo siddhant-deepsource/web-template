@@ -1,4 +1,4 @@
-module github.com/rickypai/web-template
+module github.com/rickypai/web-template/api
 
 go 1.15
 

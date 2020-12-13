@@ -4,7 +4,7 @@ package app;
 import "google/protobuf/timestamp.proto";
 import "protobuf/os/os.proto";
 
-option go_package = "github.com/rickypai/web-template/protobuf/app";
+option go_package = "github.com/rickypai/web-template/api/protobuf/app";
 
 message App {
   optional int64 id = 1;

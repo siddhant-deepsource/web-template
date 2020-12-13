@@ -3,7 +3,7 @@ package os;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/rickypai/web-template/protobuf/os";
+option go_package = "github.com/rickypai/web-template/api/protobuf/os";
 
 message OS {
   optional int64 id = 1;

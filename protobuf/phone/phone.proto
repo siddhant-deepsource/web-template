@@ -5,7 +5,7 @@ import "google/protobuf/timestamp.proto";
 import "protobuf/make/make.proto";
 import "protobuf/os/os.proto";
 
-option go_package = "github.com/rickypai/web-template/protobuf/phone";
+option go_package = "github.com/rickypai/web-template/api/protobuf/phone";
 
 message Phone {
   optional int64 id = 1;
