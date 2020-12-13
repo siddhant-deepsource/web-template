@@ -1,6 +1,7 @@
 .PHONY: proto envoy proto-setup api web format
 
 PB_REL="https://github.com/protocolbuffers/protobuf/releases"
+UNAME_S := $(shell uname -s)
 
 api:
 	(cd api && air)
@@ -26,9 +27,19 @@ lint-envoy:
 	envoy --config-path envoy/envoy.yaml --mode validate
 
 proto-setup:
+	mkdir -p ${HOME}/.local/bin
+ifeq ($(UNAME_S),Linux)
 	curl -L https://github.com/grpc/grpc-web/releases/download/1.2.1/protoc-gen-grpc-web-1.2.1-linux-x86_64 > ${HOME}/.local/bin/protoc-gen-grpc-web
 	curl -LO ${PB_REL}/download/v3.14.0/protoc-3.14.0-linux-x86_64.zip
 	unzip protoc-3.14.0-linux-x86_64.zip -d ${HOME}/.local
+	rm protoc-3.14.0-linux-x86_64.zip
+endif
+ifeq ($(UNAME_S),Darwin)
+	curl -L https://github.com/grpc/grpc-web/releases/download/1.2.1/protoc-gen-grpc-web-1.2.1-darwin-x86_64 > ${HOME}/.local/bin/protoc-gen-grpc-web
+	curl -LO ${PB_REL}/download/v3.14.0/protoc-3.14.0-osx-x86_64.zip
+	unzip protoc-3.14.0-osx-x86_64.zip -d ${HOME}/.local
+	rm protoc-3.14.0-osx-x86_64.zip
+endif
 	go get google.golang.org/protobuf/cmd/protoc-gen-go google.golang.org/grpc/cmd/protoc-gen-go-grpc
 	yarn global add grpc-tools
 
