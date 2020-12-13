@@ -33,12 +33,12 @@ type Phone struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         *int64                 `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
-	Name       *string                `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Make       *make1.Make            `protobuf:"bytes,3,opt,name=make" json:"make,omitempty"`
-	Os         *os.OS                 `protobuf:"bytes,4,opt,name=os" json:"os,omitempty"`
-	CreatedAt  *timestamppb.Timestamp `protobuf:"bytes,9000,opt,name=created_at,json=createdAt" json:"created_at,omitempty"`
-	ModifiedAt *timestamppb.Timestamp `protobuf:"bytes,9001,opt,name=modified_at,json=modifiedAt" json:"modified_at,omitempty"`
+	Id         int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name       string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Make       *make1.Make            `protobuf:"bytes,3,opt,name=make,proto3" json:"make,omitempty"`
+	Os         *os.OS                 `protobuf:"bytes,4,opt,name=os,proto3" json:"os,omitempty"`
+	CreatedAt  *timestamppb.Timestamp `protobuf:"bytes,9000,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	ModifiedAt *timestamppb.Timestamp `protobuf:"bytes,9001,opt,name=modified_at,json=modifiedAt,proto3" json:"modified_at,omitempty"`
 }
 
 func (x *Phone) Reset() {
@@ -74,15 +74,15 @@ func (*Phone) Descriptor() ([]byte, []int) {
 }
 
 func (x *Phone) GetId() int64 {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.Id
 	}
 	return 0
 }
 
 func (x *Phone) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -142,7 +142,8 @@ var file_protobuf_phone_phone_proto_rawDesc = []byte{
 	0x65, 0x64, 0x41, 0x74, 0x42, 0x35, 0x5a, 0x33, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
 	0x6f, 0x6d, 0x2f, 0x72, 0x69, 0x63, 0x6b, 0x79, 0x70, 0x61, 0x69, 0x2f, 0x77, 0x65, 0x62, 0x2d,
 	0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x70, 0x68, 0x6f, 0x6e, 0x65,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (

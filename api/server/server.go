@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/rickypai/web-template/api/protobuf/api"
 	"github.com/rickypai/web-template/api/protobuf/make"
@@ -51,18 +50,18 @@ func getPhone(id int64) *phone.Phone {
 	ts := ptypes.TimestampNow()
 
 	return &phone.Phone{
-		Id:   proto.Int64(id),
-		Name: proto.String(fmt.Sprintf("Phone #%v", id)),
+		Id:   id,
+		Name: fmt.Sprintf("Phone #%v", id),
 		Make: &make.Make{
-			Id:   proto.Int64(id),
-			Name: proto.String(fmt.Sprintf("Make #%v", id)),
+			Id:   id,
+			Name: fmt.Sprintf("Make #%v", id),
 
 			CreatedAt:  ts,
 			ModifiedAt: ts,
 		},
 		Os: &os.OS{
-			Id:   proto.Int64(id),
-			Name: proto.String(fmt.Sprintf("OS #%v", id)),
+			Id:   id,
+			Name: fmt.Sprintf("OS #%v", id),
 
 			CreatedAt:  ts,
 			ModifiedAt: ts,
