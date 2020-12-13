@@ -8,9 +8,14 @@ jobs:
 
     working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
     steps:
+      - run: pwd
       - checkout
-      - run: go build -v ./...
-      - run: go test -v ./...
+      - run:
+          command: go build -v ./...
+          working_directory: ./api
+      - run:
+          command: go test -v ./...
+          working_directory: ./api
   "Envoy validate config":
     docker:
       - image: "envoyproxy/envoy-alpine:v1.15.3@sha256:429550bacdf49175a076bb063b1314b317ef2666e08424b2d39088432e229a6b"
