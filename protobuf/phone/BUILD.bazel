@@ -1,0 +1,32 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "phone_proto",
+    srcs = ["phone.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protobuf/make:make_proto",
+        "//protobuf/os:os_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+go_proto_library(
+    name = "phone_go_proto",
+    importpath = "github.com/rickypai/web-template/api/protobuf/phone",
+    proto = ":phone_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protobuf/make",
+        "//protobuf/os",
+    ],
+)
+
+go_library(
+    name = "phone",
+    embed = [":phone_go_proto"],
+    importpath = "github.com/rickypai/web-template/api/protobuf/phone",
+    visibility = ["//visibility:public"],
+)

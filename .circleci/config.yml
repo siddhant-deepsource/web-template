@@ -2,10 +2,42 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
 jobs:
+  "Bazel build":
+    docker:
+      - image: gcr.io/cloud-builders/bazel@sha256:15219ed8ff15d72d3615d7c8443a19ce8272947ff75e58253a3d76ef38e48a4c
+    resource_class: medium
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - web-template-bazel-v0-{{ checksum ".bazelversion" }}-{{ checksum "WORKSPACE" }}-{{ checksum "api/go.sum" }}
+            - web-template-bazel-v0-{{ checksum ".bazelversion" }}-{{ checksum "WORKSPACE" }}
+            - web-template-bazel-v0-{{ checksum ".bazelversion" }}
+      - restore_cache:
+          keys:
+            - web-template-bazel-repo-v0-{{ checksum ".bazelversion" }}-{{ checksum "WORKSPACE" }}-{{ checksum "api/go.sum" }}
+            - web-template-bazel-repo-v0-{{ checksum ".bazelversion" }}-{{ checksum "WORKSPACE" }}
+            - web-template-bazel-repo-v0-{{ checksum ".bazelversion" }}
+      - run:
+          command: mkdir -p ~/.bazel_cache
+      - run:
+          command: bazel fetch //... --repository_cache=~/.bazel_repo
+      - run:
+          command: bazel build //... --disk_cache=~/.bazel_cache --repository_cache=~/.bazel_repo --jobs=2
+      - save_cache:
+          key: web-template-bazel-repo-v0-{{ checksum ".bazelversion" }}-{{ checksum "WORKSPACE" }}-{{ checksum "api/go.sum" }}
+          paths:
+            - "~/.bazel_repo"
+          when: always
+      - save_cache:
+          key: web-template-bazel-v0-{{ checksum ".bazelversion" }}-{{ checksum "WORKSPACE" }}-{{ checksum "api/go.sum" }}
+          paths:
+            - "~/.bazel_cache"
+            - "~/.cache/bazelisk"
   "Go build":
     docker:
       - image: circleci/golang:1.15
-
+    resource_class: small
     working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
     steps:
       - run: pwd
@@ -19,10 +51,14 @@ jobs:
   "Envoy validate config":
     docker:
       - image: "envoyproxy/envoy-alpine:v1.15.3@sha256:429550bacdf49175a076bb063b1314b317ef2666e08424b2d39088432e229a6b"
+    resource_class: small
     steps:
       - checkout
       - run: envoy --config-path envoy/envoy.yaml --mode validate
 workflows:
+  bazel:
+    jobs:
+      - "Bazel build"
   node-tests:
     jobs:
       - node/test:

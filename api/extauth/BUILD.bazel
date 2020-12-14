@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "extauth",
+    srcs = ["extauth.go"],
+    importpath = "github.com/rickypai/web-template/api/extauth",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_gorilla_pat//:pat",
+        "@com_github_markbates_goth//:goth",
+        "@com_github_markbates_goth//gothic",
+        "@com_github_markbates_goth//providers/github",
+        "@com_github_markbates_goth//providers/twitter",
+    ],
+)

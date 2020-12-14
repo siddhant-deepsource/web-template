@@ -4,7 +4,7 @@ PB_REL="https://github.com/protocolbuffers/protobuf/releases"
 UNAME_S := $(shell uname -s)
 
 api:
-	(cd api && air)
+	ibazel run //api
 
 web:
 	(cd web && yarn run dev)
