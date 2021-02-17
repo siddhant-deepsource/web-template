@@ -36,7 +36,7 @@ jobs:
             - "~/.cache/bazelisk"
   "Go build":
     docker:
-      - image: circleci/golang:1.15
+      - image: circleci/golang:1.16rc1 # TODO: change to 1.16 when available
     resource_class: small
     working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
     steps:
