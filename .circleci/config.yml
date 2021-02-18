@@ -50,7 +50,7 @@ jobs:
           working_directory: ./api
   "Envoy validate config":
     docker:
-      - image: "envoyproxy/envoy-alpine:v1.15.3@sha256:429550bacdf49175a076bb063b1314b317ef2666e08424b2d39088432e229a6b"
+      - image: "envoyproxy/envoy-alpine:v1.17.0@sha256:47ab124a5b4058a33a995a92de7f566104fc33e8af8302efab577231f3a84e51"
     resource_class: small
     steps:
       - checkout

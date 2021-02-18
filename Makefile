@@ -23,9 +23,6 @@ proto:
 envoy:
 	envoy --config-path envoy/envoy.yaml
 
-lint-envoy:
-	envoy --config-path envoy/envoy.yaml --mode validate
-
 proto-setup:
 	mkdir -p ${HOME}/.local/bin
 ifeq ($(UNAME_S),Linux)
