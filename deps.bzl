@@ -1,4 +1,5 @@
 load("@bazel_gazelle//:deps.bzl", "go_repository")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 def go_dependencies():
     go_repository(
@@ -79,12 +80,14 @@ def go_dependencies():
         sum = "h1:EARl0OvqMoxq/UMgMSCLnXzkaXbxzskluEBlMQCJPms=",
         version = "v0.9.7",
     )
-    go_repository(
+
+    # Bazel definitions exist for this repo
+    git_repository(
         name = "com_github_envoyproxy_protoc_gen_validate",
-        importpath = "github.com/envoyproxy/protoc-gen-validate",
-        sum = "h1:EQciDnbrYxy13PgWoY8AqoxGiPrpgBZ1R8UNe3ddc+A=",
-        version = "v0.1.0",
+        remote = "https://github.com/envoyproxy/protoc-gen-validate.git",
+        tag = "v0.1.0",
     )
+
     go_repository(
         name = "com_github_go_gl_glfw",
         importpath = "github.com/go-gl/glfw",

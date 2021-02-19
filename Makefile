@@ -6,6 +6,9 @@ UNAME_S := $(shell uname -s)
 api:
 	ibazel run //api
 
+auth:
+	ibazel run //api/auth
+
 web:
 	(cd web && yarn run dev)
 

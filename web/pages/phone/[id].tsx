@@ -8,6 +8,7 @@ import { GetPhoneRequest, GetPhoneResponse } from "../../protobuf/api/api_pb";
 import { Phone } from "../../protobuf/phone/phone_pb";
 import Client from "../../clients/node_client";
 import PhoneComponent from "../../components/phone";
+import * as grpc from "@grpc/grpc-js";
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext
@@ -26,10 +27,14 @@ export const getServerSideProps = async (
     errorCode: null,
   };
 
+  const metadata = new grpc.Metadata();
+  // TODO: implement actual session token
+  metadata.set('Authorization', 'Bearer legit');
+
   const request = new GetPhoneRequest();
   request.setId(id);
   const p = new Promise((resolve, reject) =>
-    Client.getPhone(request, (err: Error, response: GetPhoneResponse) => {
+    Client.getPhone(request, metadata, (err: Error, response: GetPhoneResponse) => {
       if (err) {
         return reject(err);
       }
