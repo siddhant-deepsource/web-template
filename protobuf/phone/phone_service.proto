@@ -1,11 +1,11 @@
 syntax = "proto3";
-package api;
+package phone;
 
 import "protobuf/phone/phone.proto";
 
-option go_package = "github.com/rickypai/web-template/api/protobuf/api";
+option go_package = "github.com/rickypai/web-template/api/protobuf/phone";
 
-service API {
+service PhoneService {
   rpc GetPhone(GetPhoneRequest) returns (GetPhoneResponse) {}
   rpc ListPhones(ListPhonesRequest) returns (ListPhonesResponse) {}
 }
@@ -17,7 +17,6 @@ message GetPhoneRequest {
 message GetPhoneResponse {
   phone.Phone phone = 1;
 }
-
 
 message ListPhonesRequest {}
 

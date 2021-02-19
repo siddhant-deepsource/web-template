@@ -6,7 +6,6 @@ go_library(
     importpath = "github.com/rickypai/web-template/api/server",
     visibility = ["//visibility:public"],
     deps = [
-        "//protobuf/api",
         "//protobuf/make",
         "//protobuf/os",
         "//protobuf/phone",

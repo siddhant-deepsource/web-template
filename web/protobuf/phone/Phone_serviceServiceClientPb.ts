@@ -1,5 +1,5 @@
 /**
- * @fileoverview gRPC-Web generated client stub for api
+ * @fileoverview gRPC-Web generated client stub for phone
  * @enhanceable
  * @public
  */
@@ -13,10 +13,10 @@
 
 import * as grpcWeb from 'grpc-web';
 
-import * as protobuf_api_api_pb from '../../protobuf/api/api_pb';
+import * as protobuf_phone_phone_service_pb from '../../protobuf/phone/phone_service_pb';
 
 
-export class APIClient {
+export class PhoneServiceClient {
   client_: grpcWeb.AbstractClientBase;
   hostname_: string;
   credentials_: null | { [index: string]: string; };
@@ -36,32 +36,32 @@ export class APIClient {
   }
 
   methodInfoGetPhone = new grpcWeb.AbstractClientBase.MethodInfo(
-    protobuf_api_api_pb.GetPhoneResponse,
-    (request: protobuf_api_api_pb.GetPhoneRequest) => {
+    protobuf_phone_phone_service_pb.GetPhoneResponse,
+    (request: protobuf_phone_phone_service_pb.GetPhoneRequest) => {
       return request.serializeBinary();
     },
-    protobuf_api_api_pb.GetPhoneResponse.deserializeBinary
+    protobuf_phone_phone_service_pb.GetPhoneResponse.deserializeBinary
   );
 
   getPhone(
-    request: protobuf_api_api_pb.GetPhoneRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protobuf_api_api_pb.GetPhoneResponse>;
+    request: protobuf_phone_phone_service_pb.GetPhoneRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_phone_phone_service_pb.GetPhoneResponse>;
 
   getPhone(
-    request: protobuf_api_api_pb.GetPhoneRequest,
+    request: protobuf_phone_phone_service_pb.GetPhoneRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: protobuf_api_api_pb.GetPhoneResponse) => void): grpcWeb.ClientReadableStream<protobuf_api_api_pb.GetPhoneResponse>;
+               response: protobuf_phone_phone_service_pb.GetPhoneResponse) => void): grpcWeb.ClientReadableStream<protobuf_phone_phone_service_pb.GetPhoneResponse>;
 
   getPhone(
-    request: protobuf_api_api_pb.GetPhoneRequest,
+    request: protobuf_phone_phone_service_pb.GetPhoneRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.Error,
-               response: protobuf_api_api_pb.GetPhoneResponse) => void) {
+               response: protobuf_phone_phone_service_pb.GetPhoneResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/api.API/GetPhone',
+          '/phone.PhoneService/GetPhone',
         request,
         metadata || {},
         this.methodInfoGetPhone,
@@ -69,39 +69,39 @@ export class APIClient {
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/api.API/GetPhone',
+      '/phone.PhoneService/GetPhone',
     request,
     metadata || {},
     this.methodInfoGetPhone);
   }
 
   methodInfoListPhones = new grpcWeb.AbstractClientBase.MethodInfo(
-    protobuf_api_api_pb.ListPhonesResponse,
-    (request: protobuf_api_api_pb.ListPhonesRequest) => {
+    protobuf_phone_phone_service_pb.ListPhonesResponse,
+    (request: protobuf_phone_phone_service_pb.ListPhonesRequest) => {
       return request.serializeBinary();
     },
-    protobuf_api_api_pb.ListPhonesResponse.deserializeBinary
+    protobuf_phone_phone_service_pb.ListPhonesResponse.deserializeBinary
   );
 
   listPhones(
-    request: protobuf_api_api_pb.ListPhonesRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protobuf_api_api_pb.ListPhonesResponse>;
+    request: protobuf_phone_phone_service_pb.ListPhonesRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_phone_phone_service_pb.ListPhonesResponse>;
 
   listPhones(
-    request: protobuf_api_api_pb.ListPhonesRequest,
+    request: protobuf_phone_phone_service_pb.ListPhonesRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: protobuf_api_api_pb.ListPhonesResponse) => void): grpcWeb.ClientReadableStream<protobuf_api_api_pb.ListPhonesResponse>;
+               response: protobuf_phone_phone_service_pb.ListPhonesResponse) => void): grpcWeb.ClientReadableStream<protobuf_phone_phone_service_pb.ListPhonesResponse>;
 
   listPhones(
-    request: protobuf_api_api_pb.ListPhonesRequest,
+    request: protobuf_phone_phone_service_pb.ListPhonesRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.Error,
-               response: protobuf_api_api_pb.ListPhonesResponse) => void) {
+               response: protobuf_phone_phone_service_pb.ListPhonesResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/api.API/ListPhones',
+          '/phone.PhoneService/ListPhones',
         request,
         metadata || {},
         this.methodInfoListPhones,
@@ -109,7 +109,7 @@ export class APIClient {
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/api.API/ListPhones',
+      '/phone.PhoneService/ListPhones',
     request,
     metadata || {},
     this.methodInfoListPhones);

@@ -3,12 +3,12 @@ import { Table } from "antd";
 import { TablePaginationConfig } from "antd/lib/table";
 import Container from "../../components/container";
 import SEO from "../../components/seo";
-import Client from "../../clients/api_client";
+import PhoneServiceClient from "../../clients/grpc-web/phone_service_client";
 import { Phone } from "../../protobuf/phone/phone_pb";
 import {
   ListPhonesRequest,
   ListPhonesResponse,
-} from "../../protobuf/api/api_pb";
+} from "../../protobuf/phone/phone_service_pb";
 import { Make } from "../../protobuf/make/make_pb";
 import { OS } from "../../protobuf/os/os_pb";
 
@@ -104,7 +104,7 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
   listPhones = (): Promise<ListPhonesResponse> => {
     const request = new ListPhonesRequest();
 
-    return Client.listPhones(request, {
+    return PhoneServiceClient.listPhones(request, {
       // TODO: implement actual session token
       'Authorization': 'Bearer legit',
     });

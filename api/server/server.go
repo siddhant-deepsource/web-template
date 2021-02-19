@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/golang/protobuf/ptypes"
-	"github.com/rickypai/web-template/api/protobuf/api"
 	"github.com/rickypai/web-template/api/protobuf/make"
 	"github.com/rickypai/web-template/api/protobuf/os"
 	"github.com/rickypai/web-template/api/protobuf/phone"
@@ -14,11 +13,11 @@ import (
 )
 
 type Server struct {
-	api.UnimplementedAPIServer
+	phone.UnimplementedPhoneServiceServer
 }
 
-func (s *Server) ListPhones(ctx context.Context, in *api.ListPhonesRequest) (*api.ListPhonesResponse, error) {
-	return &api.ListPhonesResponse{
+func (s *Server) ListPhones(ctx context.Context, in *phone.ListPhonesRequest) (*phone.ListPhonesResponse, error) {
+	return &phone.ListPhonesResponse{
 		Phones: []*phone.Phone{
 			getPhone(1),
 			getPhone(2),
@@ -28,7 +27,7 @@ func (s *Server) ListPhones(ctx context.Context, in *api.ListPhonesRequest) (*ap
 	}, nil
 }
 
-func (s *Server) GetPhone(ctx context.Context, in *api.GetPhoneRequest) (*api.GetPhoneResponse, error) {
+func (s *Server) GetPhone(ctx context.Context, in *phone.GetPhoneRequest) (*phone.GetPhoneResponse, error) {
 	fmt.Printf("Called GetPhone with %+v\n", in)
 
 	id := in.GetId()
@@ -41,7 +40,7 @@ func (s *Server) GetPhone(ctx context.Context, in *api.GetPhoneRequest) (*api.Ge
 		return nil, status.Error(codes.Unknown, "unknown")
 	}
 
-	return &api.GetPhoneResponse{
+	return &phone.GetPhoneResponse{
 		Phone: getPhone(id),
 	}, nil
 }
