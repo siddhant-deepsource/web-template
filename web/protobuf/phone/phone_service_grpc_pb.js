@@ -5,26 +5,26 @@ var grpc = require('@grpc/grpc-js');
 var protobuf_phone_phone_service_pb = require('../../protobuf/phone/phone_service_pb.js');
 var protobuf_phone_phone_pb = require('../../protobuf/phone/phone_pb.js');
 
-function serialize_phone_GetPhoneRequest(arg) {
-  if (!(arg instanceof protobuf_phone_phone_service_pb.GetPhoneRequest)) {
-    throw new Error('Expected argument of type phone.GetPhoneRequest');
+function serialize_phone_GetOneByIDRequest(arg) {
+  if (!(arg instanceof protobuf_phone_phone_service_pb.GetOneByIDRequest)) {
+    throw new Error('Expected argument of type phone.GetOneByIDRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_phone_GetPhoneRequest(buffer_arg) {
-  return protobuf_phone_phone_service_pb.GetPhoneRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_phone_GetOneByIDRequest(buffer_arg) {
+  return protobuf_phone_phone_service_pb.GetOneByIDRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_phone_GetPhoneResponse(arg) {
-  if (!(arg instanceof protobuf_phone_phone_service_pb.GetPhoneResponse)) {
-    throw new Error('Expected argument of type phone.GetPhoneResponse');
+function serialize_phone_GetOneByIDResponse(arg) {
+  if (!(arg instanceof protobuf_phone_phone_service_pb.GetOneByIDResponse)) {
+    throw new Error('Expected argument of type phone.GetOneByIDResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_phone_GetPhoneResponse(buffer_arg) {
-  return protobuf_phone_phone_service_pb.GetPhoneResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_phone_GetOneByIDResponse(buffer_arg) {
+  return protobuf_phone_phone_service_pb.GetOneByIDResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_phone_ListPhonesRequest(arg) {
@@ -51,16 +51,16 @@ function deserialize_phone_ListPhonesResponse(buffer_arg) {
 
 
 var PhoneServiceService = exports.PhoneServiceService = {
-  getPhone: {
-    path: '/phone.PhoneService/GetPhone',
+  getOneByID: {
+    path: '/phone.PhoneService/GetOneByID',
     requestStream: false,
     responseStream: false,
-    requestType: protobuf_phone_phone_service_pb.GetPhoneRequest,
-    responseType: protobuf_phone_phone_service_pb.GetPhoneResponse,
-    requestSerialize: serialize_phone_GetPhoneRequest,
-    requestDeserialize: deserialize_phone_GetPhoneRequest,
-    responseSerialize: serialize_phone_GetPhoneResponse,
-    responseDeserialize: deserialize_phone_GetPhoneResponse,
+    requestType: protobuf_phone_phone_service_pb.GetOneByIDRequest,
+    responseType: protobuf_phone_phone_service_pb.GetOneByIDResponse,
+    requestSerialize: serialize_phone_GetOneByIDRequest,
+    requestDeserialize: deserialize_phone_GetOneByIDRequest,
+    responseSerialize: serialize_phone_GetOneByIDResponse,
+    responseDeserialize: deserialize_phone_GetOneByIDResponse,
   },
   listPhones: {
     path: '/phone.PhoneService/ListPhones',

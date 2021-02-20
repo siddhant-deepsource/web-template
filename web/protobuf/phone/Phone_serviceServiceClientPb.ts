@@ -35,44 +35,44 @@ export class PhoneServiceClient {
     this.options_ = options;
   }
 
-  methodInfoGetPhone = new grpcWeb.AbstractClientBase.MethodInfo(
-    protobuf_phone_phone_service_pb.GetPhoneResponse,
-    (request: protobuf_phone_phone_service_pb.GetPhoneRequest) => {
+  methodInfoGetOneByID = new grpcWeb.AbstractClientBase.MethodInfo(
+    protobuf_phone_phone_service_pb.GetOneByIDResponse,
+    (request: protobuf_phone_phone_service_pb.GetOneByIDRequest) => {
       return request.serializeBinary();
     },
-    protobuf_phone_phone_service_pb.GetPhoneResponse.deserializeBinary
+    protobuf_phone_phone_service_pb.GetOneByIDResponse.deserializeBinary
   );
 
-  getPhone(
-    request: protobuf_phone_phone_service_pb.GetPhoneRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protobuf_phone_phone_service_pb.GetPhoneResponse>;
+  getOneByID(
+    request: protobuf_phone_phone_service_pb.GetOneByIDRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_phone_phone_service_pb.GetOneByIDResponse>;
 
-  getPhone(
-    request: protobuf_phone_phone_service_pb.GetPhoneRequest,
+  getOneByID(
+    request: protobuf_phone_phone_service_pb.GetOneByIDRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: protobuf_phone_phone_service_pb.GetPhoneResponse) => void): grpcWeb.ClientReadableStream<protobuf_phone_phone_service_pb.GetPhoneResponse>;
+               response: protobuf_phone_phone_service_pb.GetOneByIDResponse) => void): grpcWeb.ClientReadableStream<protobuf_phone_phone_service_pb.GetOneByIDResponse>;
 
-  getPhone(
-    request: protobuf_phone_phone_service_pb.GetPhoneRequest,
+  getOneByID(
+    request: protobuf_phone_phone_service_pb.GetOneByIDRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.Error,
-               response: protobuf_phone_phone_service_pb.GetPhoneResponse) => void) {
+               response: protobuf_phone_phone_service_pb.GetOneByIDResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/phone.PhoneService/GetPhone',
+          '/phone.PhoneService/GetOneByID',
         request,
         metadata || {},
-        this.methodInfoGetPhone,
+        this.methodInfoGetOneByID,
         callback);
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/phone.PhoneService/GetPhone',
+      '/phone.PhoneService/GetOneByID',
     request,
     metadata || {},
-    this.methodInfoGetPhone);
+    this.methodInfoGetOneByID);
   }
 
   methodInfoListPhones = new grpcWeb.AbstractClientBase.MethodInfo(

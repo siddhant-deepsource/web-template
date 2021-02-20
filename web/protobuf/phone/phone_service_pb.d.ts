@@ -3,41 +3,41 @@ import * as jspb from 'google-protobuf'
 import * as protobuf_phone_phone_pb from '../../protobuf/phone/phone_pb';
 
 
-export class GetPhoneRequest extends jspb.Message {
+export class GetOneByIDRequest extends jspb.Message {
   getId(): number;
-  setId(value: number): GetPhoneRequest;
+  setId(value: number): GetOneByIDRequest;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetPhoneRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetPhoneRequest): GetPhoneRequest.AsObject;
-  static serializeBinaryToWriter(message: GetPhoneRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetPhoneRequest;
-  static deserializeBinaryFromReader(message: GetPhoneRequest, reader: jspb.BinaryReader): GetPhoneRequest;
+  toObject(includeInstance?: boolean): GetOneByIDRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetOneByIDRequest): GetOneByIDRequest.AsObject;
+  static serializeBinaryToWriter(message: GetOneByIDRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetOneByIDRequest;
+  static deserializeBinaryFromReader(message: GetOneByIDRequest, reader: jspb.BinaryReader): GetOneByIDRequest;
 }
 
-export namespace GetPhoneRequest {
+export namespace GetOneByIDRequest {
   export type AsObject = {
     id: number,
   }
 }
 
-export class GetPhoneResponse extends jspb.Message {
-  getPhone(): protobuf_phone_phone_pb.Phone | undefined;
-  setPhone(value?: protobuf_phone_phone_pb.Phone): GetPhoneResponse;
-  hasPhone(): boolean;
-  clearPhone(): GetPhoneResponse;
+export class GetOneByIDResponse extends jspb.Message {
+  getResult(): protobuf_phone_phone_pb.Phone | undefined;
+  setResult(value?: protobuf_phone_phone_pb.Phone): GetOneByIDResponse;
+  hasResult(): boolean;
+  clearResult(): GetOneByIDResponse;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetPhoneResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetPhoneResponse): GetPhoneResponse.AsObject;
-  static serializeBinaryToWriter(message: GetPhoneResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetPhoneResponse;
-  static deserializeBinaryFromReader(message: GetPhoneResponse, reader: jspb.BinaryReader): GetPhoneResponse;
+  toObject(includeInstance?: boolean): GetOneByIDResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetOneByIDResponse): GetOneByIDResponse.AsObject;
+  static serializeBinaryToWriter(message: GetOneByIDResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetOneByIDResponse;
+  static deserializeBinaryFromReader(message: GetOneByIDResponse, reader: jspb.BinaryReader): GetOneByIDResponse;
 }
 
-export namespace GetPhoneResponse {
+export namespace GetOneByIDResponse {
   export type AsObject = {
-    phone?: protobuf_phone_phone_pb.Phone.AsObject,
+    result?: protobuf_phone_phone_pb.Phone.AsObject,
   }
 }
 

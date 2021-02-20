@@ -27,7 +27,7 @@ func (s *Server) ListPhones(ctx context.Context, in *phone.ListPhonesRequest) (*
 	}, nil
 }
 
-func (s *Server) GetPhone(ctx context.Context, in *phone.GetPhoneRequest) (*phone.GetPhoneResponse, error) {
+func (s *Server) GetOneByID(ctx context.Context, in *phone.GetOneByIDRequest) (*phone.GetOneByIDResponse, error) {
 	fmt.Printf("Called GetPhone with %+v\n", in)
 
 	id := in.GetId()
@@ -40,8 +40,8 @@ func (s *Server) GetPhone(ctx context.Context, in *phone.GetPhoneRequest) (*phon
 		return nil, status.Error(codes.Unknown, "unknown")
 	}
 
-	return &phone.GetPhoneResponse{
-		Phone: getPhone(id),
+	return &phone.GetOneByIDResponse{
+		Result: getPhone(id),
 	}, nil
 }
 

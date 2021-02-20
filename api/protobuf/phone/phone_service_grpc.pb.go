@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PhoneServiceClient interface {
-	GetPhone(ctx context.Context, in *GetPhoneRequest, opts ...grpc.CallOption) (*GetPhoneResponse, error)
+	GetOneByID(ctx context.Context, in *GetOneByIDRequest, opts ...grpc.CallOption) (*GetOneByIDResponse, error)
 	ListPhones(ctx context.Context, in *ListPhonesRequest, opts ...grpc.CallOption) (*ListPhonesResponse, error)
 }
 
@@ -30,9 +30,9 @@ func NewPhoneServiceClient(cc grpc.ClientConnInterface) PhoneServiceClient {
 	return &phoneServiceClient{cc}
 }
 
-func (c *phoneServiceClient) GetPhone(ctx context.Context, in *GetPhoneRequest, opts ...grpc.CallOption) (*GetPhoneResponse, error) {
-	out := new(GetPhoneResponse)
-	err := c.cc.Invoke(ctx, "/phone.PhoneService/GetPhone", in, out, opts...)
+func (c *phoneServiceClient) GetOneByID(ctx context.Context, in *GetOneByIDRequest, opts ...grpc.CallOption) (*GetOneByIDResponse, error) {
+	out := new(GetOneByIDResponse)
+	err := c.cc.Invoke(ctx, "/phone.PhoneService/GetOneByID", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ func (c *phoneServiceClient) ListPhones(ctx context.Context, in *ListPhonesReque
 // All implementations must embed UnimplementedPhoneServiceServer
 // for forward compatibility
 type PhoneServiceServer interface {
-	GetPhone(context.Context, *GetPhoneRequest) (*GetPhoneResponse, error)
+	GetOneByID(context.Context, *GetOneByIDRequest) (*GetOneByIDResponse, error)
 	ListPhones(context.Context, *ListPhonesRequest) (*ListPhonesResponse, error)
 	mustEmbedUnimplementedPhoneServiceServer()
 }
@@ -61,8 +61,8 @@ type PhoneServiceServer interface {
 type UnimplementedPhoneServiceServer struct {
 }
 
-func (UnimplementedPhoneServiceServer) GetPhone(context.Context, *GetPhoneRequest) (*GetPhoneResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPhone not implemented")
+func (UnimplementedPhoneServiceServer) GetOneByID(context.Context, *GetOneByIDRequest) (*GetOneByIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOneByID not implemented")
 }
 func (UnimplementedPhoneServiceServer) ListPhones(context.Context, *ListPhonesRequest) (*ListPhonesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPhones not implemented")
@@ -80,20 +80,20 @@ func RegisterPhoneServiceServer(s grpc.ServiceRegistrar, srv PhoneServiceServer)
 	s.RegisterService(&PhoneService_ServiceDesc, srv)
 }
 
-func _PhoneService_GetPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPhoneRequest)
+func _PhoneService_GetOneByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOneByIDRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PhoneServiceServer).GetPhone(ctx, in)
+		return srv.(PhoneServiceServer).GetOneByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/phone.PhoneService/GetPhone",
+		FullMethod: "/phone.PhoneService/GetOneByID",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PhoneServiceServer).GetPhone(ctx, req.(*GetPhoneRequest))
+		return srv.(PhoneServiceServer).GetOneByID(ctx, req.(*GetOneByIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -124,8 +124,8 @@ var PhoneService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*PhoneServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetPhone",
-			Handler:    _PhoneService_GetPhone_Handler,
+			MethodName: "GetOneByID",
+			Handler:    _PhoneService_GetOneByID_Handler,
 		},
 		{
 			MethodName: "ListPhones",

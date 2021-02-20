@@ -4,7 +4,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Container from "../../components/container";
 import SEO from "../../components/seo";
 import Custom404 from "../404";
-import { GetPhoneRequest, GetPhoneResponse } from "../../protobuf/phone/phone_service_pb";
+import { GetOneByIDRequest, GetOneByIDResponse } from "../../protobuf/phone/phone_service_pb";
 import { Phone } from "../../protobuf/phone/phone_pb";
 import PhoneServiceClient from "../../clients/nodejs/phone_service_client";
 import PhoneComponent from "../../components/phone";
@@ -31,10 +31,10 @@ export const getServerSideProps = async (
   // TODO: implement actual session token
   metadata.set('Authorization', 'Bearer legit');
 
-  const request = new GetPhoneRequest();
+  const request = new GetOneByIDRequest();
   request.setId(id);
   const p = new Promise((resolve, reject) =>
-    PhoneServiceClient.getPhone(request, metadata, (err: Error, response: GetPhoneResponse) => {
+    PhoneServiceClient.getOneByID(request, metadata, (err: Error, response: GetOneByIDResponse) => {
       if (err) {
         return reject(err);
       }
@@ -45,8 +45,8 @@ export const getServerSideProps = async (
   // await (p);
   await p
     .then(
-      (response: GetPhoneResponse) => {
-        props.phone = response.getPhone().toObject();
+      (response: GetOneByIDResponse) => {
+        props.phone = response.getResult().toObject();
       },
       (e: Error) => {
         props.errorCode = e.code;

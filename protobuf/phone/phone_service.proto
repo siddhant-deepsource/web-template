@@ -6,16 +6,16 @@ import "protobuf/phone/phone.proto";
 option go_package = "github.com/rickypai/web-template/api/protobuf/phone";
 
 service PhoneService {
-  rpc GetPhone(GetPhoneRequest) returns (GetPhoneResponse) {}
+  rpc GetOneByID(GetOneByIDRequest) returns (GetOneByIDResponse) {}
   rpc ListPhones(ListPhonesRequest) returns (ListPhonesResponse) {}
 }
 
-message GetPhoneRequest {
+message GetOneByIDRequest {
   int64 id = 1;
 }
 
-message GetPhoneResponse {
-  phone.Phone phone = 1;
+message GetOneByIDResponse {
+  phone.Phone result = 1;
 }
 
 message ListPhonesRequest {}
