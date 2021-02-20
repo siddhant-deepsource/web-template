@@ -74,6 +74,36 @@ jobs:
     steps:
       - checkout
       - run: envoy --config-path envoy/envoy.yaml --mode validate
+  "Node build":
+    docker:
+      - image: "circleci/node:15.4.0"
+    resource_class: small
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "web/yarn.lock" }}
+            - yarn-packages
+      - run:
+          command: yarn install --immutable
+          working_directory: ./web
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "web/yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          command: yarn run build
+          working_directory: ./web
+      - run:
+          command: yarn run test
+          working_directory: ./web
+      - run:
+          command: yarn run lint
+          working_directory: ./web
+      - run:
+          command: ci/ensure_git_status_clean.sh
 workflows:
   protobufs:
     jobs:
@@ -81,20 +111,9 @@ workflows:
   bazel:
     jobs:
       - "Bazel build"
-  node-tests:
+  node:
     jobs:
-      - node/test:
-          name: "Node.js build"
-          app-dir: web
-          pkg-manager: yarn
-          run-command: build
-          version: "15.4.0"
-      - node/test:
-          name: "Node.js tests"
-          app-dir: web
-          pkg-manager: yarn
-          version: "15.4.0"
-
+      - "Node build"
   go:
     jobs:
       - "Go build"
