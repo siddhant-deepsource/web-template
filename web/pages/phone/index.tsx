@@ -48,7 +48,7 @@ const columns = [
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface PhoneIndexProps { }
+interface PhoneIndexProps {}
 interface PhoneIndexState {
   data: Array<Phone.AsObject>;
   pagination: TablePaginationConfig;
@@ -106,7 +106,7 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
 
     return PhoneServiceClient.listPhones(request, {
       // TODO: implement actual session token
-      'Authorization': 'Bearer legit',
+      Authorization: "Bearer legit",
     });
   };
 

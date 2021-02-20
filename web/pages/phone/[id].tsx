@@ -7,13 +7,16 @@ import { GetOneByIDRequest } from "../../protobuf/phone/phone_service_pb";
 import { Phone } from "../../protobuf/phone/phone_pb";
 import PhoneServiceClient from "../../clients/nodejs/phone_service_client";
 import PhoneComponent from "../../components/phone";
-import { GetOneByIDServerSide, GetServerSideFunc, PageProp } from "../../components/getOne";
+import {
+  GetOneByIDServerSide,
+  GetServerSideFunc,
+  PageProp,
+} from "../../components/getOne";
 
-export const getServerSideProps: GetServerSideFunc<Phone.AsObject> = GetOneByIDServerSide<Phone.AsObject, Phone>(
-  new GetOneByIDRequest(),
-  PhoneServiceClient,
-  "legit",
-);
+export const getServerSideProps: GetServerSideFunc<Phone.AsObject> = GetOneByIDServerSide<
+  Phone.AsObject,
+  Phone
+>(new GetOneByIDRequest(), PhoneServiceClient, "legit");
 
 const PhonePage = (props: PageProp<Phone.AsObject>): JSX.Element => {
   if (props.result) {
