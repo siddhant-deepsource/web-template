@@ -1,83 +1,31 @@
 import React from "react";
-import { Error, StatusCode } from "grpc-web";
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { StatusCode } from "grpc-web";
 import Container from "../../components/container";
 import SEO from "../../components/seo";
 import Custom404 from "../404";
-import { GetOneByIDRequest, GetOneByIDResponse } from "../../protobuf/phone/phone_service_pb";
+import { GetOneByIDRequest } from "../../protobuf/phone/phone_service_pb";
 import { Phone } from "../../protobuf/phone/phone_pb";
 import PhoneServiceClient from "../../clients/nodejs/phone_service_client";
 import PhoneComponent from "../../components/phone";
-import * as grpc from "@grpc/grpc-js";
+import { GetOneByIDServerSide, GetServerSideFunc, PageProp } from "../../components/getOne";
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<PhonePageProp>> => {
-  let id: number;
+export const getServerSideProps: GetServerSideFunc<Phone.AsObject> = GetOneByIDServerSide<Phone.AsObject, Phone>(
+  new GetOneByIDRequest(),
+  PhoneServiceClient,
+  "legit",
+);
 
-  if (Array.isArray(context.params.id)) {
-    id = parseInt(context.params.id[0], 10);
-  } else {
-    id = parseInt(context.params.id, 10);
-  }
-
-  const props: PhonePageProp = {
-    id,
-    phone: null,
-    errorCode: null,
-  };
-
-  const metadata = new grpc.Metadata();
-  // TODO: implement actual session token
-  metadata.set('Authorization', 'Bearer legit');
-
-  const request = new GetOneByIDRequest();
-  request.setId(id);
-  const p = new Promise((resolve, reject) =>
-    PhoneServiceClient.getOneByID(request, metadata, (err: Error, response: GetOneByIDResponse) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(response);
-    })
-  );
-
-  // await (p);
-  await p
-    .then(
-      (response: GetOneByIDResponse) => {
-        props.phone = response.getResult().toObject();
-      },
-      (e: Error) => {
-        props.errorCode = e.code;
-      }
-    )
-    .catch(() => {
-      props.errorCode = StatusCode.UNKNOWN;
-    });
-
-  return {
-    props,
-  };
-};
-
-interface PhonePageProp {
-  id: number;
-  phone?: Phone.AsObject;
-  errorCode?: number;
-}
-
-const PhonePage = (props: PhonePageProp): JSX.Element => {
-  if (props.phone) {
+const PhonePage = (props: PageProp<Phone.AsObject>): JSX.Element => {
+  if (props.result) {
     return (
       <Container defKey="1">
-        <SEO title={props.phone.name} />
-        <PhoneComponent phone={props.phone} />
+        <SEO title={props.result.name} />
+        <PhoneComponent phone={props.result} />
       </Container>
     );
   }
 
-  if (props.errorCode === StatusCode.NOT_FOUND) {
+  if (props.error.code === StatusCode.NOT_FOUND) {
     return (
       <Custom404
         defKey="1"
@@ -87,29 +35,9 @@ const PhonePage = (props: PhonePageProp): JSX.Element => {
     );
   }
 
-  if (props.errorCode === StatusCode.DEADLINE_EXCEEDED) {
-    return (
-      // <NotFoundPage
-      //   code={503}
-      //   title="Timeout"
-      //   message={
-      //     `Waited too long while fetching phone with id=${id}`
-      //   }
-      // />
-      <Container defKey="1">
-        <h1>503</h1>
-      </Container>
-    );
-  }
-
   return (
-    // <NotFoundPage
-    //   code={500}
-    //   title="Internal server error"
-    //   message={`Error fetching phone with id=${id}`}
-    // />
     <Container defKey="1">
-      <h1>500</h1>
+      <h1>{props.httpStatusCode}</h1>
     </Container>
   );
 };
