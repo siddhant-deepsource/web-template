@@ -10,7 +10,7 @@ import PhoneComponent from "../../components/phone";
 import {
   GetOneByIDServerSide,
   GetServerSideFunc,
-  PageProp,
+  GetOnePageProp,
 } from "../../components/getOne";
 
 export const getServerSideProps: GetServerSideFunc<Phone.AsObject> = GetOneByIDServerSide<
@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideFunc<Phone.AsObject> = GetOneByIDS
   Phone
 >(new GetOneByIDRequest(), PhoneServiceClient, "legit");
 
-const PhonePage = (props: PageProp<Phone.AsObject>): JSX.Element => {
+const PhonePage = (props: GetOnePageProp<Phone.AsObject>): JSX.Element => {
   if (props.result) {
     return (
       <Container defKey="1">

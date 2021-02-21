@@ -5,9 +5,9 @@ interface PhoneComponentProp {
   phone: Phone.AsObject;
 }
 
-const PhoneComponent = (props: PhoneComponentProp): JSX.Element => (
+const PhoneComponent = ({ phone }: PhoneComponentProp): JSX.Element => (
   <div>
-    <h1>{props.phone.name}</h1>
+    <h1>{phone.name}</h1>
     <Descriptions
       bordered
       column={{
@@ -19,11 +19,9 @@ const PhoneComponent = (props: PhoneComponentProp): JSX.Element => (
         xs: 1,
       }}
     >
-      <Descriptions.Item label="Name">{props.phone.name}</Descriptions.Item>
-      <Descriptions.Item label="Make">
-        {props.phone.make.name}
-      </Descriptions.Item>
-      <Descriptions.Item label="OS">{props.phone.os.name}</Descriptions.Item>
+      <Descriptions.Item label="Name">{phone.name}</Descriptions.Item>
+      <Descriptions.Item label="Make">{phone.make.name}</Descriptions.Item>
+      <Descriptions.Item label="OS">{phone.os.name}</Descriptions.Item>
     </Descriptions>
   </div>
 );

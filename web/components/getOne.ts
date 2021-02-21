@@ -3,26 +3,32 @@ import * as grpc from "@grpc/grpc-js";
 import * as jspb from "google-protobuf";
 import { Error, StatusCode } from "grpc-web";
 import { ParsedUrlQuery } from "querystring";
+import { httpStatusCodeFromGRPCError } from "./httpStatusCode";
 
+// pbMessageAsObject is the object representation of the protobuf message with AsObject
 interface pbMessageAsObject {
   id: number;
 }
 
+// pbMessage is the protobuf type of the object we're fetching
 interface pbMessage<O extends pbMessageAsObject> extends jspb.Message {
   getId: () => number;
   toObject: () => O;
 }
 
+// getByIDRequest is the gRPC request that allows querying by ID
 interface getByIDRequest<O extends pbMessageAsObject, PB extends pbMessage<O>>
   extends jspb.Message {
   setId: (id: number) => getByIDRequest<O, PB>;
 }
 
+// getByIDResponse is the gRPC response that returns the queried result
 interface getByIDResponse<O extends pbMessageAsObject, PB extends pbMessage<O>>
   extends jspb.Message {
-  getResult: () => PB;
+  getResult: () => PB | undefined;
 }
 
+// getByIDClient is the gRPC client that allows querying by ID
 interface getByIDClient<O extends pbMessageAsObject, PB extends pbMessage<O>> {
   getOneByID(
     request: getByIDRequest<O, PB>,
@@ -33,34 +39,21 @@ interface getByIDClient<O extends pbMessageAsObject, PB extends pbMessage<O>> {
     ) => void
   ): grpc.ClientUnaryCall;
 }
-
-export interface PageProp<O extends pbMessageAsObject> {
+export interface GetOnePageProp<O extends pbMessageAsObject> {
   id: number;
   result?: O;
   error?: Error;
   httpStatusCode: number;
 }
 
-interface QueryWithIDParam extends ParsedUrlQuery {
+// HTTP query params that contains the id key
+interface queryWithIDParam extends ParsedUrlQuery {
   id: string | string[];
 }
 
 export type GetServerSideFunc<O extends pbMessageAsObject> = (
   context: GetServerSidePropsContext
-) => Promise<GetServerSidePropsResult<PageProp<O>>>;
-
-const httpStatusCodeFromGRPCError = (err: Error): number => {
-  switch (err.code) {
-    case StatusCode.OK:
-      return 200;
-    case StatusCode.NOT_FOUND:
-      return 404;
-    case StatusCode.DEADLINE_EXCEEDED:
-      return 503;
-    default:
-      return 500;
-  }
-};
+) => Promise<GetServerSidePropsResult<GetOnePageProp<O>>>;
 
 export const GetOneByIDServerSide = <
   O extends pbMessageAsObject,
@@ -70,8 +63,8 @@ export const GetOneByIDServerSide = <
   client: getByIDClient<O, PB>,
   authorizationToken?: string
 ): GetServerSideFunc<O> => async (
-  context: GetServerSidePropsContext<QueryWithIDParam>
-): Promise<GetServerSidePropsResult<PageProp<O>>> => {
+  context: GetServerSidePropsContext<queryWithIDParam>
+): Promise<GetServerSidePropsResult<GetOnePageProp<O>>> => {
   let id: number;
 
   if (Array.isArray(context.params.id)) {
@@ -80,7 +73,7 @@ export const GetOneByIDServerSide = <
     id = parseInt(context.params.id, 10);
   }
 
-  const props: PageProp<O> = {
+  const props: GetOnePageProp<O> = {
     id,
     result: null,
     error: null,
@@ -94,6 +87,9 @@ export const GetOneByIDServerSide = <
   }
 
   request.setId(id);
+
+  // we have to do this weird promise/await pattern in order to make sure that return values are
+  // present.
   const p = new Promise((resolve, reject) =>
     client.getOneByID(
       request,
