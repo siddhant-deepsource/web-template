@@ -75,44 +75,84 @@ export class PhoneServiceClient {
     this.methodInfoGetOneByID);
   }
 
-  methodInfoListPhones = new grpcWeb.AbstractClientBase.MethodInfo(
-    protobuf_phone_phone_service_pb.ListPhonesResponse,
-    (request: protobuf_phone_phone_service_pb.ListPhonesRequest) => {
+  methodInfoListByCursor = new grpcWeb.AbstractClientBase.MethodInfo(
+    protobuf_phone_phone_service_pb.ListByCursorResponse,
+    (request: protobuf_phone_phone_service_pb.ListByCursorRequest) => {
       return request.serializeBinary();
     },
-    protobuf_phone_phone_service_pb.ListPhonesResponse.deserializeBinary
+    protobuf_phone_phone_service_pb.ListByCursorResponse.deserializeBinary
   );
 
-  listPhones(
-    request: protobuf_phone_phone_service_pb.ListPhonesRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protobuf_phone_phone_service_pb.ListPhonesResponse>;
+  listByCursor(
+    request: protobuf_phone_phone_service_pb.ListByCursorRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_phone_phone_service_pb.ListByCursorResponse>;
 
-  listPhones(
-    request: protobuf_phone_phone_service_pb.ListPhonesRequest,
+  listByCursor(
+    request: protobuf_phone_phone_service_pb.ListByCursorRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: protobuf_phone_phone_service_pb.ListPhonesResponse) => void): grpcWeb.ClientReadableStream<protobuf_phone_phone_service_pb.ListPhonesResponse>;
+               response: protobuf_phone_phone_service_pb.ListByCursorResponse) => void): grpcWeb.ClientReadableStream<protobuf_phone_phone_service_pb.ListByCursorResponse>;
 
-  listPhones(
-    request: protobuf_phone_phone_service_pb.ListPhonesRequest,
+  listByCursor(
+    request: protobuf_phone_phone_service_pb.ListByCursorRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.Error,
-               response: protobuf_phone_phone_service_pb.ListPhonesResponse) => void) {
+               response: protobuf_phone_phone_service_pb.ListByCursorResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/phone.PhoneService/ListPhones',
+          '/phone.PhoneService/ListByCursor',
         request,
         metadata || {},
-        this.methodInfoListPhones,
+        this.methodInfoListByCursor,
         callback);
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/phone.PhoneService/ListPhones',
+      '/phone.PhoneService/ListByCursor',
     request,
     metadata || {},
-    this.methodInfoListPhones);
+    this.methodInfoListByCursor);
+  }
+
+  methodInfoListByPage = new grpcWeb.AbstractClientBase.MethodInfo(
+    protobuf_phone_phone_service_pb.ListByPageResponse,
+    (request: protobuf_phone_phone_service_pb.ListByPageRequest) => {
+      return request.serializeBinary();
+    },
+    protobuf_phone_phone_service_pb.ListByPageResponse.deserializeBinary
+  );
+
+  listByPage(
+    request: protobuf_phone_phone_service_pb.ListByPageRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_phone_phone_service_pb.ListByPageResponse>;
+
+  listByPage(
+    request: protobuf_phone_phone_service_pb.ListByPageRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: protobuf_phone_phone_service_pb.ListByPageResponse) => void): grpcWeb.ClientReadableStream<protobuf_phone_phone_service_pb.ListByPageResponse>;
+
+  listByPage(
+    request: protobuf_phone_phone_service_pb.ListByPageRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.Error,
+               response: protobuf_phone_phone_service_pb.ListByPageResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/phone.PhoneService/ListByPage',
+        request,
+        metadata || {},
+        this.methodInfoListByPage,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/phone.PhoneService/ListByPage',
+    request,
+    metadata || {},
+    this.methodInfoListByPage);
   }
 
 }

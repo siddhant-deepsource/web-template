@@ -27,26 +27,48 @@ function deserialize_phone_GetOneByIDResponse(buffer_arg) {
   return protobuf_phone_phone_service_pb.GetOneByIDResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_phone_ListPhonesRequest(arg) {
-  if (!(arg instanceof protobuf_phone_phone_service_pb.ListPhonesRequest)) {
-    throw new Error('Expected argument of type phone.ListPhonesRequest');
+function serialize_phone_ListByCursorRequest(arg) {
+  if (!(arg instanceof protobuf_phone_phone_service_pb.ListByCursorRequest)) {
+    throw new Error('Expected argument of type phone.ListByCursorRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_phone_ListPhonesRequest(buffer_arg) {
-  return protobuf_phone_phone_service_pb.ListPhonesRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_phone_ListByCursorRequest(buffer_arg) {
+  return protobuf_phone_phone_service_pb.ListByCursorRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_phone_ListPhonesResponse(arg) {
-  if (!(arg instanceof protobuf_phone_phone_service_pb.ListPhonesResponse)) {
-    throw new Error('Expected argument of type phone.ListPhonesResponse');
+function serialize_phone_ListByCursorResponse(arg) {
+  if (!(arg instanceof protobuf_phone_phone_service_pb.ListByCursorResponse)) {
+    throw new Error('Expected argument of type phone.ListByCursorResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_phone_ListPhonesResponse(buffer_arg) {
-  return protobuf_phone_phone_service_pb.ListPhonesResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_phone_ListByCursorResponse(buffer_arg) {
+  return protobuf_phone_phone_service_pb.ListByCursorResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_phone_ListByPageRequest(arg) {
+  if (!(arg instanceof protobuf_phone_phone_service_pb.ListByPageRequest)) {
+    throw new Error('Expected argument of type phone.ListByPageRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_phone_ListByPageRequest(buffer_arg) {
+  return protobuf_phone_phone_service_pb.ListByPageRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_phone_ListByPageResponse(arg) {
+  if (!(arg instanceof protobuf_phone_phone_service_pb.ListByPageResponse)) {
+    throw new Error('Expected argument of type phone.ListByPageResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_phone_ListByPageResponse(buffer_arg) {
+  return protobuf_phone_phone_service_pb.ListByPageResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 
@@ -62,16 +84,27 @@ var PhoneServiceService = exports.PhoneServiceService = {
     responseSerialize: serialize_phone_GetOneByIDResponse,
     responseDeserialize: deserialize_phone_GetOneByIDResponse,
   },
-  listPhones: {
-    path: '/phone.PhoneService/ListPhones',
+  listByCursor: {
+    path: '/phone.PhoneService/ListByCursor',
     requestStream: false,
     responseStream: false,
-    requestType: protobuf_phone_phone_service_pb.ListPhonesRequest,
-    responseType: protobuf_phone_phone_service_pb.ListPhonesResponse,
-    requestSerialize: serialize_phone_ListPhonesRequest,
-    requestDeserialize: deserialize_phone_ListPhonesRequest,
-    responseSerialize: serialize_phone_ListPhonesResponse,
-    responseDeserialize: deserialize_phone_ListPhonesResponse,
+    requestType: protobuf_phone_phone_service_pb.ListByCursorRequest,
+    responseType: protobuf_phone_phone_service_pb.ListByCursorResponse,
+    requestSerialize: serialize_phone_ListByCursorRequest,
+    requestDeserialize: deserialize_phone_ListByCursorRequest,
+    responseSerialize: serialize_phone_ListByCursorResponse,
+    responseDeserialize: deserialize_phone_ListByCursorResponse,
+  },
+  listByPage: {
+    path: '/phone.PhoneService/ListByPage',
+    requestStream: false,
+    responseStream: false,
+    requestType: protobuf_phone_phone_service_pb.ListByPageRequest,
+    responseType: protobuf_phone_phone_service_pb.ListByPageResponse,
+    requestSerialize: serialize_phone_ListByPageRequest,
+    requestDeserialize: deserialize_phone_ListByPageRequest,
+    responseSerialize: serialize_phone_ListByPageResponse,
+    responseDeserialize: deserialize_phone_ListByPageResponse,
   },
 };
 
