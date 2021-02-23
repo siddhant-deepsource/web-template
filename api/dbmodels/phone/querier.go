@@ -9,6 +9,7 @@ import (
 type Querier interface {
 	CountTotal(ctx context.Context) (int64, error)
 	GetByID(ctx context.Context, id int64) (Phone, error)
+	GetManyByIDs(ctx context.Context, dollar_1 []int64) ([]Phone, error)
 	ListOffset(ctx context.Context, arg ListOffsetParams) ([]Phone, error)
 }
 

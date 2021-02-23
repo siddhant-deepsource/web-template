@@ -7,6 +7,7 @@ option go_package = "github.com/rickypai/web-template/api/protobuf/make";
 
 service MakeService {
   rpc GetOneByID(GetOneByIDRequest) returns (GetOneByIDResponse) {}
+  rpc GetManyByIDs(GetManyByIDsRequest) returns (GetManyByIDsResponse) {}
   rpc ListByCursor(ListByCursorRequest) returns (ListByCursorResponse) {}
   rpc ListByPage(ListByPageRequest) returns (ListByPageResponse) {}
 }
@@ -17,6 +18,14 @@ message GetOneByIDRequest {
 
 message GetOneByIDResponse {
   make.Make result = 1;
+}
+
+message GetManyByIDsRequest {
+  repeated int64 ids = 1;
+}
+
+message GetManyByIDsResponse {
+  repeated make.Make results = 1;
 }
 
 message ListByCursorRequest {

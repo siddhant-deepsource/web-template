@@ -5,6 +5,28 @@ var grpc = require('@grpc/grpc-js');
 var protobuf_make_make_service_pb = require('../../protobuf/make/make_service_pb.js');
 var protobuf_make_make_pb = require('../../protobuf/make/make_pb.js');
 
+function serialize_make_GetManyByIDsRequest(arg) {
+  if (!(arg instanceof protobuf_make_make_service_pb.GetManyByIDsRequest)) {
+    throw new Error('Expected argument of type make.GetManyByIDsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_make_GetManyByIDsRequest(buffer_arg) {
+  return protobuf_make_make_service_pb.GetManyByIDsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_make_GetManyByIDsResponse(arg) {
+  if (!(arg instanceof protobuf_make_make_service_pb.GetManyByIDsResponse)) {
+    throw new Error('Expected argument of type make.GetManyByIDsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_make_GetManyByIDsResponse(buffer_arg) {
+  return protobuf_make_make_service_pb.GetManyByIDsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_make_GetOneByIDRequest(arg) {
   if (!(arg instanceof protobuf_make_make_service_pb.GetOneByIDRequest)) {
     throw new Error('Expected argument of type make.GetOneByIDRequest');
@@ -83,6 +105,17 @@ var MakeServiceService = exports.MakeServiceService = {
     requestDeserialize: deserialize_make_GetOneByIDRequest,
     responseSerialize: serialize_make_GetOneByIDResponse,
     responseDeserialize: deserialize_make_GetOneByIDResponse,
+  },
+  getManyByIDs: {
+    path: '/make.MakeService/GetManyByIDs',
+    requestStream: false,
+    responseStream: false,
+    requestType: protobuf_make_make_service_pb.GetManyByIDsRequest,
+    responseType: protobuf_make_make_service_pb.GetManyByIDsResponse,
+    requestSerialize: serialize_make_GetManyByIDsRequest,
+    requestDeserialize: deserialize_make_GetManyByIDsRequest,
+    responseSerialize: serialize_make_GetManyByIDsResponse,
+    responseDeserialize: deserialize_make_GetManyByIDsResponse,
   },
   listByCursor: {
     path: '/make.MakeService/ListByCursor',

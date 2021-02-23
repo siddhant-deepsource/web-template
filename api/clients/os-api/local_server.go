@@ -23,6 +23,10 @@ func (s *OSServiceLocalServer) GetOneByID(ctx context.Context, req *rpc.GetOneBy
 	return s.localServer.GetOneByID(ctx, req)
 }
 
+func (s *OSServiceLocalServer) GetManyByIDs(ctx context.Context, req *rpc.GetManyByIDsRequest, opts ...grpc.CallOption) (*rpc.GetManyByIDsResponse, error) {
+	return s.localServer.GetManyByIDs(ctx, req)
+}
+
 func (s *OSServiceLocalServer) ListByCursor(ctx context.Context, req *rpc.ListByCursorRequest, opts ...grpc.CallOption) (*rpc.ListByCursorResponse, error) {
 	return s.localServer.ListByCursor(ctx, req)
 }

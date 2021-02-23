@@ -107,3 +107,12 @@ func (r *Repo) GetOneByID(ctx context.Context, id int64) (*modelT, error) {
 
 	return toRPCModel(dbResult), nil
 }
+
+func (r *Repo) GetManyByIDs(ctx context.Context, ids []int64) ([]*modelT, error) {
+	dbResults, err := r.db.GetManyByIDs(ctx, ids)
+	if err != nil {
+		return nil, fmt.Errorf("error fetching from database: %w", err)
+	}
+
+	return toRPCModels(dbResults), nil
+}

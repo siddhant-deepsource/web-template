@@ -5,6 +5,28 @@ var grpc = require('@grpc/grpc-js');
 var protobuf_os_os_service_pb = require('../../protobuf/os/os_service_pb.js');
 var protobuf_os_os_pb = require('../../protobuf/os/os_pb.js');
 
+function serialize_os_GetManyByIDsRequest(arg) {
+  if (!(arg instanceof protobuf_os_os_service_pb.GetManyByIDsRequest)) {
+    throw new Error('Expected argument of type os.GetManyByIDsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_os_GetManyByIDsRequest(buffer_arg) {
+  return protobuf_os_os_service_pb.GetManyByIDsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_os_GetManyByIDsResponse(arg) {
+  if (!(arg instanceof protobuf_os_os_service_pb.GetManyByIDsResponse)) {
+    throw new Error('Expected argument of type os.GetManyByIDsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_os_GetManyByIDsResponse(buffer_arg) {
+  return protobuf_os_os_service_pb.GetManyByIDsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_os_GetOneByIDRequest(arg) {
   if (!(arg instanceof protobuf_os_os_service_pb.GetOneByIDRequest)) {
     throw new Error('Expected argument of type os.GetOneByIDRequest');
@@ -83,6 +105,17 @@ var OSServiceService = exports.OSServiceService = {
     requestDeserialize: deserialize_os_GetOneByIDRequest,
     responseSerialize: serialize_os_GetOneByIDResponse,
     responseDeserialize: deserialize_os_GetOneByIDResponse,
+  },
+  getManyByIDs: {
+    path: '/os.OSService/GetManyByIDs',
+    requestStream: false,
+    responseStream: false,
+    requestType: protobuf_os_os_service_pb.GetManyByIDsRequest,
+    responseType: protobuf_os_os_service_pb.GetManyByIDsResponse,
+    requestSerialize: serialize_os_GetManyByIDsRequest,
+    requestDeserialize: deserialize_os_GetManyByIDsRequest,
+    responseSerialize: serialize_os_GetManyByIDsResponse,
+    responseDeserialize: deserialize_os_GetManyByIDsResponse,
   },
   listByCursor: {
     path: '/os.OSService/ListByCursor',

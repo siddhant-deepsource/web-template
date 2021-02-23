@@ -41,6 +41,46 @@ export namespace GetOneByIDResponse {
   }
 }
 
+export class GetManyByIDsRequest extends jspb.Message {
+  getIdsList(): Array<number>;
+  setIdsList(value: Array<number>): GetManyByIDsRequest;
+  clearIdsList(): GetManyByIDsRequest;
+  addIds(value: number, index?: number): GetManyByIDsRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetManyByIDsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetManyByIDsRequest): GetManyByIDsRequest.AsObject;
+  static serializeBinaryToWriter(message: GetManyByIDsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetManyByIDsRequest;
+  static deserializeBinaryFromReader(message: GetManyByIDsRequest, reader: jspb.BinaryReader): GetManyByIDsRequest;
+}
+
+export namespace GetManyByIDsRequest {
+  export type AsObject = {
+    idsList: Array<number>,
+  }
+}
+
+export class GetManyByIDsResponse extends jspb.Message {
+  getResultsList(): Array<protobuf_os_os_pb.OS>;
+  setResultsList(value: Array<protobuf_os_os_pb.OS>): GetManyByIDsResponse;
+  clearResultsList(): GetManyByIDsResponse;
+  addResults(value?: protobuf_os_os_pb.OS, index?: number): protobuf_os_os_pb.OS;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetManyByIDsResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetManyByIDsResponse): GetManyByIDsResponse.AsObject;
+  static serializeBinaryToWriter(message: GetManyByIDsResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetManyByIDsResponse;
+  static deserializeBinaryFromReader(message: GetManyByIDsResponse, reader: jspb.BinaryReader): GetManyByIDsResponse;
+}
+
+export namespace GetManyByIDsResponse {
+  export type AsObject = {
+    resultsList: Array<protobuf_os_os_pb.OS.AsObject>,
+  }
+}
+
 export class ListByCursorRequest extends jspb.Message {
   getCursor(): number;
   setCursor(value: number): ListByCursorRequest;

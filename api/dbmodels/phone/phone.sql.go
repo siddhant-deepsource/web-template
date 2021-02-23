@@ -5,6 +5,8 @@ package phone
 
 import (
 	"context"
+
+	"github.com/lib/pq"
 )
 
 const countTotal = `-- name: CountTotal :one
@@ -34,6 +36,40 @@ func (q *Queries) GetByID(ctx context.Context, id int64) (Phone, error) {
 		&i.ModifiedAt,
 	)
 	return i, err
+}
+
+const getManyByIDs = `-- name: GetManyByIDs :many
+SELECT id, name, make_id, os_id, created_at, modified_at FROM phone WHERE id = ANY($1::bigint[])
+`
+
+func (q *Queries) GetManyByIDs(ctx context.Context, dollar_1 []int64) ([]Phone, error) {
+	rows, err := q.db.QueryContext(ctx, getManyByIDs, pq.Array(dollar_1))
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Phone
+	for rows.Next() {
+		var i Phone
+		if err := rows.Scan(
+			&i.ID,
+			&i.Name,
+			&i.MakeID,
+			&i.OsID,
+			&i.CreatedAt,
+			&i.ModifiedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
 }
 
 const listOffset = `-- name: ListOffset :many

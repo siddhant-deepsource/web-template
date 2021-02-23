@@ -5,6 +5,28 @@ var grpc = require('@grpc/grpc-js');
 var protobuf_phone_phone_service_pb = require('../../protobuf/phone/phone_service_pb.js');
 var protobuf_phone_phone_pb = require('../../protobuf/phone/phone_pb.js');
 
+function serialize_phone_GetManyByIDsRequest(arg) {
+  if (!(arg instanceof protobuf_phone_phone_service_pb.GetManyByIDsRequest)) {
+    throw new Error('Expected argument of type phone.GetManyByIDsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_phone_GetManyByIDsRequest(buffer_arg) {
+  return protobuf_phone_phone_service_pb.GetManyByIDsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_phone_GetManyByIDsResponse(arg) {
+  if (!(arg instanceof protobuf_phone_phone_service_pb.GetManyByIDsResponse)) {
+    throw new Error('Expected argument of type phone.GetManyByIDsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_phone_GetManyByIDsResponse(buffer_arg) {
+  return protobuf_phone_phone_service_pb.GetManyByIDsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_phone_GetOneByIDRequest(arg) {
   if (!(arg instanceof protobuf_phone_phone_service_pb.GetOneByIDRequest)) {
     throw new Error('Expected argument of type phone.GetOneByIDRequest');
@@ -83,6 +105,17 @@ var PhoneServiceService = exports.PhoneServiceService = {
     requestDeserialize: deserialize_phone_GetOneByIDRequest,
     responseSerialize: serialize_phone_GetOneByIDResponse,
     responseDeserialize: deserialize_phone_GetOneByIDResponse,
+  },
+  getManyByIDs: {
+    path: '/phone.PhoneService/GetManyByIDs',
+    requestStream: false,
+    responseStream: false,
+    requestType: protobuf_phone_phone_service_pb.GetManyByIDsRequest,
+    responseType: protobuf_phone_phone_service_pb.GetManyByIDsResponse,
+    requestSerialize: serialize_phone_GetManyByIDsRequest,
+    requestDeserialize: deserialize_phone_GetManyByIDsRequest,
+    responseSerialize: serialize_phone_GetManyByIDsResponse,
+    responseDeserialize: deserialize_phone_GetManyByIDsResponse,
   },
   listByCursor: {
     path: '/phone.PhoneService/ListByCursor',

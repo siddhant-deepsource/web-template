@@ -27,6 +27,7 @@ const (
 
 type modelTReader interface {
 	GetOneByID(context.Context, int64) (modelT, error)
+	GetManyByIDs(context.Context, []int64) ([]modelT, error)
 
 	ListByPage(context.Context, cursor.PageRequest) ([]modelT, *cursor.PageResult, error)
 	ListByCursor(context.Context, cursor.CursorRequest) ([]modelT, *cursor.CursorResult, error)
@@ -82,5 +83,16 @@ func (s *Server) GetOneByID(ctx context.Context, req *rpc.GetOneByIDRequest) (*r
 
 	return &rpc.GetOneByIDResponse{
 		Result: result,
+	}, nil
+}
+
+func (s *Server) GetManyByIDs(ctx context.Context, req *rpc.GetManyByIDsRequest) (*rpc.GetManyByIDsResponse, error) {
+	results, err := s.repo.GetManyByIDs(ctx, req.GetIds())
+	if err != nil {
+		return nil, fmt.Errorf("error fetching %s: %w", modelName, err)
+	}
+
+	return &rpc.GetManyByIDsResponse{
+		Results: results,
 	}, nil
 }

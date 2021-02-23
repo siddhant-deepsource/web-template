@@ -75,6 +75,46 @@ export class OSServiceClient {
     this.methodInfoGetOneByID);
   }
 
+  methodInfoGetManyByIDs = new grpcWeb.AbstractClientBase.MethodInfo(
+    protobuf_os_os_service_pb.GetManyByIDsResponse,
+    (request: protobuf_os_os_service_pb.GetManyByIDsRequest) => {
+      return request.serializeBinary();
+    },
+    protobuf_os_os_service_pb.GetManyByIDsResponse.deserializeBinary
+  );
+
+  getManyByIDs(
+    request: protobuf_os_os_service_pb.GetManyByIDsRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_os_os_service_pb.GetManyByIDsResponse>;
+
+  getManyByIDs(
+    request: protobuf_os_os_service_pb.GetManyByIDsRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: protobuf_os_os_service_pb.GetManyByIDsResponse) => void): grpcWeb.ClientReadableStream<protobuf_os_os_service_pb.GetManyByIDsResponse>;
+
+  getManyByIDs(
+    request: protobuf_os_os_service_pb.GetManyByIDsRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.Error,
+               response: protobuf_os_os_service_pb.GetManyByIDsResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/os.OSService/GetManyByIDs',
+        request,
+        metadata || {},
+        this.methodInfoGetManyByIDs,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/os.OSService/GetManyByIDs',
+    request,
+    metadata || {},
+    this.methodInfoGetManyByIDs);
+  }
+
   methodInfoListByCursor = new grpcWeb.AbstractClientBase.MethodInfo(
     protobuf_os_os_service_pb.ListByCursorResponse,
     (request: protobuf_os_os_service_pb.ListByCursorRequest) => {

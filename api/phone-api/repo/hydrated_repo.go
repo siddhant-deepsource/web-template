@@ -63,3 +63,17 @@ func (r *HydratedRepo) GetOneByID(ctx context.Context, id int64) (*modelT, error
 
 	return result, nil
 }
+
+func (r *HydratedRepo) GetManyByIDs(ctx context.Context, ids []int64) ([]*modelT, error) {
+	results, err := r.repo.GetManyByIDs(ctx, ids)
+	if err != nil {
+		return nil, err
+	}
+
+	err = r.hydrator.HydrateMany(ctx, results)
+	if err != nil {
+		return nil, fmt.Errorf("hydrating: %w", err)
+	}
+
+	return results, nil
+}

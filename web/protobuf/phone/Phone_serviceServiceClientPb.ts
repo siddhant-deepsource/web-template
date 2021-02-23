@@ -75,6 +75,46 @@ export class PhoneServiceClient {
     this.methodInfoGetOneByID);
   }
 
+  methodInfoGetManyByIDs = new grpcWeb.AbstractClientBase.MethodInfo(
+    protobuf_phone_phone_service_pb.GetManyByIDsResponse,
+    (request: protobuf_phone_phone_service_pb.GetManyByIDsRequest) => {
+      return request.serializeBinary();
+    },
+    protobuf_phone_phone_service_pb.GetManyByIDsResponse.deserializeBinary
+  );
+
+  getManyByIDs(
+    request: protobuf_phone_phone_service_pb.GetManyByIDsRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_phone_phone_service_pb.GetManyByIDsResponse>;
+
+  getManyByIDs(
+    request: protobuf_phone_phone_service_pb.GetManyByIDsRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.Error,
+               response: protobuf_phone_phone_service_pb.GetManyByIDsResponse) => void): grpcWeb.ClientReadableStream<protobuf_phone_phone_service_pb.GetManyByIDsResponse>;
+
+  getManyByIDs(
+    request: protobuf_phone_phone_service_pb.GetManyByIDsRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.Error,
+               response: protobuf_phone_phone_service_pb.GetManyByIDsResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/phone.PhoneService/GetManyByIDs',
+        request,
+        metadata || {},
+        this.methodInfoGetManyByIDs,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/phone.PhoneService/GetManyByIDs',
+    request,
+    metadata || {},
+    this.methodInfoGetManyByIDs);
+  }
+
   methodInfoListByCursor = new grpcWeb.AbstractClientBase.MethodInfo(
     protobuf_phone_phone_service_pb.ListByCursorResponse,
     (request: protobuf_phone_phone_service_pb.ListByCursorRequest) => {

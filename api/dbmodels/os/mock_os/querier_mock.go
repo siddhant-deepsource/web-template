@@ -64,6 +64,21 @@ func (mr *MockQuerierMockRecorder) GetByID(ctx, id interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockQuerier)(nil).GetByID), ctx, id)
 }
 
+// GetManyByIDs mocks base method
+func (m *MockQuerier) GetManyByIDs(ctx context.Context, dollar_1 []int64) ([]os.OS, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetManyByIDs", ctx, dollar_1)
+	ret0, _ := ret[0].([]os.OS)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetManyByIDs indicates an expected call of GetManyByIDs
+func (mr *MockQuerierMockRecorder) GetManyByIDs(ctx, dollar_1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetManyByIDs", reflect.TypeOf((*MockQuerier)(nil).GetManyByIDs), ctx, dollar_1)
+}
+
 // ListOffset mocks base method
 func (m *MockQuerier) ListOffset(ctx context.Context, arg os.ListOffsetParams) ([]os.OS, error) {
 	m.ctrl.T.Helper()
