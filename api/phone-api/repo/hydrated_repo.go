@@ -65,6 +65,10 @@ func (r *HydratedRepo) GetOneByID(ctx context.Context, id int64) (*modelT, error
 }
 
 func (r *HydratedRepo) GetManyByIDs(ctx context.Context, ids []int64) ([]*modelT, error) {
+	if len(ids) == 0 {
+		return nil, nil
+	}
+
 	results, err := r.repo.GetManyByIDs(ctx, ids)
 	if err != nil {
 		return nil, err

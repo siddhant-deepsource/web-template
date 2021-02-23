@@ -109,6 +109,10 @@ func (r *Repo) GetOneByID(ctx context.Context, id int64) (*modelT, error) {
 }
 
 func (r *Repo) GetManyByIDs(ctx context.Context, ids []int64) ([]*modelT, error) {
+	if len(ids) == 0 {
+		return nil, nil
+	}
+
 	dbResults, err := r.db.GetManyByIDs(ctx, ids)
 	if err != nil {
 		return nil, fmt.Errorf("error fetching from database: %w", err)
