@@ -53,12 +53,22 @@ func NewExternalAuth() *pat.Router {
 			fmt.Fprintln(res, err)
 			return
 		}
+
 		t, _ := template.New("foo").Parse(userTemplate)
-		t.Execute(res, user)
+		err = t.Execute(res, user)
+		if err != nil {
+			fmt.Fprintln(res, err)
+			return
+		}
 	})
 
 	p.Get("/logout/{provider}", func(res http.ResponseWriter, req *http.Request) {
-		gothic.Logout(res, req)
+		err := gothic.Logout(res, req)
+		if err != nil {
+			fmt.Fprintln(res, err)
+			return
+		}
+
 		res.Header().Set("Location", "/")
 		res.WriteHeader(http.StatusTemporaryRedirect)
 	})

@@ -20,7 +20,6 @@ func main() {
 	}
 
 	opts := []grpc.ServerOption{grpc.MaxConcurrentStreams(10)}
-	opts = append(opts)
 
 	s := grpc.NewServer(opts...)
 
@@ -28,5 +27,8 @@ func main() {
 	healthpb.RegisterHealthServer(s, &healthServer{})
 
 	log.Printf("Starting gRPC Server at %s", address)
-	s.Serve(lis)
+	err = s.Serve(lis)
+	if err != nil {
+		log.Fatalf("failed to serve: %v", err)
+	}
 }

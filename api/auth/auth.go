@@ -36,8 +36,7 @@ func (a *authServer) Check(ctx context.Context, req *auth.CheckRequest) (*auth.C
 		return unauthenticatedResp(), nil
 	}
 
-	var parts []string
-	parts = strings.Split(authHeader, bearerPrefix)
+	parts := strings.Split(authHeader, bearerPrefix)
 	if len(parts) != 2 {
 		return unauthenticatedResp(), nil
 	}
