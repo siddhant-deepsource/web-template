@@ -62,3 +62,37 @@ endif
 
 format:
 	(cd web && yarn run lint)
+
+db-setup:
+	mkdir -p ${HOME}/.local/bin
+ifeq ($(UNAME_S),Linux)
+	curl -LO https://github.com/golang-migrate/migrate/releases/download/v4.14.1/migrate.linux-amd64.tar.gz
+	tar -xf migrate.linux-amd64.tar.gz -C ${HOME}/.local/bin
+	rm migrate.linux-amd64.tar.gz
+	mv ${HOME}/.local/bin/migrate.linux-amd64 ${HOME}/.local/bin/migrate
+endif
+ifeq ($(UNAME_S),Darwin)
+	curl -LO https://github.com/golang-migrate/migrate/releases/download/v4.14.1/migrate.darwin-amd64.tar.gz
+	tar -xf migrate.darwin-amd64.tar.gz -C ${HOME}/.local/bin
+	rm migrate.darwin-amd64.tar.gz
+	mv ${HOME}/.local/bin/migrate.darwin-amd64 ${HOME}/.local/bin/migrate
+endif
+	chmod +x ${HOME}/.local/bin/migrate
+
+db-migrate:
+	migrate -database "${POSTGRES_HOST}/web_template_dev?sslmode=disable" -path db/migrations up
+
+db-up: db-migrate
+
+db-down:
+	migrate -database "${POSTGRES_HOST}/web_template_dev?sslmode=disable" -path db/migrations down
+
+db-create:
+	echo "SELECT 'CREATE DATABASE web_template_dev' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'web_template_dev')\gexec" | psql
+
+db-drop:
+	echo "SELECT 'DROP DATABASE web_template_dev' WHERE EXISTS (SELECT FROM pg_database WHERE datname = 'web_template_dev')\gexec" | psql
+
+db-reset:
+	echo "DROP DATABASE IF EXISTS web_template_dev\gexec" | psql
+	echo "CREATE DATABASE web_template_dev\gexec" | psql

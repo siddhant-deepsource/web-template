@@ -53,6 +53,18 @@ jobs:
           paths:
             - "~/.bazel_cache"
             - "~/.cache/bazelisk"
+  "Go lint":
+    docker:
+      - image: golangci/golangci-lint:v1.37.1
+    resource_class: small
+    working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
+    steps:
+      - run: pwd
+      - checkout
+      - run:
+          command: golangci-lint run --timeout 2m
+          working_directory: ./api
+
   "Go build":
     docker:
       - image: circleci/golang:1.16.0
@@ -68,9 +80,6 @@ jobs:
       - run:
           name: install golangci-lint
           command: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.37.1
-      - run:
-          command: golangci-lint run
-          working_directory: ./api
       - run:
           command: go build -v ./...
           working_directory: ./api
@@ -140,7 +149,8 @@ workflows:
   go:
     jobs:
       - "Go build"
-
+      - "Go lint"
+      # TODO: validate dbmodels
   envoy:
     jobs:
       - "Envoy validate config"

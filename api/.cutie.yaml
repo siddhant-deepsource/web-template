@@ -1,0 +1,7 @@
+database: web_template_dev
+tables:
+  - name: make
+  - name: phone
+  - name: app
+  - name: os
+    model_class: OS

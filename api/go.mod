@@ -4,11 +4,13 @@ go 1.16
 
 require (
 	github.com/envoyproxy/go-control-plane v0.9.7
+	github.com/golang/mock v1.4.4
 	github.com/golang/protobuf v1.4.3
 	github.com/google/go-cmp v0.5.4 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/gorilla/pat v1.0.1
 	github.com/gorilla/sessions v1.2.1 // indirect
+	github.com/jackc/pgx/v4 v4.10.1
 	github.com/kr/text v0.2.0 // indirect
 	github.com/markbates/goth v1.66.1
 	github.com/mrjones/oauth v0.0.0-20190623134757-126b35219450 // indirect

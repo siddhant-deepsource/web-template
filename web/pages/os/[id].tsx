@@ -41,6 +41,7 @@ const OSPage = (props: GetOnePageProp<OS.AsObject>): JSX.Element => {
   return (
     <Container defKey="3">
       <h1>{props.httpStatusCode}</h1>
+      <p>{props.error.message}</p>
     </Container>
   );
 };

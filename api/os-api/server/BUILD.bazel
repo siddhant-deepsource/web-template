@@ -9,5 +9,7 @@ go_library(
         "//api/os-api/repo",
         "//api/server/cursor",
         "//protobuf/os",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
     ],
 )

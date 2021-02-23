@@ -2,75 +2,108 @@ package repo
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 
-	"github.com/golang/protobuf/ptypes"
+	dbModel "github.com/rickypai/web-template/api/dbmodels/make"
 	rpc "github.com/rickypai/web-template/api/protobuf/make"
 	cursorPkg "github.com/rickypai/web-template/api/server/cursor"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
+	"golang.org/x/sync/errgroup"
 )
 
 // this is as close as we can get without generics. Just modify this one line to change the model in question
-type modelT = *rpc.Make
-
-func NewRepo() *Repo {
-	return &Repo{}
-}
+type (
+	modelT   = rpc.Make
+	dbModelT = dbModel.Make
+)
 
 type Repo struct {
+	db dbModel.Querier
 }
 
-func (s *Repo) ListByPage(ctx context.Context, req cursorPkg.PageRequest) ([]modelT, *cursorPkg.PageResult, error) {
-	page, cursor, count := cursorPkg.GetPageOptions(req)
-	results := make([]modelT, 0, count)
+func NewRepo(db *sql.DB) *Repo {
+	return &Repo{
+		db: dbModel.New(db),
+	}
+}
 
-	for i := cursor + 1; i < cursor+1+int64(count); i++ {
-		results = append(results, getMake(i))
+func (r *Repo) ListByPage(ctx context.Context, req cursorPkg.PageRequest) ([]*modelT, *cursorPkg.PageResult, error) {
+	page, cursor, count := cursorPkg.GetPageOptions(req)
+	wg, ctx := errgroup.WithContext(ctx)
+
+	var dbModels []dbModelT
+	wg.Go(func() error {
+		var listerr error
+		dbModels, listerr = r.db.ListOffset(ctx, dbModel.ListOffsetParams{Limit: int32(count) + 1, Offset: int32(cursor)})
+		if listerr != nil {
+			return fmt.Errorf("error listing from database: %w", listerr)
+		}
+
+		return nil
+	})
+
+	var total int64
+	wg.Go(func() error {
+		var counterr error
+		total, counterr = r.db.CountTotal(ctx)
+		if counterr != nil {
+			return fmt.Errorf("error fetching total count from database: %w", counterr)
+		}
+
+		return nil
+	})
+
+	err := wg.Wait()
+	if err != nil {
+		return nil, nil, fmt.Errorf("error from database: %w", err)
+	}
+
+	hasNext := len(dbModels) > count
+
+	var results []*modelT
+
+	if hasNext {
+		results = toRPCModels(dbModels[:len(dbModels)-1])
+	} else {
+		results = toRPCModels(dbModels)
 	}
 
 	return results, &cursorPkg.PageResult{
 		NextPage:   page + 1,
-		HasNext:    true,
-		TotalPages: 100,
+		HasNext:    hasNext,
+		TotalPages: total,
 	}, nil
 }
 
-func (s *Repo) ListByCursor(ctx context.Context, req cursorPkg.CursorRequest) ([]modelT, *cursorPkg.CursorResult, error) {
+func (r *Repo) ListByCursor(ctx context.Context, req cursorPkg.CursorRequest) ([]*modelT, *cursorPkg.CursorResult, error) {
 	cursor, count := cursorPkg.GetCursorOptions(req)
-	results := make([]modelT, 0, count)
-
-	for i := cursor + 1; i < cursor+1+int64(count); i++ {
-		results = append(results, getMake(i))
+	dbModels, err := r.db.ListOffset(ctx, dbModel.ListOffsetParams{Limit: int32(count), Offset: int32(cursor)})
+	if err != nil {
+		return nil, nil, fmt.Errorf("error fetching from database: %w", err)
 	}
 
-	nextPageCursor := results[len(results)-1].GetId()
+	results := toRPCModels(dbModels)
+
+	var nextPageCursor int64
+
+	if len(results) > 1 {
+		nextPageCursor = results[len(results)-1].GetId()
+	}
 
 	return results, &cursorPkg.CursorResult{
 		Cursor: nextPageCursor,
 	}, nil
 }
 
-func (s *Repo) GetOneByID(ctx context.Context, id int64) (modelT, error) {
-	if id == 404 {
-		return nil, status.Error(codes.NotFound, "not found")
+func (r *Repo) GetOneByID(ctx context.Context, id int64) (*modelT, error) {
+	dbResult, err := r.db.GetByID(ctx, id)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+
+		return nil, fmt.Errorf("error fetching from database: %w", err)
 	}
 
-	if id == 500 {
-		return nil, status.Error(codes.Unknown, "unknown")
-	}
-
-	return getMake(id), nil
-}
-
-func getMake(id int64) *rpc.Make {
-	ts := ptypes.TimestampNow()
-
-	return &rpc.Make{
-		Id:   id,
-		Name: fmt.Sprintf("Make #%v", id),
-
-		CreatedAt:  ts,
-		ModifiedAt: ts,
-	}
+	return toRPCModel(dbResult), nil
 }

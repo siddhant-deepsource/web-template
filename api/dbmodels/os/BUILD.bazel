@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "os",
+    srcs = [
+        "db.go",
+        "models.go",
+        "os.sql.go",
+        "querier.go",
+    ],
+    importpath = "github.com/rickypai/web-template/api/dbmodels/os",
+    visibility = ["//visibility:public"],
+)

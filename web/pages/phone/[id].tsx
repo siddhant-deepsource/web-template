@@ -41,6 +41,7 @@ const PhonePage = (props: GetOnePageProp<Phone.AsObject>): JSX.Element => {
   return (
     <Container defKey="1">
       <h1>{props.httpStatusCode}</h1>
+      <p>{props.error.message}</p>
     </Container>
   );
 };

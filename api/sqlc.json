@@ -1,0 +1,37 @@
+{
+  "version": "1",
+  "packages": [
+    {
+      "name": "make",
+      "engine": "postgresql",
+      "path": "dbmodels/make",
+      "schema": "schema/tables/make.sql",
+      "queries": "schema/queries/make.sql",
+      "emit_interface": true
+    },
+    {
+      "name": "phone",
+      "engine": "postgresql",
+      "path": "dbmodels/phone",
+      "schema": "schema/tables/phone.sql",
+      "queries": "schema/queries/phone.sql",
+      "emit_interface": true
+    },
+    {
+      "name": "app",
+      "engine": "postgresql",
+      "path": "dbmodels/app",
+      "schema": "schema/tables/app.sql",
+      "queries": "schema/queries/app.sql",
+      "emit_interface": true
+    },
+    {
+      "name": "os",
+      "engine": "postgresql",
+      "path": "dbmodels/os",
+      "schema": "schema/tables/os.sql",
+      "queries": "schema/queries/os.sql",
+      "emit_interface": true
+    }
+  ]
+}

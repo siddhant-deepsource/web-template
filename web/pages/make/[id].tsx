@@ -41,6 +41,7 @@ const MakePage = (props: GetOnePageProp<Make.AsObject>): JSX.Element => {
   return (
     <Container defKey="2">
       <h1>{props.httpStatusCode}</h1>
+      <p>{props.error.message}</p>
     </Container>
   );
 };
