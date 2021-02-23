@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, Alert } from "antd";
 import { TablePaginationConfig } from "antd/lib/table";
 import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 import Container from "../../components/container";
@@ -63,6 +63,7 @@ interface PhoneIndexState {
   data: Array<Phone.AsObject>;
   pagination: TablePaginationConfig;
   loading: boolean;
+  error?: Error;
 }
 
 class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
@@ -85,20 +86,28 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
   }
 
   fetchData = (pagination: TablePaginationConfig): void => {
-    this.setState({ loading: true });
+    this.setState({ loading: true, error: null });
 
     ListByPageClientSide<Phone.AsObject, Phone>(
       new ListByPageRequest(),
       pagination,
       PhoneServiceClient,
       "legit"
-    ).then((response: PageResult<Phone.AsObject>) => {
-      this.setState({
-        loading: false,
-        data: response.results,
-        pagination: response.pagination,
+    )
+      .then((response: PageResult<Phone.AsObject>) => {
+        this.setState({
+          loading: false,
+          data: response.results,
+          pagination: response.pagination,
+        });
+      })
+      .catch((e: Error) => {
+        this.setState({
+          loading: false,
+          error: e,
+        });
+        console.log(e);
       });
-    });
   };
 
   handleTableChange = (
@@ -115,6 +124,9 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
     return (
       <Container defKey="1">
         <SEO title="Phones" />
+        {this.state.error ? (
+          <Alert message={this.state.error.message} type="error" />
+        ) : null}
         <h1>Phones</h1>
         <Table<Phone.AsObject>
           columns={columns}

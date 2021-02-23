@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, Alert } from "antd";
 import { TablePaginationConfig } from "antd/lib/table";
 import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 import Container from "../../components/container";
@@ -10,9 +10,11 @@ import { ListByPageRequest } from "../../protobuf/os/os_service_pb";
 
 import { ListByPageClientSide, PageResult } from "../../components/listPage";
 
-const OSLink = (text: number, record: OS.AsObject): JSX.Element => (
-  <a href={`/os/${record.id}/`}>{text}</a>
-);
+const OSLink = (
+  text: string,
+  record: OS.AsObject,
+  index: number
+): JSX.Element => <a href={`/os/${record.id}/`}>{text}</a>;
 
 const columns = [
   {
@@ -38,6 +40,7 @@ interface OSIndexState {
   data: Array<OS.AsObject>;
   pagination: TablePaginationConfig;
   loading: boolean;
+  error?: Error;
 }
 
 class OSIndexPage extends React.Component<OSIndexProps, OSIndexState> {
@@ -60,20 +63,28 @@ class OSIndexPage extends React.Component<OSIndexProps, OSIndexState> {
   }
 
   fetchData = (pagination: TablePaginationConfig): void => {
-    this.setState({ loading: true });
+    this.setState({ loading: true, error: null });
 
     ListByPageClientSide<OS.AsObject, OS>(
       new ListByPageRequest(),
       pagination,
       OSServiceClient,
       "legit"
-    ).then((response: PageResult<OS.AsObject>) => {
-      this.setState({
-        loading: false,
-        data: response.results,
-        pagination: response.pagination,
+    )
+      .then((response: PageResult<OS.AsObject>) => {
+        this.setState({
+          loading: false,
+          data: response.results,
+          pagination: response.pagination,
+        });
+      })
+      .catch((e: Error) => {
+        this.setState({
+          loading: false,
+          error: e,
+        });
+        console.log(e);
       });
-    });
   };
 
   handleTableChange = (
@@ -88,8 +99,11 @@ class OSIndexPage extends React.Component<OSIndexProps, OSIndexState> {
   render(): JSX.Element {
     const { data, pagination, loading } = this.state;
     return (
-      <Container defKey="3">
+      <Container defKey="1">
         <SEO title="OSs" />
+        {this.state.error ? (
+          <Alert message={this.state.error.message} type="error" />
+        ) : null}
         <h1>OSs</h1>
         <Table<OS.AsObject>
           columns={columns}
