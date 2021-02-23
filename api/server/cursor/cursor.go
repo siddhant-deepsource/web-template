@@ -5,6 +5,10 @@ type CursorRequest interface {
 	GetCount() int64
 }
 
+type CursorResult struct {
+	Cursor int64
+}
+
 const (
 	defaultCount = 20
 	maxCount     = 100

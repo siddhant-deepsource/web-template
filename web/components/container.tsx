@@ -37,7 +37,13 @@ const Container = ({ defKey, children }: ContainerProp): JSX.Element => {
               <Link href="/">Home</Link>
             </Menu.Item>
             <Menu.Item key="1">
-              <Link href="/phone/">Phones</Link>
+              <Link href="/phone/">Phone</Link>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Link href="/make/">Make</Link>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Link href="/os/">OS</Link>
             </Menu.Item>
           </Menu>
         </div>

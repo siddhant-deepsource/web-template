@@ -1,0 +1,48 @@
+syntax = "proto3";
+package os;
+
+import "protobuf/os/os.proto";
+
+option go_package = "github.com/rickypai/web-template/api/protobuf/os";
+
+service OSService {
+  rpc GetOneByID(GetOneByIDRequest) returns (GetOneByIDResponse) {}
+  rpc ListByCursor(ListByCursorRequest) returns (ListByCursorResponse) {}
+  rpc ListByPage(ListByPageRequest) returns (ListByPageResponse) {}
+}
+
+message GetOneByIDRequest {
+  int64 id = 1;
+}
+
+message GetOneByIDResponse {
+  os.OS result = 1;
+}
+
+message ListByCursorRequest {
+  int64 cursor = 1;
+
+  int64 count = 2; // defaults to 20
+}
+
+message ListByCursorResponse {
+  repeated os.OS results = 1;
+
+  int64 cursor = 2;
+}
+
+message ListByPageRequest {
+  int64 page = 1;
+
+  int64 size = 2; // defaults to 20
+}
+
+message ListByPageResponse {
+  repeated os.OS results = 1;
+
+  int64 next_page = 2;
+
+  int64 total_pages = 3;
+
+  bool has_next = 4;
+}

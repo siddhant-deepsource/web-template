@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "repo",
+    srcs = ["repo.go"],
+    importpath = "github.com/rickypai/web-template/api/os-api/repo",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//api/server/cursor",
+        "//protobuf/os",
+        "@com_github_golang_protobuf//ptypes:go_default_library_gen",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+    ],
+)

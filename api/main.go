@@ -6,8 +6,12 @@ import (
 	"net/http"
 
 	"github.com/rickypai/web-template/api/extauth"
+	makeSrv "github.com/rickypai/web-template/api/make-api/server"
+	osSrv "github.com/rickypai/web-template/api/os-api/server"
+	phoneSrv "github.com/rickypai/web-template/api/phone-api/server"
+	"github.com/rickypai/web-template/api/protobuf/make"
+	"github.com/rickypai/web-template/api/protobuf/os"
 	"github.com/rickypai/web-template/api/protobuf/phone"
-	"github.com/rickypai/web-template/api/server"
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc"
 )
@@ -24,7 +28,9 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	phone.RegisterPhoneServiceServer(s, &server.Server{})
+	phone.RegisterPhoneServiceServer(s, phoneSrv.NewServer())
+	make.RegisterMakeServiceServer(s, makeSrv.NewServer())
+	os.RegisterOSServiceServer(s, osSrv.NewServer())
 
 	extAuth := extauth.NewExternalAuth()
 

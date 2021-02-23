@@ -4,25 +4,14 @@ import { TablePaginationConfig } from "antd/lib/table";
 import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 import Container from "../../components/container";
 import SEO from "../../components/seo";
-import PhoneServiceClient from "../../clients/grpc-web/phone_service_client";
-import { Phone } from "../../protobuf/phone/phone_pb";
-import { ListByPageRequest } from "../../protobuf/phone/phone_service_pb";
-import { Make } from "../../protobuf/make/make_pb";
+import OSServiceClient from "../../clients/grpc-web/os_service_client";
 import { OS } from "../../protobuf/os/os_pb";
+import { ListByPageRequest } from "../../protobuf/os/os_service_pb";
+
 import { ListByPageClientSide, PageResult } from "../../components/listPage";
 
-const PhoneLink = (
-  text: string,
-  record: Phone.AsObject,
-  index: number
-): JSX.Element => <a href={`/phone/${record.id}/`}>{text}</a>;
-
-const MakeLink = (record: Make.AsObject): JSX.Element => (
-  <a href={`/make/${record.id}/`}>{record.name}</a>
-);
-
-const OSLink = (record: OS.AsObject): JSX.Element => (
-  <a href={`/os/${record.id}/`}>{record.name}</a>
+const OSLink = (text: number, record: OS.AsObject): JSX.Element => (
+  <a href={`/os/${record.id}/`}>{text}</a>
 );
 
 const columns = [
@@ -30,26 +19,12 @@ const columns = [
     title: "ID",
     dataIndex: "id",
     sorter: true,
-    render: PhoneLink,
+    render: OSLink,
     width: "20%",
   },
   {
     title: "Name",
     dataIndex: "name",
-    sorter: true,
-    render: PhoneLink,
-    width: "20%",
-  },
-  {
-    title: "Make",
-    dataIndex: "make",
-    sorter: true,
-    render: MakeLink,
-    width: "20%",
-  },
-  {
-    title: "OS",
-    dataIndex: "os",
     sorter: true,
     render: OSLink,
     width: "20%",
@@ -57,16 +32,16 @@ const columns = [
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface PhoneIndexProps {}
+interface OSIndexProps {}
 
-interface PhoneIndexState {
-  data: Array<Phone.AsObject>;
+interface OSIndexState {
+  data: Array<OS.AsObject>;
   pagination: TablePaginationConfig;
   loading: boolean;
 }
 
-class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
-  constructor(props: PhoneIndexProps) {
+class OSIndexPage extends React.Component<OSIndexProps, OSIndexState> {
+  constructor(props: OSIndexProps) {
     super(props);
 
     this.state = {
@@ -87,12 +62,12 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
   fetchData = (pagination: TablePaginationConfig): void => {
     this.setState({ loading: true });
 
-    ListByPageClientSide<Phone.AsObject, Phone>(
+    ListByPageClientSide<OS.AsObject, OS>(
       new ListByPageRequest(),
       pagination,
-      PhoneServiceClient,
+      OSServiceClient,
       "legit"
-    ).then((response: PageResult<Phone.AsObject>) => {
+    ).then((response: PageResult<OS.AsObject>) => {
       this.setState({
         loading: false,
         data: response.results,
@@ -104,8 +79,8 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
   handleTableChange = (
     pagination: TablePaginationConfig,
     filters: Record<string, (React.Key | boolean)[] | null>,
-    sorter: SorterResult<Phone.AsObject> | SorterResult<Phone.AsObject>[],
-    extra: TableCurrentDataSource<Phone.AsObject>
+    sorter: SorterResult<OS.AsObject> | SorterResult<OS.AsObject>[],
+    extra: TableCurrentDataSource<OS.AsObject>
   ): void => {
     this.fetchData(pagination);
   };
@@ -113,10 +88,10 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
   render(): JSX.Element {
     const { data, pagination, loading } = this.state;
     return (
-      <Container defKey="1">
-        <SEO title="Phones" />
-        <h1>Phones</h1>
-        <Table<Phone.AsObject>
+      <Container defKey="3">
+        <SEO title="OSs" />
+        <h1>OSs</h1>
+        <Table<OS.AsObject>
           columns={columns}
           rowKey={(record) => record.id}
           dataSource={data}
@@ -129,4 +104,4 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
   }
 }
 
-export default PhoneIndexPage;
+export default OSIndexPage;
