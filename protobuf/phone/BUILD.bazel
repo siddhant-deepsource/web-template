@@ -6,7 +6,7 @@ proto_library(
     name = "phone_proto",
     srcs = [
         "phone.proto",
-        "phone_service.proto",
+        "phone_reader.proto",
     ],
     visibility = ["//visibility:public"],
     deps = [

@@ -4,9 +4,9 @@ import { TablePaginationConfig } from "antd/lib/table";
 import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 import Container from "../../components/container";
 import SEO from "../../components/seo";
-import PhoneServiceClient from "../../clients/grpc-web/phone_service_client";
+import PhoneReaderClient from "../../clients/grpc-web/phone_service_client";
 import { Phone } from "../../protobuf/phone/phone_pb";
-import { ListByPageRequest } from "../../protobuf/phone/phone_service_pb";
+import { ListByPageRequest } from "../../protobuf/phone/phone_reader_pb";
 import { Make } from "../../protobuf/make/make_pb";
 import { OS } from "../../protobuf/os/os_pb";
 import { ListByPageClientSide, PageResult } from "../../components/listPage";
@@ -91,7 +91,7 @@ class PhoneIndexPage extends React.Component<PhoneIndexProps, PhoneIndexState> {
     ListByPageClientSide<Phone.AsObject, Phone>(
       new ListByPageRequest(),
       pagination,
-      PhoneServiceClient,
+      PhoneReaderClient,
       "legit"
     )
       .then((response: PageResult<Phone.AsObject>) => {

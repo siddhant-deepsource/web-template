@@ -17,7 +17,7 @@ import (
 // this is as close as we can get without generics. Just modify this one line to change the model in question
 type (
 	modelT = *rpc.Phone
-	rpcT   = rpc.UnimplementedPhoneServiceServer
+	rpcT   = rpc.UnimplementedPhoneReaderServer
 )
 
 const (
@@ -33,7 +33,7 @@ type modelTReader interface {
 	ListByCursor(context.Context, cursor.CursorRequest) ([]modelT, *cursor.CursorResult, error)
 }
 
-func NewServer(db *sql.DB, makeClient makePb.MakeServiceClient, osClient osPb.OSServiceClient) *Server {
+func NewServer(db *sql.DB, makeClient makePb.MakeReaderClient, osClient osPb.OSReaderClient) *Server {
 	return &Server{
 		repo: repo.NewHydratedRepo(db, makeClient, osClient),
 	}

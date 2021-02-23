@@ -1,5 +1,5 @@
-import { MakeServiceClient as MakeServiceClientGrpc } from "../../protobuf/make/Make_serviceServiceClientPb";
+import { MakeReaderClient as MakeReaderClientGrpc } from "../../protobuf/make/Make_readerServiceClientPb";
 
-const MakeServiceClient = new MakeServiceClientGrpc("http://localhost:8080");
+const MakeReaderClient = new MakeReaderClientGrpc("http://localhost:8080");
 
-export default MakeServiceClient;
+export default MakeReaderClient;

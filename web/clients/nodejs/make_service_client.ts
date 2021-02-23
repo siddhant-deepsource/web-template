@@ -1,14 +1,14 @@
 import * as grpc from "@grpc/grpc-js";
-import { MakeServiceClient as MakeServiceClientGrpc } from "../../protobuf/make/make_service_grpc_pb";
+import { MakeReaderClient as MakeReaderClientGrpc } from "../../protobuf/make/make_reader_grpc_pb";
 
 // const grpc = require('@grpc/grpc-js');
 
-const MakeServiceClient = new MakeServiceClientGrpc(
+const MakeReaderClient = new MakeReaderClientGrpc(
   "localhost:8080",
   grpc.credentials.createInsecure()
 );
 
-export default MakeServiceClient;
+export default MakeReaderClient;
 
 // function promisifyAll(client) {
 //   const to = {};

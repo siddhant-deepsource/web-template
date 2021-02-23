@@ -1,5 +1,5 @@
-import { PhoneServiceClient as PhoneServiceClientGrpc } from "../../protobuf/phone/Phone_serviceServiceClientPb";
+import { PhoneReaderClient as PhoneReaderClientGrpc } from "../../protobuf/phone/Phone_readerServiceClientPb";
 
-const PhoneServiceClient = new PhoneServiceClientGrpc("http://localhost:8080");
+const PhoneReaderClient = new PhoneReaderClientGrpc("http://localhost:8080");
 
-export default PhoneServiceClient;
+export default PhoneReaderClient;

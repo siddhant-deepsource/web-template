@@ -8,16 +8,16 @@ import (
 	"google.golang.org/grpc"
 )
 
-func NewMakeAPIClient() (rpc.MakeServiceClient, error) {
+func NewMakeReaderClient() (rpc.MakeReaderClient, error) {
 	opts := []grpc.DialOption{
 		grpc.WithInsecure(),
 	}
 
-	conn, err := grpc.Dial(address.MakeAPIAddress, opts...)
+	conn, err := grpc.Dial(address.MakeReaderAddress, opts...)
 	if err != nil {
-		return nil, fmt.Errorf("error dialing %s: %w", address.MakeAPIAddress, err)
+		return nil, fmt.Errorf("error dialing %s: %w", address.MakeReaderAddress, err)
 	}
 	defer conn.Close()
 
-	return rpc.NewMakeServiceClient(conn), nil
+	return rpc.NewMakeReaderClient(conn), nil
 }

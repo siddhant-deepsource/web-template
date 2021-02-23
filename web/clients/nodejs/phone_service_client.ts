@@ -1,14 +1,14 @@
 import * as grpc from "@grpc/grpc-js";
-import { PhoneServiceClient as PhoneServiceClientGrpc } from "../../protobuf/phone/phone_service_grpc_pb";
+import { PhoneReaderClient as PhoneReaderClientGrpc } from "../../protobuf/phone/phone_reader_grpc_pb";
 
 // const grpc = require('@grpc/grpc-js');
 
-const PhoneServiceClient = new PhoneServiceClientGrpc(
+const PhoneReaderClient = new PhoneReaderClientGrpc(
   "localhost:8080",
   grpc.credentials.createInsecure()
 );
 
-export default PhoneServiceClient;
+export default PhoneReaderClient;
 
 // function promisifyAll(client) {
 //   const to = {};

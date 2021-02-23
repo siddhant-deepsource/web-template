@@ -4,9 +4,9 @@ import { TablePaginationConfig } from "antd/lib/table";
 import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 import Container from "../../components/container";
 import SEO from "../../components/seo";
-import OSServiceClient from "../../clients/grpc-web/os_service_client";
+import OSReaderClient from "../../clients/grpc-web/os_service_client";
 import { OS } from "../../protobuf/os/os_pb";
-import { ListByPageRequest } from "../../protobuf/os/os_service_pb";
+import { ListByPageRequest } from "../../protobuf/os/os_reader_pb";
 
 import { ListByPageClientSide, PageResult } from "../../components/listPage";
 
@@ -68,7 +68,7 @@ class OSIndexPage extends React.Component<OSIndexProps, OSIndexState> {
     ListByPageClientSide<OS.AsObject, OS>(
       new ListByPageRequest(),
       pagination,
-      OSServiceClient,
+      OSReaderClient,
       "legit"
     )
       .then((response: PageResult<OS.AsObject>) => {

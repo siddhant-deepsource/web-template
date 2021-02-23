@@ -3,9 +3,9 @@ import { StatusCode } from "grpc-web";
 import Container from "../../components/container";
 import SEO from "../../components/seo";
 import Custom404 from "../404";
-import { GetOneByIDRequest } from "../../protobuf/make/make_service_pb";
+import { GetOneByIDRequest } from "../../protobuf/make/make_reader_pb";
 import { Make } from "../../protobuf/make/make_pb";
-import MakeServiceClient from "../../clients/nodejs/make_service_client";
+import MakeReaderClient from "../../clients/nodejs/make_service_client";
 import MakeComponent from "../../components/make";
 import {
   GetOneByIDServerSide,
@@ -16,7 +16,7 @@ import {
 export const getServerSideProps: GetServerSideFunc<Make.AsObject> = GetOneByIDServerSide<
   Make.AsObject,
   Make
->(new GetOneByIDRequest(), MakeServiceClient, "legit");
+>(new GetOneByIDRequest(), MakeReaderClient, "legit");
 
 const MakePage = (props: GetOnePageProp<Make.AsObject>): JSX.Element => {
   if (props.result) {

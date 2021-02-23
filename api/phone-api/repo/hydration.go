@@ -10,11 +10,11 @@ import (
 )
 
 type Hydrator struct {
-	makeClient makePb.MakeServiceClient
-	osClient   osPb.OSServiceClient
+	makeClient makePb.MakeReaderClient
+	osClient   osPb.OSReaderClient
 }
 
-func NewHydrator(makeClient makePb.MakeServiceClient, osClient osPb.OSServiceClient) *Hydrator {
+func NewHydrator(makeClient makePb.MakeReaderClient, osClient osPb.OSReaderClient) *Hydrator {
 	return &Hydrator{
 		makeClient: makeClient,
 		osClient:   osClient,

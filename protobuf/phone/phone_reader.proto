@@ -1,11 +1,11 @@
 syntax = "proto3";
-package make;
+package phone;
 
-import "protobuf/make/make.proto";
+import "protobuf/phone/phone.proto";
 
-option go_package = "github.com/rickypai/web-template/api/protobuf/make";
+option go_package = "github.com/rickypai/web-template/api/protobuf/phone";
 
-service MakeService {
+service PhoneReader {
   rpc GetOneByID(GetOneByIDRequest) returns (GetOneByIDResponse) {}
   rpc GetManyByIDs(GetManyByIDsRequest) returns (GetManyByIDsResponse) {}
   rpc ListByCursor(ListByCursorRequest) returns (ListByCursorResponse) {}
@@ -17,7 +17,7 @@ message GetOneByIDRequest {
 }
 
 message GetOneByIDResponse {
-  make.Make result = 1;
+  phone.Phone result = 1;
 }
 
 message GetManyByIDsRequest {
@@ -25,7 +25,7 @@ message GetManyByIDsRequest {
 }
 
 message GetManyByIDsResponse {
-  repeated make.Make results = 1;
+  repeated phone.Phone results = 1;
 }
 
 message ListByCursorRequest {
@@ -35,7 +35,7 @@ message ListByCursorRequest {
 }
 
 message ListByCursorResponse {
-  repeated make.Make results = 1;
+  repeated phone.Phone results = 1;
 
   int64 cursor = 2;
 }
@@ -47,7 +47,7 @@ message ListByPageRequest {
 }
 
 message ListByPageResponse {
-  repeated make.Make results = 1;
+  repeated phone.Phone results = 1;
 
   int64 next_page = 2;
 

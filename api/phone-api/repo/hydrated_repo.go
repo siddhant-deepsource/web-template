@@ -15,7 +15,7 @@ type HydratedRepo struct {
 	hydrator *Hydrator
 }
 
-func NewHydratedRepo(db *sql.DB, makeClient makePb.MakeServiceClient, osClient osPb.OSServiceClient) *HydratedRepo {
+func NewHydratedRepo(db *sql.DB, makeClient makePb.MakeReaderClient, osClient osPb.OSReaderClient) *HydratedRepo {
 	return &HydratedRepo{
 		repo:     NewRepo(db),
 		hydrator: NewHydrator(makeClient, osClient),

@@ -1,5 +1,5 @@
-import { OSServiceClient as OSServiceClientGrpc } from "../../protobuf/os/Os_serviceServiceClientPb";
+import { OSReaderClient as OSReaderClientGrpc } from "../../protobuf/os/Os_readerServiceClientPb";
 
-const OSServiceClient = new OSServiceClientGrpc("http://localhost:8080");
+const OSReaderClient = new OSReaderClientGrpc("http://localhost:8080");
 
-export default OSServiceClient;
+export default OSReaderClient;

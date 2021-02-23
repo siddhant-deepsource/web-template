@@ -13,10 +13,10 @@
 
 import * as grpcWeb from 'grpc-web';
 
-import * as protobuf_os_os_service_pb from '../../protobuf/os/os_service_pb';
+import * as protobuf_os_os_reader_pb from '../../protobuf/os/os_reader_pb';
 
 
-export class OSServiceClient {
+export class OSReaderClient {
   client_: grpcWeb.AbstractClientBase;
   hostname_: string;
   credentials_: null | { [index: string]: string; };
@@ -36,32 +36,32 @@ export class OSServiceClient {
   }
 
   methodInfoGetOneByID = new grpcWeb.AbstractClientBase.MethodInfo(
-    protobuf_os_os_service_pb.GetOneByIDResponse,
-    (request: protobuf_os_os_service_pb.GetOneByIDRequest) => {
+    protobuf_os_os_reader_pb.GetOneByIDResponse,
+    (request: protobuf_os_os_reader_pb.GetOneByIDRequest) => {
       return request.serializeBinary();
     },
-    protobuf_os_os_service_pb.GetOneByIDResponse.deserializeBinary
+    protobuf_os_os_reader_pb.GetOneByIDResponse.deserializeBinary
   );
 
   getOneByID(
-    request: protobuf_os_os_service_pb.GetOneByIDRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protobuf_os_os_service_pb.GetOneByIDResponse>;
+    request: protobuf_os_os_reader_pb.GetOneByIDRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_os_os_reader_pb.GetOneByIDResponse>;
 
   getOneByID(
-    request: protobuf_os_os_service_pb.GetOneByIDRequest,
+    request: protobuf_os_os_reader_pb.GetOneByIDRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: protobuf_os_os_service_pb.GetOneByIDResponse) => void): grpcWeb.ClientReadableStream<protobuf_os_os_service_pb.GetOneByIDResponse>;
+               response: protobuf_os_os_reader_pb.GetOneByIDResponse) => void): grpcWeb.ClientReadableStream<protobuf_os_os_reader_pb.GetOneByIDResponse>;
 
   getOneByID(
-    request: protobuf_os_os_service_pb.GetOneByIDRequest,
+    request: protobuf_os_os_reader_pb.GetOneByIDRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.Error,
-               response: protobuf_os_os_service_pb.GetOneByIDResponse) => void) {
+               response: protobuf_os_os_reader_pb.GetOneByIDResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/os.OSService/GetOneByID',
+          '/os.OSReader/GetOneByID',
         request,
         metadata || {},
         this.methodInfoGetOneByID,
@@ -69,39 +69,39 @@ export class OSServiceClient {
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/os.OSService/GetOneByID',
+      '/os.OSReader/GetOneByID',
     request,
     metadata || {},
     this.methodInfoGetOneByID);
   }
 
   methodInfoGetManyByIDs = new grpcWeb.AbstractClientBase.MethodInfo(
-    protobuf_os_os_service_pb.GetManyByIDsResponse,
-    (request: protobuf_os_os_service_pb.GetManyByIDsRequest) => {
+    protobuf_os_os_reader_pb.GetManyByIDsResponse,
+    (request: protobuf_os_os_reader_pb.GetManyByIDsRequest) => {
       return request.serializeBinary();
     },
-    protobuf_os_os_service_pb.GetManyByIDsResponse.deserializeBinary
+    protobuf_os_os_reader_pb.GetManyByIDsResponse.deserializeBinary
   );
 
   getManyByIDs(
-    request: protobuf_os_os_service_pb.GetManyByIDsRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protobuf_os_os_service_pb.GetManyByIDsResponse>;
+    request: protobuf_os_os_reader_pb.GetManyByIDsRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_os_os_reader_pb.GetManyByIDsResponse>;
 
   getManyByIDs(
-    request: protobuf_os_os_service_pb.GetManyByIDsRequest,
+    request: protobuf_os_os_reader_pb.GetManyByIDsRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: protobuf_os_os_service_pb.GetManyByIDsResponse) => void): grpcWeb.ClientReadableStream<protobuf_os_os_service_pb.GetManyByIDsResponse>;
+               response: protobuf_os_os_reader_pb.GetManyByIDsResponse) => void): grpcWeb.ClientReadableStream<protobuf_os_os_reader_pb.GetManyByIDsResponse>;
 
   getManyByIDs(
-    request: protobuf_os_os_service_pb.GetManyByIDsRequest,
+    request: protobuf_os_os_reader_pb.GetManyByIDsRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.Error,
-               response: protobuf_os_os_service_pb.GetManyByIDsResponse) => void) {
+               response: protobuf_os_os_reader_pb.GetManyByIDsResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/os.OSService/GetManyByIDs',
+          '/os.OSReader/GetManyByIDs',
         request,
         metadata || {},
         this.methodInfoGetManyByIDs,
@@ -109,39 +109,39 @@ export class OSServiceClient {
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/os.OSService/GetManyByIDs',
+      '/os.OSReader/GetManyByIDs',
     request,
     metadata || {},
     this.methodInfoGetManyByIDs);
   }
 
   methodInfoListByCursor = new grpcWeb.AbstractClientBase.MethodInfo(
-    protobuf_os_os_service_pb.ListByCursorResponse,
-    (request: protobuf_os_os_service_pb.ListByCursorRequest) => {
+    protobuf_os_os_reader_pb.ListByCursorResponse,
+    (request: protobuf_os_os_reader_pb.ListByCursorRequest) => {
       return request.serializeBinary();
     },
-    protobuf_os_os_service_pb.ListByCursorResponse.deserializeBinary
+    protobuf_os_os_reader_pb.ListByCursorResponse.deserializeBinary
   );
 
   listByCursor(
-    request: protobuf_os_os_service_pb.ListByCursorRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protobuf_os_os_service_pb.ListByCursorResponse>;
+    request: protobuf_os_os_reader_pb.ListByCursorRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_os_os_reader_pb.ListByCursorResponse>;
 
   listByCursor(
-    request: protobuf_os_os_service_pb.ListByCursorRequest,
+    request: protobuf_os_os_reader_pb.ListByCursorRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: protobuf_os_os_service_pb.ListByCursorResponse) => void): grpcWeb.ClientReadableStream<protobuf_os_os_service_pb.ListByCursorResponse>;
+               response: protobuf_os_os_reader_pb.ListByCursorResponse) => void): grpcWeb.ClientReadableStream<protobuf_os_os_reader_pb.ListByCursorResponse>;
 
   listByCursor(
-    request: protobuf_os_os_service_pb.ListByCursorRequest,
+    request: protobuf_os_os_reader_pb.ListByCursorRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.Error,
-               response: protobuf_os_os_service_pb.ListByCursorResponse) => void) {
+               response: protobuf_os_os_reader_pb.ListByCursorResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/os.OSService/ListByCursor',
+          '/os.OSReader/ListByCursor',
         request,
         metadata || {},
         this.methodInfoListByCursor,
@@ -149,39 +149,39 @@ export class OSServiceClient {
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/os.OSService/ListByCursor',
+      '/os.OSReader/ListByCursor',
     request,
     metadata || {},
     this.methodInfoListByCursor);
   }
 
   methodInfoListByPage = new grpcWeb.AbstractClientBase.MethodInfo(
-    protobuf_os_os_service_pb.ListByPageResponse,
-    (request: protobuf_os_os_service_pb.ListByPageRequest) => {
+    protobuf_os_os_reader_pb.ListByPageResponse,
+    (request: protobuf_os_os_reader_pb.ListByPageRequest) => {
       return request.serializeBinary();
     },
-    protobuf_os_os_service_pb.ListByPageResponse.deserializeBinary
+    protobuf_os_os_reader_pb.ListByPageResponse.deserializeBinary
   );
 
   listByPage(
-    request: protobuf_os_os_service_pb.ListByPageRequest,
-    metadata: grpcWeb.Metadata | null): Promise<protobuf_os_os_service_pb.ListByPageResponse>;
+    request: protobuf_os_os_reader_pb.ListByPageRequest,
+    metadata: grpcWeb.Metadata | null): Promise<protobuf_os_os_reader_pb.ListByPageResponse>;
 
   listByPage(
-    request: protobuf_os_os_service_pb.ListByPageRequest,
+    request: protobuf_os_os_reader_pb.ListByPageRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.Error,
-               response: protobuf_os_os_service_pb.ListByPageResponse) => void): grpcWeb.ClientReadableStream<protobuf_os_os_service_pb.ListByPageResponse>;
+               response: protobuf_os_os_reader_pb.ListByPageResponse) => void): grpcWeb.ClientReadableStream<protobuf_os_os_reader_pb.ListByPageResponse>;
 
   listByPage(
-    request: protobuf_os_os_service_pb.ListByPageRequest,
+    request: protobuf_os_os_reader_pb.ListByPageRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.Error,
-               response: protobuf_os_os_service_pb.ListByPageResponse) => void) {
+               response: protobuf_os_os_reader_pb.ListByPageResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/os.OSService/ListByPage',
+          '/os.OSReader/ListByPage',
         request,
         metadata || {},
         this.methodInfoListByPage,
@@ -189,7 +189,7 @@ export class OSServiceClient {
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/os.OSService/ListByPage',
+      '/os.OSReader/ListByPage',
     request,
     metadata || {},
     this.methodInfoListByPage);

@@ -6,7 +6,7 @@ proto_library(
     name = "os_proto",
     srcs = [
         "os.proto",
-        "os_service.proto",
+        "os_reader.proto",
     ],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:timestamp_proto"],

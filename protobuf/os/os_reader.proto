@@ -5,7 +5,7 @@ import "protobuf/os/os.proto";
 
 option go_package = "github.com/rickypai/web-template/api/protobuf/os";
 
-service OSService {
+service OSReader {
   rpc GetOneByID(GetOneByIDRequest) returns (GetOneByIDResponse) {}
   rpc GetManyByIDs(GetManyByIDsRequest) returns (GetManyByIDsResponse) {}
   rpc ListByCursor(ListByCursorRequest) returns (ListByCursorResponse) {}

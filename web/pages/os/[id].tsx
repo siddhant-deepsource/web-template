@@ -3,9 +3,9 @@ import { StatusCode } from "grpc-web";
 import Container from "../../components/container";
 import SEO from "../../components/seo";
 import Custom404 from "../404";
-import { GetOneByIDRequest } from "../../protobuf/os/os_service_pb";
+import { GetOneByIDRequest } from "../../protobuf/os/os_reader_pb";
 import { OS } from "../../protobuf/os/os_pb";
-import OSServiceClient from "../../clients/nodejs/os_service_client";
+import OSReaderClient from "../../clients/nodejs/os_service_client";
 import OSComponent from "../../components/os";
 import {
   GetOneByIDServerSide,
@@ -16,7 +16,7 @@ import {
 export const getServerSideProps: GetServerSideFunc<OS.AsObject> = GetOneByIDServerSide<
   OS.AsObject,
   OS
->(new GetOneByIDRequest(), OSServiceClient, "legit");
+>(new GetOneByIDRequest(), OSReaderClient, "legit");
 
 const OSPage = (props: GetOnePageProp<OS.AsObject>): JSX.Element => {
   if (props.result) {

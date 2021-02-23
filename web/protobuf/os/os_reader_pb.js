@@ -1,4 +1,4 @@
-// source: protobuf/os/os_service.proto
+// source: protobuf/os/os_reader.proto
 /**
  * @fileoverview
  * @enhanceable

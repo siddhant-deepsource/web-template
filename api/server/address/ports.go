@@ -7,18 +7,18 @@ const (
 	GeneralAPIAddress = GeneralAPIFQDN + ":" + GeneralAPIPortStr
 
 	// all the services have the same port value for now
-	MakeAPIFQDN    = GeneralAPIFQDN
-	MakeAPIPort    = GeneralAPIPort
-	MakeAPIPortStr = GeneralAPIPortStr
-	MakeAPIAddress = GeneralAPIAddress
+	MakeReaderFQDN    = GeneralAPIFQDN
+	MakeReaderPort    = GeneralAPIPort
+	MakeReaderPortStr = GeneralAPIPortStr
+	MakeReaderAddress = GeneralAPIAddress
 
-	OSAPIFQDN    = GeneralAPIFQDN
-	OSAPIPort    = GeneralAPIPort
-	OSAPIPortStr = GeneralAPIPortStr
-	OSAPIAddress = GeneralAPIAddress
+	OSReaderFQDN    = GeneralAPIFQDN
+	OSReaderPort    = GeneralAPIPort
+	OSReaderPortStr = GeneralAPIPortStr
+	OSReaderAddress = GeneralAPIAddress
 
-	PhoneAPIFQDN    = GeneralAPIFQDN
-	PhoneAPIPort    = GeneralAPIPort
-	PhoneAPIPortStr = GeneralAPIPortStr
-	PhoneAPIAddress = GeneralAPIAddress
+	PhoneReaderFQDN    = GeneralAPIFQDN
+	PhoneReaderPort    = GeneralAPIPort
+	PhoneReaderPortStr = GeneralAPIPortStr
+	PhoneReaderAddress = GeneralAPIAddress
 )
