@@ -3,6 +3,8 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "repo",
     srcs = [
+        "hydrated_repo.go",
+        "hydration.go",
         "repo.go",
         "translations.go",
     ],
@@ -14,7 +16,6 @@ go_library(
         "//protobuf/make",
         "//protobuf/os",
         "//protobuf/phone",
-        "@com_github_golang_protobuf//ptypes:go_default_library_gen",
         "@org_golang_google_protobuf//types/known/timestamppb",
         "@org_golang_x_sync//errgroup",
     ],

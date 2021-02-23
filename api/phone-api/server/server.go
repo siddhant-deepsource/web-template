@@ -6,6 +6,8 @@ import (
 	"fmt"
 
 	"github.com/rickypai/web-template/api/phone-api/repo"
+	makePb "github.com/rickypai/web-template/api/protobuf/make"
+	osPb "github.com/rickypai/web-template/api/protobuf/os"
 	rpc "github.com/rickypai/web-template/api/protobuf/phone"
 	"github.com/rickypai/web-template/api/server/cursor"
 	"google.golang.org/grpc/codes"
@@ -30,9 +32,9 @@ type modelTReader interface {
 	ListByCursor(context.Context, cursor.CursorRequest) ([]modelT, *cursor.CursorResult, error)
 }
 
-func NewServer(db *sql.DB) *Server {
+func NewServer(db *sql.DB, makeClient makePb.MakeServiceClient, osClient osPb.OSServiceClient) *Server {
 	return &Server{
-		repo: repo.NewRepo(db),
+		repo: repo.NewHydratedRepo(db, makeClient, osClient),
 	}
 }
 

@@ -6,6 +6,8 @@ import (
 	"net"
 	"net/http"
 
+	makeCl "github.com/rickypai/web-template/api/clients/make-api"
+	osCl "github.com/rickypai/web-template/api/clients/os-api"
 	"github.com/rickypai/web-template/api/config"
 	"github.com/rickypai/web-template/api/extauth"
 	makeSrv "github.com/rickypai/web-template/api/make-api/server"
@@ -14,17 +16,17 @@ import (
 	"github.com/rickypai/web-template/api/protobuf/make"
 	"github.com/rickypai/web-template/api/protobuf/os"
 	"github.com/rickypai/web-template/api/protobuf/phone"
+	"github.com/rickypai/web-template/api/server/address"
 	"golang.org/x/sync/errgroup"
 	"google.golang.org/grpc"
 )
 
 const (
-	grpcPort = ":50051"
 	httpPort = ":50052"
 )
 
 func main() {
-	lis, err := net.Listen("tcp", grpcPort)
+	lis, err := net.Listen("tcp", address.GeneralAPIAddress)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -36,8 +38,11 @@ func main() {
 		log.Fatalf("connecting to database: %v", err)
 	}
 
+	makeClient := makeCl.NewMakeAPILocalServer(db)
+	osClient := osCl.NewOSAPILocalServer(db)
+
 	s := grpc.NewServer()
-	phone.RegisterPhoneServiceServer(s, phoneSrv.NewServer(db))
+	phone.RegisterPhoneServiceServer(s, phoneSrv.NewServer(db, makeClient, osClient))
 	make.RegisterMakeServiceServer(s, makeSrv.NewServer(db))
 	os.RegisterOSServiceServer(s, osSrv.NewServer(db))
 
@@ -45,7 +50,7 @@ func main() {
 
 	g, _ := errgroup.WithContext(ctx)
 	g.Go(func() error {
-		log.Printf("listening gRPC on %s", grpcPort)
+		log.Printf("listening gRPC on %s", address.GeneralAPIAddress)
 		return s.Serve(lis)
 	})
 
