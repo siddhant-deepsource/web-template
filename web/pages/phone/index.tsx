@@ -4,7 +4,7 @@ import { TablePaginationConfig } from "antd/lib/table";
 import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 import Container from "../../components/container";
 import SEO from "../../components/seo";
-import PhoneReaderClient from "../../clients/grpc-web/phone_service_client";
+import PhoneReaderClient from "../../clients/grpc-web/phone_reader_client";
 import { Phone } from "../../protobuf/phone/phone_pb";
 import { ListByPageRequest } from "../../protobuf/phone/phone_reader_pb";
 import { Make } from "../../protobuf/make/make_pb";

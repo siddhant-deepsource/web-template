@@ -5,7 +5,7 @@ import SEO from "../../components/seo";
 import Custom404 from "../404";
 import { GetOneByIDRequest } from "../../protobuf/make/make_reader_pb";
 import { Make } from "../../protobuf/make/make_pb";
-import MakeReaderClient from "../../clients/nodejs/make_service_client";
+import MakeReaderClient from "../../clients/nodejs/make_reader_client";
 import MakeComponent from "../../components/make";
 import {
   GetOneByIDServerSide,

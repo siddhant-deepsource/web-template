@@ -5,7 +5,7 @@ import SEO from "../../components/seo";
 import Custom404 from "../404";
 import { GetOneByIDRequest } from "../../protobuf/phone/phone_reader_pb";
 import { Phone } from "../../protobuf/phone/phone_pb";
-import PhoneReaderClient from "../../clients/nodejs/phone_service_client";
+import PhoneReaderClient from "../../clients/nodejs/phone_reader_client";
 import PhoneComponent from "../../components/phone";
 import {
   GetOneByIDServerSide,

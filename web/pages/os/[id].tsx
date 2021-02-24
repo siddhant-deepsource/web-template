@@ -5,7 +5,7 @@ import SEO from "../../components/seo";
 import Custom404 from "../404";
 import { GetOneByIDRequest } from "../../protobuf/os/os_reader_pb";
 import { OS } from "../../protobuf/os/os_pb";
-import OSReaderClient from "../../clients/nodejs/os_service_client";
+import OSReaderClient from "../../clients/nodejs/os_reader_client";
 import OSComponent from "../../components/os";
 import {
   GetOneByIDServerSide,
