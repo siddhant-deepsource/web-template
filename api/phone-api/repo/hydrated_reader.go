@@ -10,19 +10,19 @@ import (
 	cursorPkg "github.com/rickypai/web-template/api/server/cursor"
 )
 
-type HydratedRepo struct {
-	repo     *Repo
+type HydratedReader struct {
+	repo     *Reader
 	hydrator *Hydrator
 }
 
-func NewHydratedRepo(db *sql.DB, makeClient makePb.MakeReaderClient, osClient osPb.OSReaderClient) *HydratedRepo {
-	return &HydratedRepo{
-		repo:     NewRepo(db),
+func NewHydratedReader(db *sql.DB, makeClient makePb.MakeReaderClient, osClient osPb.OSReaderClient) *HydratedReader {
+	return &HydratedReader{
+		repo:     NewReader(db),
 		hydrator: NewHydrator(makeClient, osClient),
 	}
 }
 
-func (r *HydratedRepo) ListByPage(ctx context.Context, req cursorPkg.PageRequest) ([]*modelT, *cursorPkg.PageResult, error) {
+func (r *HydratedReader) ListByPage(ctx context.Context, req cursorPkg.PageRequest) ([]*modelT, *cursorPkg.PageResult, error) {
 	results, pageResult, err := r.repo.ListByPage(ctx, req)
 	if err != nil {
 		return nil, nil, err
@@ -36,7 +36,7 @@ func (r *HydratedRepo) ListByPage(ctx context.Context, req cursorPkg.PageRequest
 	return results, pageResult, nil
 }
 
-func (r *HydratedRepo) ListByCursor(ctx context.Context, req cursorPkg.CursorRequest) ([]*modelT, *cursorPkg.CursorResult, error) {
+func (r *HydratedReader) ListByCursor(ctx context.Context, req cursorPkg.CursorRequest) ([]*modelT, *cursorPkg.CursorResult, error) {
 	results, cursorResult, err := r.repo.ListByCursor(ctx, req)
 	if err != nil {
 		return nil, nil, err
@@ -50,7 +50,7 @@ func (r *HydratedRepo) ListByCursor(ctx context.Context, req cursorPkg.CursorReq
 	return results, cursorResult, nil
 }
 
-func (r *HydratedRepo) GetOneByID(ctx context.Context, id int64) (*modelT, error) {
+func (r *HydratedReader) GetOneByID(ctx context.Context, id int64) (*modelT, error) {
 	result, err := r.repo.GetOneByID(ctx, id)
 	if err != nil {
 		return nil, err
@@ -64,7 +64,7 @@ func (r *HydratedRepo) GetOneByID(ctx context.Context, id int64) (*modelT, error
 	return result, nil
 }
 
-func (r *HydratedRepo) GetManyByIDs(ctx context.Context, ids []int64) ([]*modelT, error) {
+func (r *HydratedReader) GetManyByIDs(ctx context.Context, ids []int64) ([]*modelT, error) {
 	if len(ids) == 0 {
 		return nil, nil
 	}

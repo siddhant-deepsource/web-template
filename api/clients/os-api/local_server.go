@@ -9,28 +9,28 @@ import (
 	"google.golang.org/grpc"
 )
 
-func NewOSReaderLocalServer(db *sql.DB) rpc.OSReaderClient {
-	return &OSReaderLocalServer{
-		localServer: server.NewServer(db),
+func NewLocalReadServer(db *sql.DB) rpc.OSReaderClient {
+	return &LocalReadServer{
+		localServer: server.NewReadServer(db),
 	}
 }
 
-type OSReaderLocalServer struct {
+type LocalReadServer struct {
 	localServer rpc.OSReaderServer
 }
 
-func (s *OSReaderLocalServer) GetOneByID(ctx context.Context, req *rpc.GetOneByIDRequest, opts ...grpc.CallOption) (*rpc.GetOneByIDResponse, error) {
+func (s *LocalReadServer) GetOneByID(ctx context.Context, req *rpc.GetOneByIDRequest, opts ...grpc.CallOption) (*rpc.GetOneByIDResponse, error) {
 	return s.localServer.GetOneByID(ctx, req)
 }
 
-func (s *OSReaderLocalServer) GetManyByIDs(ctx context.Context, req *rpc.GetManyByIDsRequest, opts ...grpc.CallOption) (*rpc.GetManyByIDsResponse, error) {
+func (s *LocalReadServer) GetManyByIDs(ctx context.Context, req *rpc.GetManyByIDsRequest, opts ...grpc.CallOption) (*rpc.GetManyByIDsResponse, error) {
 	return s.localServer.GetManyByIDs(ctx, req)
 }
 
-func (s *OSReaderLocalServer) ListByCursor(ctx context.Context, req *rpc.ListByCursorRequest, opts ...grpc.CallOption) (*rpc.ListByCursorResponse, error) {
+func (s *LocalReadServer) ListByCursor(ctx context.Context, req *rpc.ListByCursorRequest, opts ...grpc.CallOption) (*rpc.ListByCursorResponse, error) {
 	return s.localServer.ListByCursor(ctx, req)
 }
 
-func (s *OSReaderLocalServer) ListByPage(ctx context.Context, req *rpc.ListByPageRequest, opts ...grpc.CallOption) (*rpc.ListByPageResponse, error) {
+func (s *LocalReadServer) ListByPage(ctx context.Context, req *rpc.ListByPageRequest, opts ...grpc.CallOption) (*rpc.ListByPageResponse, error) {
 	return s.localServer.ListByPage(ctx, req)
 }

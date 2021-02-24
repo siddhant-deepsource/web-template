@@ -38,13 +38,13 @@ func main() {
 		log.Fatalf("connecting to database: %v", err)
 	}
 
-	makeClient := makeCl.NewMakeReaderLocalServer(db)
-	osClient := osCl.NewOSReaderLocalServer(db)
+	makeClient := makeCl.NewLocalReadServer(db)
+	osClient := osCl.NewLocalReadServer(db)
 
 	s := grpc.NewServer()
-	phone.RegisterPhoneReaderServer(s, phoneSrv.NewServer(db, makeClient, osClient))
-	make.RegisterMakeReaderServer(s, makeSrv.NewServer(db))
-	os.RegisterOSReaderServer(s, osSrv.NewServer(db))
+	phone.RegisterPhoneReaderServer(s, phoneSrv.NewReadServer(db, makeClient, osClient))
+	make.RegisterMakeReaderServer(s, makeSrv.NewReadServer(db))
+	os.RegisterOSReaderServer(s, osSrv.NewReadServer(db))
 
 	extAuth := extauth.NewExternalAuth()
 
