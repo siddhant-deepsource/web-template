@@ -18,18 +18,36 @@ Also I just like Go.
 
 ## RPC: Protobuf + gRPC
 
-TODO
+WIP
+
+### Alternatives: REST
+
+### Alternatives: GraphQL
 
 ## Web: Next.js
 
-TODO
+WIP
+
+### Alternatives: Static site generation
+
+WIP
+
+Static site generation completely absolves the need to even have an application sever to render and host pages. This means pages can be built before deployment and deployed/served by object stores like AWS S3.
+
+Despite the convenience, static site generation makes it difficult to handle dynamic contents. For example, when resources are not found, rendering 404 pages with the right status code can be a challenge.
 
 ## Database: PostgreSQL?
 
-TODO
+WIP
 
 ## Layer 7 Load Balancing: Envoy
 
-TODO
+WIP
 
 ## Build System: Bazel
+
+WIP
+
+### Alternatives: No build system
+
+### Alternatives: Buck, Pants
