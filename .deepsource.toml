@@ -1,17 +1,18 @@
 version = 1
 
+exclude_patterns = [
+    "web/protobuf/**",
+    "api/dbmodels/**",
+    "api/protobuf/**"
+]
+
 [[analyzers]]
 name = "go"
 enabled = true
 
   [analyzers.meta]
-  import_paths = ["github.com/rickypai/web-template/api"]
+  import_paths = ["github.com/rickypai/web-template"]
 
 [[analyzers]]
 name = "javascript"
 enabled = true
-
-  [analyzers.meta]
-  environment = ["nodejs"]
-  style_guide = "airbnb"
-  dialect = "typescript"
