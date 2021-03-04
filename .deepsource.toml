@@ -1,18 +1,18 @@
 version = 1
 
-exclude_patterns = [
-    "web/protobuf/**",
-    "api/dbmodels/**",
-    "api/protobuf/**"
-]
-
 [[analyzers]]
 name = "go"
 enabled = true
 
   [analyzers.meta]
-  import_paths = ["github.com/rickypai/web-template"]
+  import_paths = ["github.com/siddhant-deepsource/web-template"]
 
 [[analyzers]]
 name = "javascript"
 enabled = true
+
+  [analyzers.meta]
+  environment = [
+    "nodejs",
+    "browser"
+  ]
